@@ -1,0 +1,7 @@
+div.sidebar {
+    position: relative;
+    top: 16px;
+    bottom: 16px;
+    z-index: 100;
+    overflow: scroll;
+}

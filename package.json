@@ -8,7 +8,7 @@
   "license": "MIT",
   "scripts": {
     "build": "webpack -p",
-    "start": "webpack-dev-server"
+    "start": "webpack-dev-server --mode=development"
   },
   "dependencies": {
     "babel-preset-es2017": "^6.24.1",
