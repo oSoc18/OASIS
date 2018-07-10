@@ -8,15 +8,21 @@ export default class Header extends Component {
         return (
             <nav className="header navbar">
                 <div className="nav-wrapper row">
-                    <a href="/" className="header__brand brand-logo" style={{float: 'left'}}>OASIS</a>
-                    <div className="col m6 grey-text"style={{float: 'left'}}>
-                        <div className="col input-field m9 s9 grey-text">
-                            <input id="search" className="grey-text white" value="" type="text"/>
-                            <label className="grey-text" htmlFor="search">Zoeken</label>
+
+                    <a href="#" className="brand">
+                        <img className="brand__icon" src="/src/images/logo-oasis.svg" alt="OASIS"></img>
+                        <h1 className="brand__name">OASIS</h1>
+                    </a>
+                    <form className="search__bar">
+                        <div className="input-field">
+                            <input id="search" type="search" required></input>
+                                <label className="label-icon" htmlFor="search"><i className="material-icons">search</i></label>
+                                <i className="material-icons">close</i>
                         </div>
-                    </div>
+                    </form>
                 </div>
+
             </nav>
-        )
+    )
     }
-}
+    }
