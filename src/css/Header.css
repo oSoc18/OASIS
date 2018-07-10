@@ -1,3 +1,37 @@
 .header a.header__brand {
     position: relative;
 }
+
+.header .nav-wrapper {
+    padding: 8px;
+}
+.header .brand{
+    height: 100%;
+    display: inline-block;
+}
+
+.header .brand__icon{
+    height: 100%;
+    float: left;
+}
+
+.header .brand__name{
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+    font-size:30px;
+    line-height: 48px;
+    float:left;
+}
+
+.header .search__bar{
+    display: inline-block;
+    height: 100%;
+    float:right;
+    background-color: #ffffff33;
+}
+
+.header .input-field .row .col.s12{
+    width: 0%;
+    float: right;
+}
