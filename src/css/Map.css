@@ -10,8 +10,3 @@ div.leaflet-container {
     bottom: 0;
     z-index: 0;
 }
-
-div.application__content {
-    position: relative;
-    z-index: -100;
-}
