@@ -1,0 +1,11 @@
+div.sidebar {
+    position: relative;
+    z-index: 100;
+    height: calc(100% - 48px);
+    margin: 24px;
+}
+
+div.sidebar__card {
+    overflow: scroll;
+    height: 100%;
+}

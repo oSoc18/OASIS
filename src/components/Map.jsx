@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 
-require('../css/leaflet.1.3.1.css');
 require('../css/Map.css');
 
 export default class OpenStreetMap extends Component {
