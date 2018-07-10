@@ -28,4 +28,10 @@
     display: inline-block;
     height: 100%;
     float:right;
+    background-color: #ffffff33;
+}
+
+.header .input-field .row .col.s12{
+    width: 0%;
+    float: right;
 }
