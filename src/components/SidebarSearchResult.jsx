@@ -11,7 +11,7 @@ export default class SidebarSearchResult extends React.Component {
 
     handleClick(e){
         e.preventDefault();
-        this.props.onClick();
+        this.props.onClick(e.target.id);
     }
 
     render() {
@@ -31,7 +31,7 @@ export default class SidebarSearchResult extends React.Component {
                     <i className="material-icons">hearing</i>
                     <i className="material-icons">accessibility</i>
                 </Col>
-                <a className="col m12 s12 center" href="#" onClick={this.handleClick}>Meer details...</a>
+                <a className="col m12 s12 center" href="#" onClick={this.handleClick} id={this.props.buildings.id}>Meer details...</a>
                 <hr />
             </Row>
         )
