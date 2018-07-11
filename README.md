@@ -8,6 +8,7 @@
 * Clone this repository
 * Run `yarn install`
 * Run `yarn start` to compile the code and to run a local webserver
+* Run `yarn run build` to output all compiled files to /build
 
 ### File structure
 * `/.github`: (Issue) templates for github
