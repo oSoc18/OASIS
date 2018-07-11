@@ -5,18 +5,20 @@ import BuildingDetail from './SidebarBuildingDetail.jsx';
 
 require('../css/Sidebar.css');
 
+const STATE_RESULTS = 'results';
+const STATE_DETAILS = 'details';
 
 export default class Sidebar extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            currentView: 'results' // 'details'
+            currentView: STATE_RESULTS
         }
     }
 
     onClick = () => {
-        let newState = this.state.currentView === 'results' ? 'details' : 'results';
+        let newState = this.state.currentView === STATE_RESULTS ? STATE_DETAILS : STATE_RESULTS;
         this.setState = {
             currentView: newState
         }
@@ -37,9 +39,9 @@ export default class Sidebar extends React.Component {
     }    
 
     show = () => {
-        if(this.state.currentView === 'results'){
+        if(this.state.currentView === STATE_RESULTS){
             return this.createSearchResults();
-        }else if(this.state.currentView === 'details'){
+        }else if(this.state.currentView === STATE_DETAILS){
             return this.createDetails();
         }else{
             // Tampered state
