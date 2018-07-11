@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 
 require('../css/SidebarBuildingDetail.css');
 
-export default class OpenStreetMap extends Component {
+export default class SidebarBuildingDetail extends Component {
 
     render() {
         return (
