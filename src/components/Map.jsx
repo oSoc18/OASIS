@@ -19,16 +19,20 @@ export default class OpenStreetMap extends Component {
      * @param markerIcon this in informotion on the marker icon
      * @returns {Array} this return the position of the building
      */
-     markers = markerIcon => {
+     showMarkers = (markerIcon) => {
         let buldingPosition = [];
          {this.props.buildings.map((building) => {
-             buldingPosition.push(<Marker className="pointer"  position={[building.location.long, building.location.lat]} icon={markerIcon}>
+             buldingPosition.push(<Marker className="pointer"  position={[building.location.long, building.location.lat]}
+                                          icon={markerIcon} onMouseOver={this.test}>
                  <Popup>A pretty CSS3 popup. <br /> Easily customizable.</Popup></Marker>);
             //return <Marker className="pointer"  position={[building.location.lat, building.location.long]} icon={myIcon}/>
         })}
         return buldingPosition;
     };
 
+test = () =>{
+    alert('test');
+}
 
     render() {
         var markerIcon = L.icon({
@@ -44,10 +48,9 @@ export default class OpenStreetMap extends Component {
                     attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {this.markers(markerIcon)}
-                onMouseOver={() => {
-                this.markers.leafletElement.bindPopup('foo').openPopup();
-                }}/>
+                <p >i am here</p>
+                {this.showMarkers(markerIcon)}
+
             </Map>
         )
     }
