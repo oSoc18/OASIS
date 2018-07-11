@@ -19,22 +19,22 @@ export default class Sidebar extends React.Component {
 
     onClick = () => {
         let newState = this.state.currentView === STATE_RESULTS ? STATE_DETAILS : STATE_RESULTS;
-        this.setState = {
+        this.setState({
             currentView: newState
-        }
+        })
     }
 
     createSearchResults = () => {
         let result = [];
         {this.props.buildings.map((building) => {
-                result.push(<SearchResult buildings={building}  />);
+                result.push(<SearchResult buildings={building} onClick={this.onClick} />);
         })};
         return  result;
     }
 
     createDetails = () => {
         let details = [];
-        details.push(<BuildingDetail />);
+        details.push(<BuildingDetail onClick={this.onClick}/>);
         return details;
     }    
 

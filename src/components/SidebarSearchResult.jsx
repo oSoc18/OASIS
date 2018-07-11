@@ -6,6 +6,12 @@ require('../css/SidebarSearchResult.css');
 export default class SidebarSearchResult extends React.Component {
     constructor(props){
         super(props);
+        this.handleClick = this.handleClick.bind(this);
+    }
+
+    handleClick(e){
+        e.preventDefault();
+        this.props.onClick();
     }
 
     render() {
@@ -25,7 +31,7 @@ export default class SidebarSearchResult extends React.Component {
                     <i className="material-icons">hearing</i>
                     <i className="material-icons">accessibility</i>
                 </Col>
-                <a className="col m12 s12 center" href="#">Meer details...</a>
+                <a className="col m12 s12 center" href="#" onClick={this.handleClick}>Meer details...</a>
                 <hr />
             </Row>
         )
