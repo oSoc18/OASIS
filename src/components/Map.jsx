@@ -22,11 +22,13 @@ export default class OpenStreetMap extends Component {
      markers = markerIcon => {
         let buldingPosition = [];
          {this.props.buildings.map((building) => {
-            buldingPosition.push(<Marker className="pointer"  position={[building.location.long, building.location.lat]} icon={markerIcon}/>);
+             buldingPosition.push(<Marker className="pointer"  position={[building.location.long, building.location.lat]} icon={markerIcon}>
+                 <Popup>A pretty CSS3 popup. <br /> Easily customizable.</Popup></Marker>);
             //return <Marker className="pointer"  position={[building.location.lat, building.location.long]} icon={myIcon}/>
         })}
         return buldingPosition;
     };
+
 
     render() {
         var markerIcon = L.icon({
@@ -43,6 +45,9 @@ export default class OpenStreetMap extends Component {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                 {this.markers(markerIcon)}
+                onMouseOver={() => {
+                this.markers.leafletElement.bindPopup('foo').openPopup();
+                }}/>
             </Map>
         )
     }
