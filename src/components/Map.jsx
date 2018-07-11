@@ -5,7 +5,7 @@ require('../css/Map.css');
 
 export default class OpenStreetMap extends Component {
     state = {
-        lat: 49.05389,
+        lat: 51.05389,
         lng: 3.705,
         zoom: 11,
     }
