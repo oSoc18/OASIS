@@ -1,8 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App.jsx';
+import App from './components/App';
+import registerServiceWorker from './registerServiceWorker';
 
-/** This is just for rendering, edit App.jsx instead! **/
+require('./css/vendor/leaflet.1.3.1.css');
+require('./css/vendor/materialize.min.css');
+require('./css/vendor/material-icons.css');
+//require('./js/jquery-2.1.1.min.js');
+//require('./js/materialize.js');
 
 const buildings = [
     {id: 1, title:"BeCentral", src:"http://placekitten.com/200/300", about:"Information about becentral", location: {long: 51.05389, lat:3.705}},
@@ -11,4 +16,5 @@ const buildings = [
     {id: 4, title:"Building Name", src:"http://placekitten.com/200/200", about:"Info", location: {long: 50, lat:5}}
 ];
 
-ReactDOM.render(<App buildingArr={buildings}/>, document.getElementById('root'));
+ReactDOM.render(<App buildingArr={buildings} />, document.getElementById('root'));
+registerServiceWorker();

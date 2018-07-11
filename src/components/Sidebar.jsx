@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import SearchResult from "./SidebarSearchResult.jsx";
 import {Card, Col} from "react-materialize";
 import BuildingDetail from './SidebarBuildingDetail.jsx';
@@ -29,7 +29,7 @@ export default class Sidebar extends React.Component {
     createSearchResults = () => {
         let result = [];
         this.props.buildings.map((building) => {
-                result.push(<SearchResult buildings={building} onClick={this.onClick} />);
+            result.push(<SearchResult buildings={building} onClick={this.onClick} />);
         });
         return  result;
     };
@@ -40,7 +40,7 @@ export default class Sidebar extends React.Component {
         let building = this.props.buildings.find(b => b.id == id);
         details.push(<BuildingDetail buildings={building} onClick={this.onClick}/>);
         return details;
-    }; 
+    };
 
     show = () => {
         if(this.state.currentView === STATE_RESULTS){

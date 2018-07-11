@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React from 'react'
 import {Col, Row} from "react-materialize";
 
 require('../css/SidebarSearchResult.css');
@@ -24,7 +24,7 @@ export default class SidebarSearchResult extends React.Component {
                 <img className="col m3 s12 sidebar__searchresult__thumbnail" src={this.props.buildings.src}/>
 
                 <Col m={9} s={12}>
-                        <span className="sidebar__searchresult__description"><p>{this.props.buildings.about}</p></span>
+                    <span className="sidebar__searchresult__description"><p>{this.props.buildings.about}</p></span>
                 </Col>
                 <Col>
                     <i className="material-icons">accessible</i>
