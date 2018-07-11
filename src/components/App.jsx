@@ -16,8 +16,8 @@ export default class App extends React.Component {
             <div className={"application"}>
                 <Header className={"application__header"}/>
                 <Row className={"application__content"}>
-                    <Sidebar/>
-                    <OpenStreetMap/>
+                    <Sidebar buildings={this.props.buildingArr}/>
+                    <OpenStreetMap buildings={this.props.buildingArr}/>
                 </Row>
             </div>);
     }
