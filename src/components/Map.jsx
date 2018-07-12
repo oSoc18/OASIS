@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import * as L from "leaflet";
 
 require('../css/Map.css');
 
@@ -36,7 +37,7 @@ test = () =>{
 
     render() {
         var markerIcon = L.icon({
-            iconUrl: "/src/images/map-marker-icon.png",
+            iconUrl: require("../images/map-marker-icon.png"),
             iconSize: [38, 38],
             iconAnchor: [19, 38],
             popupAnchor: [-3 -76]
