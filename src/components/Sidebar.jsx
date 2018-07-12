@@ -7,46 +7,65 @@ require('../css/Sidebar.css');
 
 const STATE_RESULTS = 'results';
 const STATE_DETAILS = 'details';
+let renderedView = []; // IDs that are visible
 
 export default class Sidebar extends React.Component {
     constructor(props){
         super(props);
 
         this.state = {
-            currentView: STATE_RESULTS,
-            buildingDetail: 1
+            currentView: STATE_RESULTS
         }
+       
     }
 
-    onClick = (newId) => {
-        let newState = this.state.currentView === STATE_RESULTS ? STATE_DETAILS : STATE_RESULTS;
+
+    // changeViewState = () => {
+    //     let newState = this.state.currentView === STATE_RESULTS ? STATE_DETAILS : STATE_RESULTS;
+    //     this.setState({
+    //         currentView: newState
+    //     })
+    // }
+
+    setStateToList = (idArr) => {    
+        renderedView = idArr;
         this.setState({
-            currentView: newState,
-            buildingDetail: newId
+            currentView: STATE_RESULTS
         })
     }
 
-    createSearchResults = () => {
+    setStateToDetails = (id) => {
+        renderedView = id;
+        this.setState({
+            currentView: STATE_DETAILS
+        })
+    }
+
+    renderLists = () => {
         let result = [];
-        this.props.buildings.map((building) => {
-            result.push(<SearchResult buildings={building} onClick={this.onClick} />);
-        });
+        for(let i = 0; i < renderedView.length; i++){
+            let b = this.props.buildings.find(b => b.id == renderedView[i]);
+            result.push(<SearchResult buildings={b} onClick={this.setStateToDetails} />);
+        }
+        // this.props.buildings.map((building) => {
+        //     result.push(<SearchResult buildings={building} onClick={this.onClick} />);
+        // });
         return  result;
     };
 
-    createDetails = () => {
+
+    renderDetails = () => {
         let details = [];
-        let id = this.state.buildingDetail;
-        let building = this.props.buildings.find(b => b.id == id);
-        details.push(<BuildingDetail buildings={building} onClick={this.onClick}/>);
+        let building = this.props.buildings.find(b => b.id == renderedView);
+        details.push(<BuildingDetail buildings={building} onClick={this.setStateToResults}/>);
         return details;
     };
 
     show = () => {
         if(this.state.currentView === STATE_RESULTS){
-            return this.createSearchResults();
+            return this.renderLists();
         }else if(this.state.currentView === STATE_DETAILS){
-            return this.createDetails();
+            return this.renderDetails();
         }else{
             // Tampered state
         }
