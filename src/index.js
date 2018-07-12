@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App';
 import registerServiceWorker from './registerServiceWorker';
+// import LD from 'ldfetch';
 
 require('./css/vendor/leaflet.1.3.1.css');
 require('./css/vendor/materialize.min.css');
@@ -15,6 +16,16 @@ const buildings = [
     {id: 3, title:"Public Service", src:"http://placekitten.com/200/300", about:"Some public service building", location: {long: 51, lat:2}},
     {id: 4, title:"Building Name", src:"http://placekitten.com/200/200", about:"Info", location: {long: 50, lat:5}}
 ];
+
+// const fetcher = new LD() ;
+// const url = 'https://linked.open.gent/parking';
+
+// let getLodData = async function () {
+//     let response = await fetcher.get(url);
+//     let responsetriples = response.triples;
+//     console.log(responsetriples);   
+// }
+
 
 ReactDOM.render(<App buildingArr={buildings} />, document.getElementById('root'));
 registerServiceWorker();
