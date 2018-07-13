@@ -1,3 +1,6 @@
+map css
+
+
 div.leaflet-container {
     position: absolute;
     width: 100%;
@@ -13,5 +16,29 @@ div.leaflet-container {
 
 .leaflet-marker-pane>img{
     margin:-1px;
+}
 
+.map__marker__image {
+    position: relative;
+    height:38px;
+    width:38px;
+    top: -38px;
+    left: -19px;
+}
+
+.map__marker__text{
+    position: relative;
+    width:80px;
+    overflow: hidden;
+    white-space: nowrap;
+    top: -100px;
+    left: -19px;
+    background-color: #ffffff;
+    opacity: 0.9;
+    display: none;
+    text-align: center;
+}
+
+.map__marker__image:hover + .map__marker__text{
+    display: block;
 }
