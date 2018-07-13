@@ -38,7 +38,6 @@ export default class OpenStreetMap extends Component {
         })}
         return buldingPosition;
     };
-
     showMousePopup = () =>{
         //alert('test');
     }

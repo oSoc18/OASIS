@@ -11,6 +11,7 @@ require('./css/vendor/material-icons.css');
 //require('./js/jquery-2.1.1.min.js');
 //require('./js/materialize.js');
 
+
 const buildings = [
     {id: 1, title:"BeCentral", src:"http://placekitten.com/200/300", about:"Information about becentral", location: {long: 50.8454685, lat:4.3574836}},
     {id: 2, title:"City Hall", src:"http://placekitten.com/200/200", about:"Awesome city hall place", location: {long: 51, lat:4}},
