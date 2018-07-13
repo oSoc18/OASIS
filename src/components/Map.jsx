@@ -1,5 +1,3 @@
-map jsx
-
 import React, {Component} from 'react'
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import * as L from "leaflet";

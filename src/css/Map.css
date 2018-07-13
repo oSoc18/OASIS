@@ -1,6 +1,3 @@
-map css
-
-
 div.leaflet-container {
     position: absolute;
     width: 100%;
@@ -23,8 +20,8 @@ div.leaflet-container {
     position: relative;
     height:38px;
     width:38px;
-    top: -38px;
-    left: -19px;
+    top: -32px;
+    left: -13px;
 }
 
 .map__marker__text{
