@@ -30,7 +30,7 @@ div.leaflet-container {
     overflow: hidden;
     white-space: nowrap;
     top: -100px;
-    left: -19px;
+    left: -35px;
     background-color: #ffffff;
     opacity: 0.9;
     display: none;
@@ -38,5 +38,9 @@ div.leaflet-container {
 }
 
 .map__marker__image:hover + .map__marker__text{
+    display: block;
+}
+
+.map__marker:hover > .map__marker__text {
     display: block;
 }
