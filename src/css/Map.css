@@ -11,7 +11,36 @@ div.leaflet-container {
     z-index: 0;
 }
 
+
 .leaflet-marker-pane>img{
     margin:-1px;
+}
 
+.map__marker__image {
+    position: relative;
+    height:38px;
+    width:38px;
+    top: -32px;
+    left: -13px;
+}
+
+.map__marker__text{
+    position: relative;
+    width:80px;
+    overflow: hidden;
+    white-space: nowrap;
+    top: -100px;
+    left: -35px;
+    background-color: #ffffff;
+    opacity: 0.9;
+    display: none;
+    text-align: center;
+}
+
+.map__marker__image:hover + .map__marker__text{
+    display: block;
+}
+
+.map__marker:hover > .map__marker__text {
+    display: block;
 }
