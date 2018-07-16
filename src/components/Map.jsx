@@ -32,29 +32,13 @@ export default class OpenStreetMap extends Component {
 
             buldingPosition.push(<Marker className="pointer"  position={[building.location.long, building.location.lat]}
                                          icon={markerIcon}></Marker>);
-            //return <Marker className="pointer"  position={[building.location.lat, building.location.long]} icon={myIcon}/>
         })}
         return buldingPosition;
     };
-    showMousePopup = () =>{
-        //alert('test');
-    }
-
-    hideMousePopup = () =>{
-        //alert('test');
-    }
 
 
 
     render() {
-
-
-        /*  var markerIcon = L.icon({
-              iconUrl: require("../images/map-marker-icon.png"),
-              iconSize: [38, 38],
-              iconAnchor: [19, 38],
-              popupAnchor: [-3 -76]
-          });*/
 
         return (
             <Map center={[51.05389,3.705]} zoom={this.state.zoom}>
