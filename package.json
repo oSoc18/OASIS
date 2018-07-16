@@ -9,6 +9,8 @@
     "mobx": "^5.0.3",
     "mobx-react": "^5.2.3",
     "react": "^16.4.1",
+    "react-app-rewire-mobx": "^1.0.8",
+    "react-app-rewired": "^1.5.2",
     "react-dom": "^16.4.1",
     "react-leaflet": "^2.0.0",
     "react-materialize": "^2.3.3",
@@ -18,15 +20,10 @@
     "redux-thunk": "^2.2.0",
     "webfontloader": "^1.6.28"
   },
-  "babel": {
-    "plugins": [
-      "transform-decorators-legacy"
-    ]
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   }
 }
