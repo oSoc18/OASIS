@@ -1,9 +1,12 @@
 import React, {Component} from 'react'
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import * as L from "leaflet";
+import {inject, observer} from 'mobx-react';
 
 require('../css/Map.css');
-
+    
+@inject('BuildingStore')
+@observer
 export default class OpenStreetMap extends Component {
     state = {
         lat: 51.05389,
@@ -13,6 +16,7 @@ export default class OpenStreetMap extends Component {
 
     constructor(props){
         super(props);
+        this.BuildingStore = this.props.BuildingStore;
     }
 
     /**
@@ -22,7 +26,7 @@ export default class OpenStreetMap extends Component {
      */
      showMarkers = (markerIcon) => {
         let buldingPosition = [];
-         {this.props.buildings.map((building) => {
+         {this.BuildingStore.getBuildings.map((building) => {
              buldingPosition.push(<Marker className="pointer"  position={[building.location.lat, building.location.long]}
                                           icon={markerIcon} onClick={this.onClick} >
                  <Popup>A pretty CSS3 popup. <br /> Easily customizable.</Popup></Marker>);
@@ -34,7 +38,7 @@ export default class OpenStreetMap extends Component {
     onClick = (e) =>{
         let b;
         // console.log(e);
-        this.props.buildings.forEach(element => {
+        this.BuildingStore.getBuildings.forEach(element => {
             if(element.location.lat === e.latlng.lat && element.location.long === e.latlng.lng){
                 b = element;
             }

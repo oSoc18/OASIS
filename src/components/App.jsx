@@ -56,15 +56,16 @@ export default class App extends React.Component {
     render() {
         const {BuildingStore} = this.props;
         BuildingStore.addBuildings(buildings);
-        console.log(this.props);
+        //console.log(BuildingStore.getBuildings);
         return (
             <div className={"application"}>
                 <Header className={"application__header"}/>
                 <Row className={"application__content"}>
-                    {/* <Sidebar buildings={example.buildings} onClick={this.showDetail} detail={this.state.buildingDetail}
+                    <Sidebar onClick={this.showDetail} detail={this.state.buildingDetail}
                     ref={this.sidebar}
                     />
-                    <OpenStreetMap buildings={example.buildings} onClick={this.showDetail}/>*/}
+                    <OpenStreetMap onClick={this.showDetail}/>
+                    
                 </Row> 
             </div>);
     }

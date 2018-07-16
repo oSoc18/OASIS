@@ -2,22 +2,19 @@ import React from 'react'
 import SearchResult from "./SidebarSearchResult.jsx";
 import {Card, Col} from "react-materialize";
 import BuildingDetail from './SidebarBuildingDetail.jsx';
+import {inject, observer} from 'mobx-react';
 
 require('../css/Sidebar.css');
-
-const STATE_RESULTS = 'results';
-const STATE_DETAILS = 'details';
-let renderedView = []; // IDs that are visible
-
+    
+@inject('BuildingStore')
+@observer
 export default class Sidebar extends React.Component {
     constructor(props){
         super(props);
-
-        this.state = {
-            currentView: STATE_RESULTS
-        }
-       
+        this.BuildingStore = this.props.BuildingStore;
+        console.log(this.BuildingStore)
     }
+
 
 
     // changeViewState = () => {
@@ -27,25 +24,25 @@ export default class Sidebar extends React.Component {
     //     })
     // }
 
-    setStateToList = (idArr) => {    
-        renderedView = idArr;
-        this.setState({
-            currentView: STATE_RESULTS
-        })
-    }
+    // setStateToList = (idArr) => {    
+    //     renderedView = idArr;
+    //     this.setState({
+    //         currentView: STATE_RESULTS
+    //     })
+    // }
 
-    setStateToDetails = (id) => {
-        renderedView = id;
-        this.setState({
-            currentView: STATE_DETAILS
-        })
-    }
+    // setStateToDetails = (id) => {
+    //     renderedView = id;
+    //     this.setState({
+    //         currentView: STATE_DETAILS
+    //     })
+    // }
 
     renderLists = () => {
         let result = [];
-        for(let i = 0; i < renderedView.length; i++){
-            let b = this.props.buildings.find(b => b.id == renderedView[i]);
-            result.push(<SearchResult buildings={b} onClick={this.setStateToDetails} />);
+        for(let i = 0; i < this.BuildingStore.getBuildings.length; i++){
+            //let b = this.props.buildings.find(b => b.id == renderedView[i]);
+            result.push(<SearchResult buildings={this.BuildingStore.getBuildings[i]} onClick={this.setStateToDetails} />);
         }
         // this.props.buildings.map((building) => {
         //     result.push(<SearchResult buildings={building} onClick={this.onClick} />);
@@ -56,18 +53,15 @@ export default class Sidebar extends React.Component {
 
     renderDetails = () => {
         let details = [];
-        let building = this.props.buildings.find(b => b.id == renderedView);
-        details.push(<BuildingDetail buildings={building} onClick={this.setStateToResults}/>);
+        details.push(<BuildingDetail buildings={this.BuildingStore.getBuilding} onClick={this.setStateToResults}/>);
         return details;
     };
 
     show = () => {
-        if(this.state.currentView === STATE_RESULTS){
+        if(!this.BuildingStore.getIsDetailAvailable){
             return this.renderLists();
-        }else if(this.state.currentView === STATE_DETAILS){
-            return this.renderDetails();
         }else{
-            // Tampered state
+            return this.renderDetails();
         }
     }
 

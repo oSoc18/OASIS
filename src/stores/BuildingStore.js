@@ -1,4 +1,4 @@
-import {observable, action, computed,decorate} from 'mobx';
+import {observable, action, computed} from 'mobx';
 
 class BuildingStore {
     @observable buildings = [];
@@ -15,6 +15,18 @@ class BuildingStore {
 
     @action setIsDetailAvailable = (available) => {
         this.isDetailAvailable = available;
+    };
+
+    @computed get getBuildings(){
+        return this.buildings;
+    };
+
+    @computed get getBuilding(){
+        return this.building;
+    };
+
+    @computed get getIsDetailAvailable(){
+        return this.isDetailAvailable;
     };
 }
 
