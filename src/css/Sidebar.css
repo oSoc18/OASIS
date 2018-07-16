@@ -1,8 +1,9 @@
 div.sidebar {
-    position: relative;
+    position: absolute;
     z-index: 100;
     height: calc(100% - 48px);
     margin: 24px;
+    float: left;
 }
 
 div.sidebar__card {

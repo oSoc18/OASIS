@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Input, Row} from "react-materialize";
 
 require('../css/Header.css');
 
@@ -6,14 +7,14 @@ export default class Header extends Component {
 
     render(props) {
         return (
-            <nav className="header navbar">
-                <div className="nav-wrapper row">
+            <nav className="header">
+                <div className="search__bar">
 
                     <a href="#" className="brand">
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
                         <h1 className="brand__name">OASIS</h1>
                     </a>
-                    <form className="search__bar">
+                    <form className="search">
                         <div className="input-field">
                             <input id="search" type="search" required></input>
                                 <label className="label-icon" htmlFor="search">
@@ -23,8 +24,25 @@ export default class Header extends Component {
                         </div>
                     </form>
                 </div>
+                <div className="search__filters">
+                    <Row>
+                        <Input s={3} type='select' defaultValue='2' className="search__filters__filter">
+                            <option value='1'>Option 1</option>
+                            <option value='2'>Option 2</option>
+                            <option value='3'>Option 3</option>
+                        </Input>
+
+                        <Input s={3} type='select' defaultValue='2' className="search__filters__filter">
+                            <option value='1'>Option 1</option>
+                            <option value='2'>Option 2</option>
+                            <option value='3'>Option 3</option>
+                        </Input>
+                    </Row>
+                </div>
 
             </nav>
+
+
     )
     }
     }
