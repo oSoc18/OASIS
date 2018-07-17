@@ -21,16 +21,20 @@ export default class OpenStreetMap extends Component {
 
     /**
      * show marker showing one array one at the time
-     * @param markerIcon this in informotion on the marker icon
+     *
      * @returns {Array} this return the position of the building
      */
-     showMarkers = (markerIcon) => {
+    showMarkers = () => {
+
         let buldingPosition = [];
-         {this.BuildingStore.getBuildings.map((building) => {
-             buldingPosition.push(<Marker className="pointer"  position={[building.location.lat, building.location.long]}
-                                          icon={markerIcon} onClick={this.onClick} >
-                 <Popup>A pretty CSS3 popup. <br /> Easily customizable.</Popup></Marker>);
-            //return <Marker className="pointer"  position={[building.location.lat, building.location.long]} icon={myIcon}/>
+        {this.BuildingStore.getBuildings.map((building) => {
+
+            var markerIcon = L.divIcon({className: 'map__marker', html: '' +
+                '<img src="'+ require("../images/map-marker-icon.png") +'" class="map__marker__image"/>' +
+                '<span class="map__marker__text">'+building.title+'</span>'});
+
+            buldingPosition.push(<Marker className="pointer"  position={[building.location.long, building.location.lat]}
+                                         icon={markerIcon} onClick={this.onClick}></Marker>);
         })}
         return buldingPosition;
     };
@@ -47,12 +51,6 @@ export default class OpenStreetMap extends Component {
     }
 
     render() {
-        var markerIcon = L.icon({
-            iconUrl: require("../images/map-marker-icon.png"),
-            iconSize: [38, 38],
-            iconAnchor: [19, 38],
-            popupAnchor: [-3 -76]
-        });
 
         return (
             <Map center={[51.05389,3.705]} zoom={this.state.zoom}>
@@ -60,7 +58,7 @@ export default class OpenStreetMap extends Component {
                     attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                {this.showMarkers(markerIcon)}
+                {this.showMarkers()}
             </Map>
         )
     }
