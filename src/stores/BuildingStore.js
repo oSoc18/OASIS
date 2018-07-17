@@ -3,7 +3,7 @@ import {observable, action, computed} from 'mobx';
 class BuildingStore {
     @observable buildings = [];
     @observable building = null;
-    @observable isDetailAvailable = false;
+    @observable isInDetailState = false;
 
     @action addBuildings = (buildingArray) => {
         this.buildings = buildingArray;
@@ -13,8 +13,8 @@ class BuildingStore {
         this.building = building;
     };
 
-    @action setIsDetailAvailable = (available) => {
-        this.isDetailAvailable = available;
+    @action setIsInDetailState = (available) => {
+        this.isInDetailState = available;
     };
 
     @computed get getBuildings(){
@@ -25,8 +25,8 @@ class BuildingStore {
         return this.building;
     };
 
-    @computed get getIsDetailAvailable(){
-        return this.isDetailAvailable;
+    @computed get getIsInDetailState(){
+        return this.isInDetailState;
     };
 }
 

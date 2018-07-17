@@ -7,9 +7,6 @@ import {inject, observer} from 'mobx-react';
 
 require('../css/App.css');
 
-
-let renderedView = []; // IDs that are visible
-
 const buildings = [
     {id: 1, title:"BeCentral", src:"http://placekitten.com/200/300", about:"Information about becentral", location: {lat: 51.05389, long:3.705}},
     {id: 2, title:"City Hall", src:"http://placekitten.com/200/200", about:"Awesome city hall place", location: {lat: 51, long:4}},
@@ -22,41 +19,14 @@ const buildings = [
 export default class App extends React.Component {
     constructor(props){
         super(props);
-        //this.sidebar = React.createRef();
         this.state = {
             buildingDetail: 1
         }
-
-       // {this.init()};
     }
-
-    // onRender(){
-    //     {this.showList(renderedView)}
-    // }
-
-    // init=()=>{
-    //     renderedView = [];
-    //     for(let i = 0; i < example.length; i++){
-    //         renderedView.push(example[i].id)
-    //     }
-    // }
-
-    // showDetail = (newId) => {
-    //     this.setState({
-    //         buildingDetail: newId
-    //     })
-        
-    //     this.sidebar.current.setStateToDetails(newId);
-    // }
-
-    // showList = (idArr) => {
-    //     this.sidebar.current.setStateToList(idArr);
-    // }
     
     render() {
         const {BuildingStore} = this.props;
         BuildingStore.addBuildings(buildings);
-        //console.log(BuildingStore.getBuildings);
         return (
             <div className={"application"}>
                 <Header className={"application__header"}/>

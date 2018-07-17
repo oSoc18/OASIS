@@ -30,7 +30,7 @@ export default class Sidebar extends React.Component {
     };
 
     show = () => {
-        if(!this.BuildingStore.getIsDetailAvailable){
+        if(!this.BuildingStore.getIsInDetailState){
             return this.renderLists();
         }else{
             return this.renderDetails();

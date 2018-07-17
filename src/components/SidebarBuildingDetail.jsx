@@ -15,7 +15,7 @@ export default class SidebarBuildingDetail extends Component {
 
     handleClick(e){
         e.preventDefault();
-        this.BuildingStore.setIsDetailAvailable(false);
+        this.BuildingStore.setIsInDetailState(false);
     }
 
     render() {

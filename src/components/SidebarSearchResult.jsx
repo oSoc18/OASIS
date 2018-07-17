@@ -19,7 +19,7 @@ export default class SidebarSearchResult extends React.Component {
         let building = this.BuildingStore.getBuildings.find(b => b.id === id);
         
         this.BuildingStore.setBuilding(building);
-        this.BuildingStore.setIsDetailAvailable(true);
+        this.BuildingStore.setIsInDetailState(true);
     }
 
     render() {
