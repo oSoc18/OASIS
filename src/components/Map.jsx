@@ -5,8 +5,6 @@ import {inject, observer} from 'mobx-react';
 
 require('../css/Map.css');
 
-
-
 @inject('BuildingStore')
 @observer
 export default class OpenStreetMap extends Component {
@@ -38,9 +36,8 @@ export default class OpenStreetMap extends Component {
      * @returns {Array} this return the position of the building
      */
     showMarkers = () => {
-
         let buldingPosition = [];
-        {this.BuildingStore.getBuildings.map((building) => {
+        {this.BuildingStore.getFilteredBuildings.map((building) => {
 
             var markerIcon = L.divIcon({className: 'map__marker', html: '' +
                 '<img src="'+ require("../images/map-marker-icon.png") +'" class="map__marker__image"/>' +

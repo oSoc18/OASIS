@@ -1,10 +1,23 @@
-import React, {Component} from 'react'
+import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
 
 require('../css/Header.css');
 
-export default class Header extends Component {
 
-    render(props) {
+@inject('BuildingStore')
+@observer
+export default class Header extends Component {
+    constructor(props){
+        super(props);
+        this.BuildingStore = this.props.BuildingStore;
+        this.handleInput = this.handleInput.bind(this);
+    }
+
+    handleInput = (e) =>{
+        this.BuildingStore.setSearchKey(e.target.value);
+    }
+
+    render() {
         return (
             <nav className="header navbar">
                 <div className="nav-wrapper row">
@@ -15,7 +28,7 @@ export default class Header extends Component {
                     </a>
                     <form className="search__bar">
                         <div className="input-field">
-                            <input id="search" type="search" required></input>
+                            <input id="search" type="search" required onInput={this.handleInput}></input>
                                 <label className="label-icon" htmlFor="search">
                                     <i className="material-icons">search</i>
                                 </label>
@@ -23,8 +36,7 @@ export default class Header extends Component {
                         </div>
                     </form>
                 </div>
-
             </nav>
-    )
+        )
     }
-    }
+}
