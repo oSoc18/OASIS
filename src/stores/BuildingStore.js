@@ -6,6 +6,7 @@ class BuildingStore {
     @observable isInDetailState = false;
     @observable searchKey = "";
 
+
     @action addBuildings = (buildingArray) => {
         this.buildings = buildingArray;
     };
@@ -54,6 +55,8 @@ class BuildingStore {
     @computed get getIsInDetailState(){
         return this.isInDetailState;
     };
+
+    @computed get getSearchKey(){return this.searchKey;}
 }
 
 const store = new BuildingStore();
