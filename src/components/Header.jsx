@@ -6,7 +6,41 @@ require('../css/Header.css');
 
 export default class Header extends Component {
 
-    wheelchairWidthFilter = <span>Filter details</span>;
+    filters = [
+        {name: 'Wheelchair width', content: <span>Filter details</span>},
+        {name:  'Wheelchair height', content:  <span>Filter details</span>},
+    ];
+
+
+    filterReferences = [];
+
+    allRefsCollected = () => {
+        return Object.keys(this.filterReferences).length >= this.filters.length;
+    }
+
+    refCollector = (id) => {
+        var that = this;
+        return function (element) {
+            that.filterReferences[id] = element;
+
+            if (that.allRefsCollected()) {
+                // do some work with all refs
+            }
+        }
+    };
+
+    onOpenFilterModal = () => {
+        for (var i = 0, len = this.filterReferences.length ; i < len; i++) {
+            this.filterReferences[i].closeModal();
+        }
+    };
+
+    renderFilters() {
+        return this.filters.map((filter, index) => {
+            return <SearchFilterContainer name={filter.name} content={filter.content} onOpen={this.onOpenFilterModal}
+                                          ref={this.refCollector(index)}/>;
+        });
+    }
 
     render(props) {
         return (
@@ -41,8 +75,7 @@ export default class Header extends Component {
                             <option value='3'>Option 3</option>
                         </Input>
 
-                        <SearchFilterContainer name="Wheelchair Width" content={this.wheelchairWidthFilter}/>
-                        <SearchFilterContainer name="Wheelchair Height" content={this.wheelchairWidthFilter}/>
+                        {this.renderFilters()}
                     </Row>
                 </div>
 

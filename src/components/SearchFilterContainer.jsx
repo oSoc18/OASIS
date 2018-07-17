@@ -11,7 +11,14 @@ export class SearchFilterContainer extends Component {
         return {showDetail: false};
     }
 
+    closeModal = function (){
+        this.setState({showDetail: false});
+    }
+
     onClick = function () {
+        if (!this.state.showDetail){
+            this.props.onOpen();
+        }
         this.setState({showDetail: !this.state.showDetail});
     }
 
