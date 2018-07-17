@@ -10,10 +10,10 @@ export default class Header extends Component {
     constructor(props){
         super(props);
         this.BuildingStore = this.props.BuildingStore;
-        this.handleInput = this.handleInput.bind(this);
+        this.handleSearchRequest = this.handleSearchRequest.bind(this);
     }
 
-    handleInput = (e) =>{
+    handleSearchRequest = (e) =>{
         this.BuildingStore.setSearchKey(e.target.value);
     }
 
@@ -26,15 +26,15 @@ export default class Header extends Component {
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
                         <h1 className="brand__name">OASIS</h1>
                     </a>
-                    <form className="search__bar">
+                    <div className="search__bar">
                         <div className="input-field">
-                            <input id="search" type="search" required onInput={this.handleInput}></input>
+                            <input id="search" type="search" required onInput={this.handleSearchRequest}></input>
                                 <label className="label-icon" htmlFor="search">
                                     <i className="material-icons">search</i>
                                 </label>
                                 <i className="material-icons">close</i>
                         </div>
-                    </form>
+                    </div>
                 </div>
             </nav>
         )

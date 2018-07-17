@@ -19,6 +19,10 @@ export default class OpenStreetMap extends Component {
         }
     }
 
+    /**
+     * On mounting of the component we ask for location permission
+     * and place the coordinates (if allowed) in the state
+     */
     componentWillMount(){
         navigator.geolocation.getCurrentPosition(
             (position) => {
