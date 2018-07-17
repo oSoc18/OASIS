@@ -36,14 +36,14 @@ export default class OpenStreetMap extends Component {
     };
 
     onClick = (e) =>{
-        let b;
-        // console.log(e);
+        let building;
         this.BuildingStore.getBuildings.forEach(element => {
             if(element.location.lat === e.latlng.lat && element.location.long === e.latlng.lng){
-                b = element;
+                building = element;
             }
         });
-        this.props.onClick(b.id);
+        this.BuildingStore.setBuilding(building);
+        this.BuildingStore.setIsDetailAvailable(true);
     }
 
     render() {

@@ -12,48 +12,20 @@ export default class Sidebar extends React.Component {
     constructor(props){
         super(props);
         this.BuildingStore = this.props.BuildingStore;
-        console.log(this.BuildingStore)
     }
-
-
-
-    // changeViewState = () => {
-    //     let newState = this.state.currentView === STATE_RESULTS ? STATE_DETAILS : STATE_RESULTS;
-    //     this.setState({
-    //         currentView: newState
-    //     })
-    // }
-
-    // setStateToList = (idArr) => {    
-    //     renderedView = idArr;
-    //     this.setState({
-    //         currentView: STATE_RESULTS
-    //     })
-    // }
-
-    // setStateToDetails = (id) => {
-    //     renderedView = id;
-    //     this.setState({
-    //         currentView: STATE_DETAILS
-    //     })
-    // }
 
     renderLists = () => {
         let result = [];
         for(let i = 0; i < this.BuildingStore.getBuildings.length; i++){
-            //let b = this.props.buildings.find(b => b.id == renderedView[i]);
-            result.push(<SearchResult buildings={this.BuildingStore.getBuildings[i]} onClick={this.setStateToDetails} />);
+            result.push(<SearchResult buildings={this.BuildingStore.getBuildings[i]} />);
         }
-        // this.props.buildings.map((building) => {
-        //     result.push(<SearchResult buildings={building} onClick={this.onClick} />);
-        // });
         return  result;
     };
 
 
     renderDetails = () => {
         let details = [];
-        details.push(<BuildingDetail buildings={this.BuildingStore.getBuilding} onClick={this.setStateToResults}/>);
+        details.push(<BuildingDetail buildings={this.BuildingStore.getBuilding}/>);
         return details;
     };
 

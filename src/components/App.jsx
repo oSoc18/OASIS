@@ -61,11 +61,8 @@ export default class App extends React.Component {
             <div className={"application"}>
                 <Header className={"application__header"}/>
                 <Row className={"application__content"}>
-                    <Sidebar onClick={this.showDetail} detail={this.state.buildingDetail}
-                    ref={this.sidebar}
-                    />
-                    <OpenStreetMap onClick={this.showDetail}/>
-                    
+                    <Sidebar detail={this.state.buildingDetail} ref={this.sidebar} />
+                    <OpenStreetMap />
                 </Row> 
             </div>);
     }
