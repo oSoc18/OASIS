@@ -2,53 +2,38 @@ import React from 'react'
 import SearchResult from "./SidebarSearchResult.jsx";
 import {Card, Col} from "react-materialize";
 import BuildingDetail from './SidebarBuildingDetail.jsx';
+import {inject, observer} from 'mobx-react';
 
 require('../css/Sidebar.css');
-
-const STATE_RESULTS = 'results';
-const STATE_DETAILS = 'details';
-
+    
+@inject('BuildingStore')
+@observer
 export default class Sidebar extends React.Component {
     constructor(props){
         super(props);
-
-        this.state = {
-            currentView: STATE_RESULTS,
-            buildingDetail: 1
-        }
+        this.BuildingStore = this.props.BuildingStore;
     }
 
-    onClick = (newId) => {
-        let newState = this.state.currentView === STATE_RESULTS ? STATE_DETAILS : STATE_RESULTS;
-        this.setState({
-            currentView: newState,
-            buildingDetail: newId
-        })
-    }
-
-    createSearchResults = () => {
+    renderLists = () => {
         let result = [];
-        this.props.buildings.map((building) => {
-            result.push(<SearchResult buildings={building} onClick={this.onClick} />);
-        });
+        for(let i = 0; i < this.BuildingStore.getBuildings.length; i++){
+            result.push(<SearchResult buildings={this.BuildingStore.getBuildings[i]} />);
+        }
         return  result;
     };
 
-    createDetails = () => {
+
+    renderDetails = () => {
         let details = [];
-        let id = this.state.buildingDetail;
-        let building = this.props.buildings.find(b => b.id == id);
-        details.push(<BuildingDetail buildings={building} onClick={this.onClick}/>);
+        details.push(<BuildingDetail buildings={this.BuildingStore.getBuilding}/>);
         return details;
     };
 
     show = () => {
-        if(this.state.currentView === STATE_RESULTS){
-            return this.createSearchResults();
-        }else if(this.state.currentView === STATE_DETAILS){
-            return this.createDetails();
+        if(!this.BuildingStore.getIsInDetailState){
+            return this.renderLists();
         }else{
-            // Tampered state
+            return this.renderDetails();
         }
     }
 
