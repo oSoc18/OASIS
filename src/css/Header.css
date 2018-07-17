@@ -8,37 +8,69 @@
     padding: 8px;
 }
 
-
-
-
-.header .brand{
+.header .brand {
     height: 100%;
     display: inline-block;
 }
 
-.header .brand__icon{
+.header .brand__icon {
     height: 100%;
     float: left;
 }
 
-.header .brand__name{
+.header .brand__name {
     height: 100%;
     display: inline-block;
     margin: 0;
-    font-size:30px;
+    font-size: 30px;
     line-height: 48px;
-    float:left;
+    float: left;
 }
 
-.header .search{
+.header .search {
     display: inline-block;
     height: 100%;
-    float:right;
+    float: right;
     background-color: #ffffff33;
 }
 
-.header .search__filters__filter{
+.header .select-wrapper.search__filters__filter {
     height: 100%;
     background-color: #ffffff33;
     padding: 8px;
+}
+
+/* Search filters with a modal dropdown*/
+.search__filters__filter.search__filters__filter--modal {
+    position: relative;
+    height: 64px;
+    width: auto;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 8px;
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+.search__filters__filter--modal .search__filters__filter__caption a {
+    border-radius: 8px;
+    border: 1px solid white;
+    padding: 8px;
+}
+
+.search__filters__filter--modal .search__filters__filter__detail {
+    background-color: white;
+    border-radius: 8px;
+    width: 300px;
+    min-height: 200px;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    color: black;
+    padding: 8px;
+    display: none;
+}
+
+.search__filters__filter--modal .search__filters__filter__detail--visible {
+    display: block !important;
 }
