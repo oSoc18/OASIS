@@ -14,7 +14,13 @@ export default class Header extends Component {
     }
 
     handleSearchRequest = (e) =>{
+        this.BuildingStore.setIsInDetailState(false);
         this.BuildingStore.setSearchKey(e.target.value);
+    }
+
+    resetSearch = (e) => {
+        document.getElementById('search').value = "";
+        this.BuildingStore.setSearchKey(document.getElementById('search').value);
     }
 
     render() {
@@ -26,13 +32,14 @@ export default class Header extends Component {
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
                         <h1 className="brand__name">OASIS</h1>
                     </a>
+                    
                     <div className="search__bar">
                         <div className="input-field">
                             <input id="search" type="search" required onInput={this.handleSearchRequest}></input>
-                                <label className="label-icon" htmlFor="search">
-                                    <i className="material-icons">search</i>
-                                </label>
-                                <i className="material-icons">close</i>
+                            <label className="label-icon" htmlFor="search">
+                                <i className="material-icons">search</i>
+                            </label>
+                            <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
                     </div>
                 </div>
