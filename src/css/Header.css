@@ -13,24 +13,24 @@
     display: inline-block;
 }
 
-.header .brand__icon {
+.header .brand__icon{
     height: 100%;
     float: left;
 }
 
-.header .brand__name {
+.header .brand__name{
     height: 100%;
     display: inline-block;
     margin: 0;
-    font-size: 30px;
+    font-size:30px;
     line-height: 48px;
-    float: left;
+    float:left;
 }
 
-.header .search {
+.header .search{
     display: inline-block;
     height: 100%;
-    float: right;
+    float:right;
     background-color: #ffffff33;
 }
 
@@ -61,8 +61,8 @@
 .search__filters__filter--modal .search__filters__filter__detail {
     background-color: white;
     border-radius: 8px;
-    width: 300px;
-    min-height: 200px;
+    width: 100%;
+    min-height: 100%;
     position: absolute;
     left: 0;
     z-index: 1000;
@@ -73,4 +73,14 @@
 
 .search__filters__filter--modal .search__filters__filter__detail--visible {
     display: block !important;
+    width: 200%;
+    background-color: #e57373;
+}
+
+.wheelchair__description{
+    top:0px;
+}
+
+.value{
+    font-size: 20px;
 }

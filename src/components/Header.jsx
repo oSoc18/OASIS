@@ -6,13 +6,40 @@ require('../css/Header.css');
 
 export default class Header extends Component {
 
+    displaySliderValue = () => {
+        let sliderValue = document.getElementById("test5").value;
+        document.getElementById("wheelchair__description").innerHTML = "Wheelchair width :"+sliderValue;
+    }
+
+    wheelchairWidthFilter =
+        <div className="search__filters__range" action="#">
+            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :50</p>
+            <p className="range-field">
+                <input type="range" id="test5" min="0" max="100" onChange={this.displaySliderValue}/>
+            </p>
+        </div>;
+
+    multiple__selection =
+        <Row>
+            <Input name='group1' type='radio' value='red' label='Red' />
+            <Input name='group1' type='radio' value='yellow' label='Yellow' />
+        </Row>;
+
+    selection =
+        <Row>
+            <Input name='group2' type='checkbox' value='red' label='Red' />
+            <Input name='group2' type='checkbox' value='yellow' label='Yellow' />
+        </Row>;
+
     filters = [
-        {name: 'Wheelchair width', content: <span>Filter details</span>},
-        {name:  'Wheelchair height', content:  <span>Filter details</span>},
+        {name: 'Wheelchair width', content: this.wheelchairWidthFilter},
+        {name: 'Elevator', content: this.multiple__selection},
+        {name: 'options', content: this.selection},
     ];
 
 
     filterReferences = [];
+
 
     allRefsCollected = () => {
         return Object.keys(this.filterReferences).length >= this.filters.length;
@@ -30,7 +57,7 @@ export default class Header extends Component {
     };
 
     onOpenFilterModal = () => {
-        for (var i = 0, len = this.filterReferences.length ; i < len; i++) {
+        for (var i = 0, len = this.filterReferences.length; i < len; i++) {
             this.filterReferences[i].closeModal();
         }
     };
@@ -62,19 +89,7 @@ export default class Header extends Component {
                     </form>
                 </div>
                 <div className="search__filters">
-                    <Row>
-                        <Input s={3} type='select' defaultValue='2' className="search__filters__filter">
-                            <option value='1'>Option 1</option>
-                            <option value='2'>Option 2</option>
-                            <option value='3'>Option 3</option>
-                        </Input>
-
-                        <Input s={3} type='select' defaultValue='2' className="search__filters__filter">
-                            <option value='1'>Option 1</option>
-                            <option value='2'>Option 2</option>
-                            <option value='3'>Option 3</option>
-                        </Input>
-
+                    <Row className="">
                         {this.renderFilters()}
                     </Row>
                 </div>
