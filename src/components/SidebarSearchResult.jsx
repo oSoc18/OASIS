@@ -1,17 +1,25 @@
 import React from 'react'
 import {Col, Row} from "react-materialize";
+import {inject, observer} from 'mobx-react';
 
 require('../css/SidebarSearchResult.css');
 
+@inject('BuildingStore')
+@observer
 export default class SidebarSearchResult extends React.Component {
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.BuildingStore = this.props.BuildingStore;
     }
 
     handleClick(e){
         e.preventDefault();
-        this.props.onClick(e.target.id);
+        let id = this.props.buildings.id;
+        let building = this.BuildingStore.getBuildings.find(b => b.id === id);
+        
+        this.BuildingStore.setBuilding(building);
+        this.BuildingStore.setIsInDetailState(true);
     }
 
     render() {

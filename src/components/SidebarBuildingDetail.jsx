@@ -1,17 +1,21 @@
 import React, {Component} from 'react'
 import {Col, Row} from "react-materialize";
+import {inject, observer} from 'mobx-react';
 
 require('../css/SidebarBuildingDetail.css');
 
+@inject('BuildingStore')
+@observer
 export default class SidebarBuildingDetail extends Component {
     constructor(props){
         super(props);
         this.handleClick = this.handleClick.bind(this);
+        this.BuildingStore = this.props.BuildingStore;
     }
 
     handleClick(e){
         e.preventDefault();
-        this.props.onClick();
+        this.BuildingStore.setIsInDetailState(false);
     }
 
     render() {
