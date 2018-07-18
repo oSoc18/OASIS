@@ -15,12 +15,63 @@ const buildings = [
     {id: 4, title:"Building Name", src:"http://placekitten.com/200/200", about:"Info", location: {lat: 50, long:5}}
 ];
 
-const url = 'http://smartflanders.ilabt.imec.be/graph/master-catalog.json';
+const StartURL = 'http://smartflanders.ilabt.imec.be/graph/master-catalog.json';
+const fetch = new ldfetch();
 
-var fetch = new ldfetch();
-var getLinkedOpenData = async function () {
-    var response = await fetch.get(url);
-    console.log(response.triples);
+var triplesToObjects = function(triples) {
+	var objects = {};
+	for (var index in triples) {
+		var triple = triples[index];
+		if (!objects[triple.subject.value]) {
+			objects[triple.subject.value] = {};
+		}
+		objects[triple.subject.value][triple.predicate.value] = triple.object.value;
+
+		// if (triple.predicate.value === "http://www.w3.org/ns/prov#generatedAtTime") {
+		// 	objects[triple.subject.value][triple.predicate.value] = new Date(
+		// 		objects[triple.subject.value][triple.predicate.value]
+		// 	);
+		// }
+	}
+	return objects;
+};
+
+
+let callGebouw = async function (url) {
+    let response = await fetch.get(url);
+    let objects = triplesToObjects(response.triples);
+    
+    console.log(objects);
+
+}
+
+let callChild = async function (url) {
+    let response = await fetch.get(url);
+    let triples = response.triples;
+    let objects = triplesToObjects(triples);
+
+    for(let subject in objects){
+        let entity = objects[subject];
+        // console.log(entity);
+        if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "https://www.w3.org/ns/dcat#Dataset"){
+            if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
+                let dist = entity["https://www.w3.org/ns/dcat#distribution"];
+                let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
+                callGebouw(url);
+            }
+        }
+    }
+
+}
+let getLinkedOpenData = async function () {
+    let response = await fetch.get(StartURL);
+    let triples = response.triples;
+    for(let index in triples){
+        if(triples[index].predicate.value === "http://xmlns.com/foaf/0.1/page"){
+            let url = triples[index].object.value;
+            callChild(url);
+        }
+    }    
 }
 try {
     getLinkedOpenData();
