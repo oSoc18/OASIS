@@ -4,6 +4,7 @@ import Sidebar from "./Sidebar.jsx";
 import {Row} from "react-materialize";
 import Header from "./Header.jsx";
 import {inject, observer} from 'mobx-react';
+import * as ldfetch from '../ldfetch/lib/ldfetch';
 
 require('../css/App.css');
 
@@ -13,6 +14,19 @@ const buildings = [
     {id: 3, title:"Public Service", src:"http://placekitten.com/200/300", about:"Some public service building", location: {lat: 51, long:2}},
     {id: 4, title:"Building Name", src:"http://placekitten.com/200/200", about:"Info", location: {lat: 50, long:5}}
 ];
+
+const url = 'http://smartflanders.ilabt.imec.be/graph/master-catalog.json';
+
+var fetch = new ldfetch();
+var getLinkedOpenData = async function () {
+    var response = await fetch.get(url);
+    console.log(response.triples);
+}
+try {
+    getLinkedOpenData();
+} catch (e) {
+    console.error(e);
+}
 
 @inject('BuildingStore')
 @observer
@@ -24,6 +38,8 @@ export default class App extends React.Component {
         }
     }
     
+   
+        
     render() {
         const {BuildingStore} = this.props;
         BuildingStore.addBuildings(buildings);
