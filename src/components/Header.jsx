@@ -23,6 +23,8 @@ export default class Header extends Component {
     displaySliderValue = () => {
         let sliderValue = document.getElementById("wheelslider").value;
         document.getElementById("wheelchair__description").innerHTML = "Wheelchair width :"+sliderValue;
+        this.BuildingStore.setIsInDetailState(false);
+        this.BuildingStore.setFilters({wheelchairWidth: sliderValue});
     }
 
     wheelchairWidthFilter =

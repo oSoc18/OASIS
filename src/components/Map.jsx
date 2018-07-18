@@ -48,8 +48,8 @@ export default class OpenStreetMap extends Component {
                 '<span class="map__marker__text">'+building.title+'</span>'});
 
             buldingPosition.push(<Marker className="pointer"  position={[building.location.lat, building.location.long]}
-                                         icon={markerIcon} onClick={this.onClick}></Marker>);
-        })}
+                                         icon={markerIcon} onClick={this.onClick}></Marker>);}
+        )}
         return buldingPosition;
     };
 
