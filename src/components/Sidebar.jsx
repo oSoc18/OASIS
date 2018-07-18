@@ -16,8 +16,8 @@ export default class Sidebar extends React.Component {
 
     renderLists = () => {
         let result = [];
-        for(let i = 0; i < this.BuildingStore.getBuildings.length; i++){
-            result.push(<SearchResult buildings={this.BuildingStore.getBuildings[i]} />);
+        for(let i = 0; i < this.BuildingStore.getFilteredBuildings.length; i++){
+            result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]} />);
         }
         return  result;
     };
@@ -38,9 +38,13 @@ export default class Sidebar extends React.Component {
     }
 
     render() {
+        let searchTitle = (this.BuildingStore.getSearchKey==="")
+         ? "Results (" + this.BuildingStore.getBuildings.length + ")"
+         : "Results for '" + this.BuildingStore.getSearchKey +"' ("+this.renderLists().length+")";
         return (
             <Col m={3} s={12} className="sidebar">
-                <Card className='sidebar__card white darken-1' title='Search results' actions={[<a href='#'>This is a link</a>]}>
+                
+                <Card className='sidebar__card white darken-1' title={searchTitle} actions={[<a href='#'>This is a link</a>]}>
                     {this.show()}
                 </Card>
             </Col>

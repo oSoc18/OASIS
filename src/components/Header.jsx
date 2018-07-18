@@ -1,10 +1,25 @@
 import React, {Component} from 'react'
 import {Input, Row} from "react-materialize";
 import {SearchFilterContainer} from "./SearchFilterContainer";
+import React, {Component} from 'react';
+import {inject, observer} from 'mobx-react';
 
 require('../css/Header.css');
 
+
+@inject('BuildingStore')
+@observer
 export default class Header extends Component {
+    constructor(props){
+        super(props);
+        this.BuildingStore = this.props.BuildingStore;
+        this.handleSearchRequest = this.handleSearchRequest.bind(this);
+    }
+
+    handleSearchRequest = (e) =>{
+        this.BuildingStore.setIsInDetailState(false);
+        this.BuildingStore.setSearchKey(e.target.value);
+    }
 
     displaySliderValue = () => {
         let sliderValue = document.getElementById("test5").value;
@@ -69,7 +84,13 @@ export default class Header extends Component {
         });
     }
 
-    render(props) {
+
+    resetSearch = (e) => {
+        document.getElementById('search').value = "";
+        this.BuildingStore.setSearchKey(document.getElementById('search').value);
+    }
+
+    render() {
         return (
             <nav className="header">
                 <div className="search__bar">
@@ -77,26 +98,23 @@ export default class Header extends Component {
                     <a href="#" className="brand">
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
                         <h1 className="brand__name">OASIS</h1>
-                    </a>
-                    <form className="search">
+                    </a>                  
+                    <div className="search">
                         <div className="input-field">
-                            <input id="search" type="search" required></input>
+                            <input id="search" type="search" required onInput={this.handleSearchRequest}></input>
                             <label className="label-icon" htmlFor="search">
                                 <i className="material-icons">search</i>
                             </label>
-                            <i className="material-icons">close</i>
+                            <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div className="search__filters">
                     <Row className="">
                         {this.renderFilters()}
                     </Row>
                 </div>
-
             </nav>
-
-
         )
     }
 }
