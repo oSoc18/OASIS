@@ -1,11 +1,14 @@
-.header a.header__brand {
+.header {
     position: relative;
+    height: 120px;
 }
 
-.header .nav-wrapper {
+.header .search__bar {
+    height: 50%;
     padding: 8px;
 }
-.header .brand{
+
+.header .brand {
     height: 100%;
     display: inline-block;
 }
@@ -24,9 +27,60 @@
     float:left;
 }
 
-.header .search__bar{
+.header .search{
     display: inline-block;
     height: 100%;
     float:right;
     background-color: #ffffff33;
+}
+
+.header .select-wrapper.search__filters__filter {
+    height: 100%;
+    background-color: #ffffff33;
+    padding: 8px;
+}
+
+/* Search filters with a modal dropdown*/
+.search__filters__filter.search__filters__filter--modal {
+    position: relative;
+    height: 64px;
+    width: auto;
+    cursor: pointer;
+    display: inline-block;
+    margin-right: 8px;
+    margin-left: 8px;
+    vertical-align: top;
+}
+
+.search__filters__filter--modal .search__filters__filter__caption a {
+    border-radius: 8px;
+    border: 1px solid white;
+    padding: 8px;
+}
+
+.search__filters__filter--modal .search__filters__filter__detail {
+    background-color: white;
+    border-radius: 8px;
+    width: 100%;
+    min-height: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 1000;
+    color: black;
+    padding: 8px;
+    display: none;
+}
+
+.search__filters__filter--modal .search__filters__filter__detail--visible {
+    display: block !important;
+    width: 200%;
+    background-color: #e57373;
+}
+
+.wheelchair__description{
+    top:0px;
+}
+
+.value{
+    font-size: 20px;
 }
