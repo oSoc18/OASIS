@@ -22,15 +22,15 @@ export default class Header extends Component {
     }
 
     displaySliderValue = () => {
-        let sliderValue = document.getElementById("test5").value;
+        let sliderValue = document.getElementById("wheelslider").value;
         document.getElementById("wheelchair__description").innerHTML = "Wheelchair width :"+sliderValue;
     }
 
     wheelchairWidthFilter =
         <div className="search__filters__range" action="#">
-            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :50</p>
+            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :100</p>
             <p className="range-field">
-                <input type="range" id="test5" min="0" max="100" onChange={this.displaySliderValue}/>
+                <input type="range" id="wheelslider" min="50" max="150" onChange={this.displaySliderValue}/>
             </p>
         </div>;
 
