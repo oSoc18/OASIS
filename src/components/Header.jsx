@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import {Input, Row} from "react-materialize";
 import {SearchFilterContainer} from "./SearchFilterContainer";
-import React, {Component} from 'react';
 import {inject, observer} from 'mobx-react';
 
 require('../css/Header.css');
