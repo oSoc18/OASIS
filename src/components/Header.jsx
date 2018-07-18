@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Input, Row} from "react-materialize";
+import {Col, Input, Row} from "react-materialize";
 import {SearchFilterContainer} from "./SearchFilterContainer";
 import {inject, observer} from 'mobx-react';
 
@@ -94,13 +94,12 @@ export default class Header extends Component {
     render() {
         return (
             <nav className="header">
-                <div className="search__bar">
-
-                    <a href="#" className="brand">
+                <Row className="search__bar">
+                    <Col s={3} href="#" className="brand">
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
                         <h1 className="brand__name">OASIS</h1>
-                    </a>                  
-                    <div className="search">
+                    </Col>
+                    <Col s={6} className="search">
                         <div className="input-field">
                             <input id="search" type="search" required onInput={this.handleSearchRequest}></input>
                             <label className="label-icon" htmlFor="search">
@@ -108,11 +107,17 @@ export default class Header extends Component {
                             </label>
                             <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
-                    </div>
-                </div>
+                    </Col>
+                    <Col>
+                    </Col>
+                </Row>
                 <div className="search__filters">
                     <Row className="">
-                        {this.renderFilters()}
+                        <Col s={3}>
+                        </Col>
+                        <Col s={9}>
+                            {this.renderFilters()}
+                        </Col>
                     </Row>
                 </div>
             </nav>
