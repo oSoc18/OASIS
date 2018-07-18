@@ -46,8 +46,8 @@ export default class OpenStreetMap extends Component {
             var markerIcon = L.divIcon({className: 'map__marker', html: '' +
                 '<img src="'+ require("../images/map-marker-icon.png") +'" class="map__marker__image"/>' +
                 '<span class="map__marker__text">'+building.title+'</span>'});
-
-            buldingPosition.push(<Marker className="pointer"  position={[building.location.lat, building.location.long]}
+                // UPDATE THE FOLLOWING CODE --> REMOVE [0]
+            buldingPosition.push(<Marker className="pointer"  position={[building[0].location.lat, building[0].location.long]}
                                          icon={markerIcon} onClick={this.onClick}></Marker>);
         })}
         return buldingPosition;

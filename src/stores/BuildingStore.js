@@ -7,8 +7,8 @@ class BuildingStore {
     @observable searchKey = "";
 
 
-    @action addBuildings = (buildingArray) => {
-        this.buildings = buildingArray;
+    @action addBuildings = (building) => {
+        this.buildings.push(building);
     };
 
     @action setBuilding = (building) => {
