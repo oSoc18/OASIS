@@ -38,7 +38,7 @@ export default class Sidebar extends React.Component {
 
     render() {
         let searchTitle = (this.BuildingStore.getSearchKey === "")
-            ? "Results (" + this.BuildingStore.getBuildings.length + ")"
+            ? "Results (" + this.BuildingStore.getFilteredBuildings.length + ")"
             : "Results for '" + this.BuildingStore.getSearchKey + "' (" + this.renderLists().length + ")";
         return (
             <Col l={3} m={6} s={12} className="sidebar">
