@@ -35,13 +35,14 @@ class BuildingStore {
         let arr = [];
         for (let i = 0; i < this.buildings.length; i++) {
             let title = this.buildings[i].props.title.toLowerCase();
-            let buildingAccessibleWidth = this.buildings[i].props.door.width;
-
+            let widthOfTheDoor = parseInt(this.buildings[i].props.door.width);
+            let widthOfTheChair = parseInt(this.filters.wheelchairWidth);
+            
             if (this.searchKey !== "" && title.search(this.searchKey) < 0) {
                 continue;
             }
-
-            if (buildingAccessibleWidth < this.filters.wheelchairWidth) {
+            
+            if (widthOfTheChair > widthOfTheDoor) {
                 continue;
             }
 
@@ -52,8 +53,6 @@ class BuildingStore {
 
     @computed get getFilteredBuildings() {
         return this.filterBuildings();
-
-
     }
 
     @computed get getBuilding() {

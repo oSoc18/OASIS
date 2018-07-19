@@ -27,7 +27,7 @@ export default class Header extends Component {
     //range filter
     wheelchairWidthFilter =
         <div className="search__filters__range" action="#">
-            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :100</p>
+            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :50</p>
             <p className="range-field">
                 <input type="range" id="wheelslider" min="50" max="150" onChange={this.displaySliderValue}/>
             </p>
@@ -113,7 +113,7 @@ export default class Header extends Component {
                     </Col>
                     <Col s={6} className="search">
                         <div className="input-field">
-                            <input id="search" type="search" required onInput={this.handleSearchRequest}></input>
+                            <input id="search" type="search" placeholder="search by name" required onInput={this.handleSearchRequest}></input>
                             <label className="label-icon" htmlFor="search">
                                 <i className="material-icons">search</i>
                             </label>
