@@ -1,98 +1,136 @@
+$headerBarPrimaryHeight: 56px;
+$headerBarFilterHeight: 50px;
+$headerBarPadding: 8px;
+
+$filterBarForeground: $colorPrimary;
+$filterBarBackground: white;
+
 .header {
-    position: relative;
-    height: 120px;
-    background-color: $colorPrimary;
-    color: $textColorOnPrimary;
+  position: relative;
+  height: $headerBarPrimaryHeight + $headerBarFilterHeight;
+  background-color: $colorPrimary;
 }
 
 .header .search__bar {
-    height: 50%;
-    padding: 8px;
-    margin-bottom: 0px;
-}
+  height: $headerBarPrimaryHeight;
+  padding: 8px;
+  margin-bottom: 0;
+  color: white;
 
-.header .brand {
+  .brand {
     height: 100%;
     display: inline-block;
-}
+  }
 
-.header .brand__icon{
+  .brand__icon {
     height: 100%;
     float: left;
-}
+  }
 
-.header .brand__name{
+  .brand__name {
     height: 100%;
     display: inline-block;
     margin: 0;
-    font-size:30px;
+    font-size: 30px;
     line-height: 48px;
-    float:left;
-}
+    float: left;
+  }
 
-.header .search{
+  div.search {
     display: block;
-    height: 100%;
-    float:right;
-    background-color: #ffffff55;
-    width: 95rem;
-}
-
-.header .select-wrapper.search__filters__filter {
-    height: 100%;
+    height: $headerBarPrimaryHeight - 2* $headerBarPadding;
     background-color: #ffffff33;
-    padding: 8px;
+    padding: 0;
+
+    i.material-icons {
+      line-height: $headerBarPrimaryHeight - 2* $headerBarPadding;
+      height: $headerBarPrimaryHeight - 2* $headerBarPadding;
+    }
+  }
 }
 
-/* Search filters with a modal dropdown*/
-.search__filters__filter.search__filters__filter--modal {
+.header .search__filters {
+  height: $headerBarFilterHeight;
+  margin-bottom: 0;
+  border-bottom: 1px solid rgb(219, 219, 219);
+  color: $colorPrimary;
+  background-color: white;
+
+  & > div {
+    height: $headerBarFilterHeight;
+    padding: 0;
+    margin-bottom: 0;
+  }
+
+  .select-wrapper.search__filters__filter {
+    height: 100%;
+    background-color: #ffffff77;
+    padding: 8px;
+  }
+
+  /* Search filters with a modal dropdown*/
+  .search__filters__filter.search__filters__filter--modal {
     position: relative;
-    height: 64px;
+    height: $headerBarFilterHeight;
     width: auto;
     cursor: pointer;
     display: inline-block;
-    margin-right: 8px;
-    margin-left: 8px;
     vertical-align: top;
-}
 
-.search__filters__filter--modal .search__filters__filter__caption a {
-    border-radius: 8px;
-    border: 1px solid white;
-    padding: 8px;
-}
+    .search__filters__filter__caption {
+      height: $headerBarFilterHeight;
+      padding: $headerBarPadding 2*$headerBarPadding $headerBarPadding 0;
+      background-color: transparent;
+      display: block;
+      border: none;
 
-.search__filters__filter--modal .search__filters__filter__detail {
-    background-color: white;
-    border-radius: 8px;
-    width: 100%;
-    min-height: 100%;
-    position: absolute;
-    left: 0;
-    z-index: 1000;
-    color: black;
-    padding: 8px;
-    display: none;
+      a {
+        display: block;
+        margin-top: ($headerBarFilterHeight - 3 * $headerBarPadding - 18px)/2;
+        padding: $headerBarPadding / 2;
+        line-height: 18px;
+        font-size: 14px;
+        border-radius: 4px;
+        color: $filterBarForeground;
+        border: 1px solid $filterBarForeground;
+      }
 
-    &.search__filters__filter__detail--visible {
-        display: block !important;
-        width: 150%;
-        background-color: $colorPrimary;
+      &.search__filters__filter__caption--active a {
+        background-color: $filterBarForeground;
+        color: $filterBarBackground;
+        border: 1px solid $filterBarForeground;
+      }
+
     }
 
-    label {
-        color: $textColorOnPrimary;
+    .search__filters__filter__detail {
+      background-color: white;
+      border-radius: 4px;
+      width: 100%;
+      min-height: 25px;
+      position: absolute;
+      left: 0;
+      z-index: 10000;
+      color: black;
+      padding: $headerBarPadding * 2;
+      display: none;
+      line-height: 18px;
+
+      box-shadow: rgba(0, 0, 0, 0.15) 0 14px 36px 2px !important;
+      border: 1px solid rgba(0, 0, 0, 0.2);
     }
-}
 
-.wheelchair__description{
-    top:0px;
-}
+    .search__filters__filter__detail--visible {
+      display: block !important;
+      width: auto;
+      background-color: $filterBarBackground;
+      box-shadow: rgba(0, 0, 0, 0.15) 0 14px 36px 2px !important;
+      border: 1px solid rgba($filterBarForeground, 0.2);
+      color: $textColor;
+    }
 
-.value{
-    font-size: 20px;
-}
-
-.inputText{
-    color: #0D47A1;
+    #wheelslider {
+      width: 240px;
+    }
+  }
 }
