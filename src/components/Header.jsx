@@ -6,20 +6,23 @@ import {inject, observer} from 'mobx-react';
 @inject('BuildingStore')
 @observer
 export default class Header extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
         this.handleSearchRequest = this.handleSearchRequest.bind(this);
     }
 
-    handleSearchRequest = (e) =>{
+    handleSearchRequest = (e) => {
         this.BuildingStore.setIsInDetailState(false);
         this.BuildingStore.setSearchKey(e.target.value);
     }
 
+    /**
+     * Update the slider value inside the modal
+     */
     displaySliderValue = () => {
         let sliderValue = document.getElementById("wheelslider").value;
-        document.getElementById("wheelchair__description").innerHTML = "Wheelchair width :"+sliderValue;
+        document.getElementById("search__filters__filter__caption__breedte-rolstoel").innerHTML = "Breedte rolstoel: " + sliderValue + "cm";
         this.BuildingStore.setIsInDetailState(false);
         this.BuildingStore.setFilters({wheelchairWidth: sliderValue});
     }
@@ -27,52 +30,54 @@ export default class Header extends Component {
     //range filter
     wheelchairWidthFilter =
         <div className="search__filters__range" action="#">
-            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :50</p>
             <p className="range-field">
                 <input type="range" id="wheelslider" min="50" max="150" onChange={this.displaySliderValue}/>
             </p>
         </div>;
 
-    //radio botton filter
-    selection =
+    typeOfBuildingFilter =
         <Row>
-            <Input name='group1' type='radio' value='red' label='Red' />
-            <Input name='group1' type='radio' value='yellow' label='Yellow' />
+            <Input name='group1' type='checkbox' value='restaurant' label='Restaurant'/>
+            <Input name='group1' type='checkbox' value='bar' label='Cafe'/>
+            <Input name='group1' type='checkbox' value='shop' label='Winkelen'/>
+            <Input name='group1' type='checkbox' value='school' label='School'/>
+            <Input name='group1' type='checkbox' value='hospital' label='Ziekenhuis'/>
         </Row>;
 
-    //radio botton filter
-    typeOfFacility =
+    facilitiesFilter =
         <Row>
-            <Input name='group1' type='radio' value='restaurant' label='restaurant' />
-            <Input name='group1' type='radio' value='bar' label='bar' />
-            <Input name='group1' type='radio' value='shop' label='shop' />
-            <Input name='group1' type='radio' value='mall' label='mall' />
-            <Input name='group1' type='radio' value='school' label='school' />
-            <Input name='group1' type='radio' value='hospital' label='hospital' />
+            <Input name='group2' type='checkbox' value='red' label='Lift'/>
+            <Input name='group2' type='checkbox' value='yellow' label='Ringleiding'/>
         </Row>;
 
-    //checkboxe filter
-    multiple__selection =
-        <Row>
-            <Input name='group2' type='checkbox' value='red' label='Red' />
-            <Input name='group2' type='checkbox' value='yellow' label='Yellow' />
-        </Row>;
-
+    /**
+     * This array determines which filters are rendered, and consists of the name (shown in the header) and the component which is shown in the modal
+     *
+     * @type {*[]}
+     */
     filters = [
-        {name: 'typeOfFacility', content: this.typeOfFacility},
-        {name: 'Wheelchair width', content: this.wheelchairWidthFilter},
-        {name: 'Elevator', content: this.selection},
-        {name: 'options', content: this.multiple__selection},
+        {name: 'Categorie', content: this.typeOfBuildingFilter},
+        {name: 'Breedte rolstoel', content: this.wheelchairWidthFilter},
+        {name: 'Faciliteiten', content: this.facilitiesFilter},
     ];
 
 
     filterReferences = [];
 
-
+    /**
+     * Helper function which determines if the references to all filter components have been saved yet
+     *
+     * @returns {boolean}
+     */
     allRefsCollected = () => {
         return Object.keys(this.filterReferences).length >= this.filters.length;
     }
 
+    /**
+     * Helper function which stores references to all child filter components
+     *
+     * @returns {boolean}
+     */
     refCollector = (id) => {
         var that = this;
         return function (element) {
@@ -84,12 +89,20 @@ export default class Header extends Component {
         }
     };
 
+    /**
+     * Executed before a filter modal is opened, used to close all other modals
+     */
     onOpenFilterModal = () => {
         for (var i = 0, len = this.filterReferences.length; i < len; i++) {
             this.filterReferences[i].closeModal();
         }
     };
 
+    /**
+     * Render the filter components
+     *
+     * @returns {any[]}
+     */
     renderFilters() {
         return this.filters.map((filter, index) => {
             return <SearchFilterContainer name={filter.name} content={filter.content} onOpen={this.onOpenFilterModal}
@@ -113,23 +126,19 @@ export default class Header extends Component {
                     </Col>
                     <Col s={6} className="search">
                         <div className="input-field">
-                            <input id="search" type="search" placeholder="search by name" required onInput={this.handleSearchRequest}></input>
+                            <input id="search" type="search" placeholder="Zoek op naam" required onInput={this.handleSearchRequest}></input>
                             <label className="label-icon" htmlFor="search">
                                 <i className="material-icons">search</i>
                             </label>
                             <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
                     </Col>
-                    <Col>
+                </Row>
+                <Row className="search__filters">
+                    <Col s={9} offset="s0 m6 l3">
+                        {this.renderFilters()}
                     </Col>
                 </Row>
-                <div className="search__filters">
-                    <Row className="">
-                        <Col s={9} offset="s0 m6 l3">
-                            {this.renderFilters()}
-                        </Col>
-                    </Row>
-                </div>
             </nav>
         )
     }
