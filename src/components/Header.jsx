@@ -22,7 +22,7 @@ export default class Header extends Component {
      */
     displaySliderValue = () => {
         let sliderValue = document.getElementById("wheelslider").value;
-        document.getElementById("wheelchair__description").innerHTML = "Wheelchair width: " + sliderValue + "cm";
+        document.getElementById("search__filters__filter__caption__breedte-rolstoel").innerHTML = "Breedte rolstoel: " + sliderValue + "cm";
         this.BuildingStore.setIsInDetailState(false);
         this.BuildingStore.setFilters({wheelchairWidth: sliderValue});
     }
@@ -30,7 +30,6 @@ export default class Header extends Component {
     //range filter
     wheelchairWidthFilter =
         <div className="search__filters__range" action="#">
-            <span className="wheelchair__description" id="wheelchair__description">Wheelchair width: 100cm</span>
             <p className="range-field">
                 <input type="range" id="wheelslider" min="50" max="150" onChange={this.displaySliderValue}/>
             </p>
