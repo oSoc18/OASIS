@@ -1,0 +1,19 @@
+
+$primaryColor: #20b2bd;
+$primaryColorDark: #026863;
+
+@import "Header";
+@import "Map";
+@import "Sidebar";
+@import "SidebarBuildingDetail";
+@import "SidebarSearchResult";
+
+html, body, div#root, div.application {
+    height: 100%;
+    overflow: hidden;
+}
+
+div.application__content {
+    position: relative;
+    height: calc(100% - 64px);
+}

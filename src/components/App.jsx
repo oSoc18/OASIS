@@ -5,7 +5,7 @@ import {Row} from "react-materialize";
 import Header from "./Header.jsx";
 import {inject, observer} from 'mobx-react';
 
-require('../css/App.css');
+require('../css/App.scss');
 
 const buildings = [
     {id: 1, title:"BeCentral", src:"http://placekitten.com/200/300", about:"Information about becentral", location: {lat: 51.05389, long:3.705},wheelchair:{width:50}},

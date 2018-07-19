@@ -3,8 +3,6 @@ import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import * as L from "leaflet";
 import {inject, observer} from 'mobx-react';
 
-require('../css/Map.css');
-
 @inject('BuildingStore')
 @observer
 export default class OpenStreetMap extends Component {

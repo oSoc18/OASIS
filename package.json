@@ -10,6 +10,7 @@
     "mobx-react": "^5.2.3",
     "react": "^16.4.1",
     "react-app-rewire-mobx": "^1.0.8",
+    "react-app-rewire-scss": "^1.0.2",
     "react-app-rewired": "^1.5.2",
     "react-dom": "^16.4.1",
     "react-leaflet": "^2.0.0",
@@ -25,5 +26,9 @@
     "build": "react-app-rewired build",
     "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.2",
+    "sass-loader": "^7.0.3"
   }
 }
