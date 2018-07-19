@@ -126,7 +126,7 @@ export default class Header extends Component {
                     </Col>
                     <Col s={6} className="search">
                         <div className="input-field">
-                            <input id="search" type="search" placeholder="search by name" required onInput={this.handleSearchRequest}></input>
+                            <input id="search" type="search" placeholder="Zoek op naam" required onInput={this.handleSearchRequest}></input>
                             <label className="label-icon" htmlFor="search">
                                 <i className="material-icons">search</i>
                             </label>
