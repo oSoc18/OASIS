@@ -27,7 +27,7 @@ export default class Header extends Component {
     //range filter
     wheelchairWidthFilter =
         <div className="search__filters__range" action="#">
-            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :100</p>
+            <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :50</p>
             <p className="range-field">
                 <input type="range" id="wheelslider" min="50" max="150" onChange={this.displaySliderValue}/>
             </p>
