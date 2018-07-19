@@ -21,6 +21,7 @@ const buildings = [];
 const StartURL = 'http://smartflanders.ilabt.imec.be/graph/master-catalog.json';
 const fetch = new ldfetch();
 
+
 @inject('BuildingStore')
 @observer
 export default class App extends React.Component {
@@ -34,6 +35,9 @@ export default class App extends React.Component {
         }
     }
 
+    /**
+    * It takes the list of triples as an argument, and returns a summary of everything we know about a certain subject in one object
+    */
     triplesToObjects = function(triples) {
         var objects = {};
         for (var index in triples) {
@@ -46,6 +50,9 @@ export default class App extends React.Component {
         return objects;
     };
 
+    /**
+    * Get information of a building based on the url and push it to the building array
+    */
     callGebouw = async function (url) {
         try{
             let response = await fetch.get(url);
@@ -75,13 +82,16 @@ export default class App extends React.Component {
         }
     }
     
+    /**
+    * Get the Dataset urls from the master catalog and search for buildings
+    */
     callChild = async function (url) {
         try{
             let response = await fetch.get(url);
             let triples = response.triples;
             let objects = this.triplesToObjects(triples);
             for(let subject in objects){
-                let entity = objects[subject];
+                let entity = objects[subject];            
                 if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "https://www.w3.org/ns/dcat#Dataset"){
                     if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
                         let dist = entity["https://www.w3.org/ns/dcat#distribution"];
@@ -95,6 +105,9 @@ export default class App extends React.Component {
         }
     }
 
+    /**
+    * Get the linked open data from the master catalog using the url above
+    */
     getLinkedOpenData = async function () {
         let response = await fetch.get(StartURL);
         let triples = response.triples;
@@ -104,7 +117,7 @@ export default class App extends React.Component {
                 await this.callChild(url);
             }
         }
-
+        
         const {BuildingStore} = this.props;
         BuildingStore.addBuildings(buildings);
     }
