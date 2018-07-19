@@ -2,11 +2,12 @@ import React, {Component} from 'react'
 import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
 import * as L from "leaflet";
 import {inject, observer} from 'mobx-react';
+import {Col} from "react-materialize";
 
 @inject('BuildingStore')
 @observer
 export default class OpenStreetMap extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
 
@@ -21,14 +22,14 @@ export default class OpenStreetMap extends Component {
      * On mounting of the component we ask for location permission
      * and place the coordinates (if allowed) in the state
      */
-    componentWillMount(){
+    componentWillMount() {
         navigator.geolocation.getCurrentPosition(
             (position) => {
-              this.setState({
-                lat: position.coords.latitude,
-                lng: position.coords.longitude,
-                zoom: 16
-              });
+                this.setState({
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                    zoom: 16
+                });
             });
     }
 
@@ -39,22 +40,26 @@ export default class OpenStreetMap extends Component {
      */
     showMarkers = () => {
         let buldingPosition = [];
-        {this.BuildingStore.getFilteredBuildings.map((building) => {
-            
-            var markerIcon = L.divIcon({className: 'map__marker', html: '' +
-                '<img src="'+ require("../images/map-marker-icon.png") +'" class="map__marker__image"/>' +
-                '<span class="map__marker__text">'+building.props.title+'</span>'});
-                
-            buldingPosition.push(<Marker className="pointer"  position={[building.props.lat, building.props.long]}
-    icon={markerIcon} onClick={this.onClick}/>);
-        })}
+        {
+            this.BuildingStore.getFilteredBuildings.map((building) => {
+
+                var markerIcon = L.divIcon({
+                    className: 'map__marker', html: '' +
+                    '<img src="' + require("../images/map-marker-icon.png") + '" class="map__marker__image"/>' +
+                    '<span class="map__marker__text">' + building.props.title + '</span>'
+                });
+
+                buldingPosition.push(<Marker className="pointer" position={[building.props.lat, building.props.long]}
+                                             icon={markerIcon} onClick={this.onClick}/>);
+            })
+        }
         return buldingPosition;
     };
 
-    onClick = (e) =>{
+    onClick = (e) => {
         let building;
         this.BuildingStore.getBuildings.forEach(element => {
-            if(element.props.lat === e.latlng.lat && element.props.long === e.latlng.lng){
+            if (element.props.lat === e.latlng.lat && element.props.long === e.latlng.lng) {
                 building = element;
             }
         });
@@ -64,13 +69,13 @@ export default class OpenStreetMap extends Component {
 
     render() {
         return (
-            <Map center={[this.state.lat,this.state.lng]} zoom={this.state.zoom}>
-                <TileLayer
-                    attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                {this.showMarkers()}
-            </Map>
+                <Map className={"col m9"} center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
+                    <TileLayer
+                        attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    />
+                    {this.showMarkers()}
+                </Map>
         )
     }
 }

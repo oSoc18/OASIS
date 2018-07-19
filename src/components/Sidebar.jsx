@@ -4,21 +4,21 @@ import {Card, Col} from "react-materialize";
 import BuildingDetail from './SidebarBuildingDetail.jsx';
 import {inject, observer} from 'mobx-react';
 
-    
+
 @inject('BuildingStore')
 @observer
 export default class Sidebar extends React.Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
     }
 
     renderLists = () => {
         let result = [];
-        for(let i = 0; i < this.BuildingStore.getFilteredBuildings.length; i++){
-            result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]} />);
+        for (let i = 0; i < this.BuildingStore.getFilteredBuildings.length; i++) {
+            result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]}/>);
         }
-        return  result;
+        return result;
     };
 
 
@@ -29,23 +29,21 @@ export default class Sidebar extends React.Component {
     };
 
     show = () => {
-        if(!this.BuildingStore.getIsInDetailState){
+        if (!this.BuildingStore.getIsInDetailState) {
             return this.renderLists();
-        }else{
+        } else {
             return this.renderDetails();
         }
     }
 
     render() {
-        let searchTitle = (this.BuildingStore.getSearchKey==="")
-         ? "Results (" + this.BuildingStore.getBuildings.length + ")"
-         : "Results for '" + this.BuildingStore.getSearchKey +"' ("+this.renderLists().length+")";
+        let searchTitle = (this.BuildingStore.getSearchKey === "")
+            ? "Results (" + this.BuildingStore.getBuildings.length + ")"
+            : "Results for '" + this.BuildingStore.getSearchKey + "' (" + this.renderLists().length + ")";
         return (
             <Col m={3} s={12} className="sidebar">
-                
-                <Card className='sidebar__card white darken-1' title={searchTitle} actions={[<a href='#'>This is a link</a>]}>
-                    {this.show()}
-                </Card>
+                <h4>{searchTitle}</h4>
+                {this.show()}
             </Col>
         )
     }
