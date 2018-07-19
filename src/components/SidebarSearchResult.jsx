@@ -27,6 +27,7 @@ export default class SidebarSearchResult extends React.Component {
         return (
             <Row>
                 <Col m={12} s={12}>
+                    <hr />
                     <h4>{this.Building.title}</h4>
                 </Col>
 
@@ -35,13 +36,12 @@ export default class SidebarSearchResult extends React.Component {
                 <Col m={9} s={12}>
                     <span className="sidebar__searchresult__description"><p>{this.Building.about}</p></span>
                 </Col>
-                <Col>
-                    <i className="material-icons">accessible</i>
+                <Col m={9} s={12}>
+                    <p>{this.Building.door.description}: {this.Building.door.width} cm</p>
                     <i className="material-icons">hearing</i>
                     <i className="material-icons">accessibility</i>
                 </Col>
                 <a className="col m12 s12 center" href="#" onClick={this.handleClick} id={this.Building.id}>Meer details...</a>
-                <hr />
             </Row>
         )
     }

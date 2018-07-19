@@ -61,8 +61,12 @@ export default class App extends React.Component {
                     let adres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"]; // not relevant for user
                     location.lat = objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#lat"];
                     location.long =  objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#long"];
+                    
+                    let door={description: "", width:0}
+                    door.description = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://purl.org/dc/terms/description"];
+                    door.width = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://semweb.mmlab.be/ns/wa#entranceDoorWidth"];
 
-                    let comp = <Building id={subject} title={title} src={src} about={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} />
+                    let comp = <Building id={subject} title={title} src={src} about={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} door={door}/>
                     buildings.push(comp);
                 }
             }

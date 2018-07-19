@@ -30,6 +30,7 @@ export default class SidebarBuildingDetail extends Component {
                 </Col>
                 <Col className="m12 s12 left">
                     <h4>Details:</h4>
+                    <p>{this.Building.door.description}: {this.Building.door.width} cm</p>
                 </Col>
                 <a href='#' className="col m12 s12 center" onClick={this.handleClick}>Return to search results</a>
             </Row>
