@@ -40,13 +40,13 @@ export default class OpenStreetMap extends Component {
     showMarkers = () => {
         let buldingPosition = [];
         {this.BuildingStore.getFilteredBuildings.map((building) => {
-
+            
             var markerIcon = L.divIcon({className: 'map__marker', html: '' +
                 '<img src="'+ require("../images/map-marker-icon.png") +'" class="map__marker__image"/>' +
                 '<span class="map__marker__text">'+building.title+'</span>'});
                 // UPDATE THE FOLLOWING CODE --> REMOVE [0]
             buldingPosition.push(<Marker className="pointer"  position={[building[0].location.lat, building[0].location.long]}
-                                         icon={markerIcon} onClick={this.onClick}></Marker>);
+    icon={markerIcon} onClick={this.onClick}/>);
         })}
         return buldingPosition;
     };
@@ -54,7 +54,7 @@ export default class OpenStreetMap extends Component {
     onClick = (e) =>{
         let building;
         this.BuildingStore.getBuildings.forEach(element => {
-            if(element.location.lat === e.latlng.lat && element.location.long === e.latlng.lng){
+            if(element.props.lat === e.latlng.lat && element.props.long === e.latlng.lng){
                 building = element;
             }
         });

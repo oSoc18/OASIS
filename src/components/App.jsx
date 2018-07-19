@@ -26,9 +26,7 @@ const fetch = new ldfetch();
 export default class App extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            buildingDetail: 1
-        }
+        
         try {
             this.getLinkedOpenData();
         } catch (e) {
@@ -49,33 +47,37 @@ export default class App extends React.Component {
     };
 
     callGebouw = async function (url) {
-        let response = await fetch.get(url);
-        let objects = this.triplesToObjects(response.triples);
+        try{
+            let response = await fetch.get(url);
+            let objects = this.triplesToObjects(response.triples);
 
-        for(let subject in objects){
-            let entity = objects[subject];
-            if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
-                let descr = entity["http://purl.org/dc/terms/description"];
-                let location = {lat:0, long: 0};
-                let adres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"]; // not relevant for user
-                location.lat = objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#lat"];
-                location.long =  objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#long"];
+            for(let subject in objects){
+                let entity = objects[subject];
+                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
+                    let descr = entity["http://purl.org/dc/terms/description"];
+                    let location = {lat:0, long: 0};
+                    let title = "Gebouw";
+                    let src = "http://placekitten.com/200/300";
+                    let adres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"]; // not relevant for user
+                    location.lat = objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#lat"];
+                    location.long =  objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#long"];
+                    
+                    let door={description: "", width:0}
+                    door.description = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://purl.org/dc/terms/description"];
+                    door.width = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://semweb.mmlab.be/ns/wa#entranceDoorWidth"];
 
-                buildings.push({id: subject, title:"...", src:"http://placekitten.com/200/300",about:descr, location: location});
+                    let comp = <Building id={subject} title={title} src={src} about={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} door={door}/>
+                    buildings.push(comp);
+                }
             }
+        }catch(e){
+            return;
         }
     }
     
     callChild = async function (url) {
-        if (url === "http://www.oostende.be/"){
-            return;
-        }else{
-            // if(url === "http://www.oostende.be/"){
-            //     url = "http://ruben.verborgh.org";
-            // }
-            // console.log("waiting for "+url);
+        try{
             let response = await fetch.get(url);
-            // console.log("waited for "+url);
             let triples = response.triples;
             let objects = this.triplesToObjects(triples);
             for(let subject in objects){
@@ -88,6 +90,8 @@ export default class App extends React.Component {
                     }
                 }
             }
+        }catch(e){
+            return;
         }
     }
 
@@ -110,7 +114,7 @@ export default class App extends React.Component {
             <div className={"application"}>
                 <Header className={"application__header"}/>
                 <Row className={"application__content"}>
-                    <Sidebar detail={this.state.buildingDetail} ref={this.sidebar} />
+                    <Sidebar />
                     <OpenStreetMap />
                 </Row> 
             </div>);
