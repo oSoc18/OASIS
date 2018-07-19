@@ -36,19 +36,19 @@ export default class Header extends Component {
     //radio botton filter
     selection =
         <Row>
-            <Input name='group1' type='radio' value='red' label='Red' />
+            <Input className="inputText" name='group1' type='radio' value='red' label='Red' />
             <Input name='group1' type='radio' value='yellow' label='Yellow' />
         </Row>;
 
     //radio botton filter
     typeOfFacility =
         <Row>
-            <Input name='group1' type='radio' value='restaurant' label='restaurant' />
-            <Input name='group1' type='radio' value='bar' label='bar' />
-            <Input name='group1' type='radio' value='shop' label='shop' />
-            <Input name='group1' type='radio' value='mall' label='mall' />
-            <Input name='group1' type='radio' value='school' label='school' />
-            <Input name='group1' type='radio' value='hospital' label='hospital' />
+            <Input name='group1' type='checkbox' value='restaurant' label='restaurant' />
+            <Input name='group1' type='checkbox' value='bar' label='bar' />
+            <Input name='group1' type='checkbox' value='shop' label='shop' />
+            <Input name='group1' type='checkbox' value='mall' label='mall' />
+            <Input name='group1' type='checkbox' value='school' label='school' />
+            <Input name='group1' type='checkbox' value='hospital' label='hospital' />
         </Row>;
 
     //checkboxe filter

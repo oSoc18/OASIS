@@ -34,7 +34,7 @@
     display: block;
     height: 100%;
     float:right;
-    background-color: #ffffff33;
+    background-color: #ffffff55;
     width: 95rem;
 }
 
@@ -73,12 +73,16 @@
     color: black;
     padding: 8px;
     display: none;
-}
 
-.search__filters__filter--modal .search__filters__filter__detail--visible {
-    display: block !important;
-    width: 200%;
-    background-color: #e57373;
+    &.search__filters__filter__detail--visible {
+        display: block !important;
+        width: 150%;
+        background-color: $colorPrimary;
+    }
+
+    label {
+        color: $textColorOnPrimary;
+    }
 }
 
 .wheelchair__description{
@@ -87,4 +91,8 @@
 
 .value{
     font-size: 20px;
+}
+
+.inputText{
+    color: #0D47A1;
 }
