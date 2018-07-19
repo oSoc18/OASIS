@@ -6,6 +6,7 @@
 .header .search__bar {
     height: 50%;
     padding: 8px;
+    margin-bottom: 0px;
 }
 
 .header .brand {
@@ -28,10 +29,11 @@
 }
 
 .header .search{
-    display: inline-block;
+    display: block;
     height: 100%;
     float:right;
     background-color: #ffffff33;
+    width: 95rem;
 }
 
 .header .select-wrapper.search__filters__filter {
