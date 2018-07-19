@@ -41,7 +41,7 @@ export default class Sidebar extends React.Component {
             ? "Results (" + this.BuildingStore.getBuildings.length + ")"
             : "Results for '" + this.BuildingStore.getSearchKey + "' (" + this.renderLists().length + ")";
         return (
-            <Col m={3} s={12} className="sidebar">
+            <Col l={3} m={6} s={12} className="sidebar">
                 <h4>{searchTitle}</h4>
                 {this.show()}
             </Col>

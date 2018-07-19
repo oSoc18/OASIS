@@ -107,7 +107,7 @@ export default class Header extends Component {
         return (
             <nav className="header">
                 <Row className="search__bar">
-                    <Col s={3} href="#" className="brand">
+                    <Col l={3} m={6} href="#" className="brand">
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
                         <h1 className="brand__name">OASIS</h1>
                     </Col>
@@ -125,9 +125,7 @@ export default class Header extends Component {
                 </Row>
                 <div className="search__filters">
                     <Row className="">
-                        <Col s={3}>
-                        </Col>
-                        <Col s={9}>
+                        <Col s={9} offset="s0 m6 l3">
                             {this.renderFilters()}
                         </Col>
                     </Row>
