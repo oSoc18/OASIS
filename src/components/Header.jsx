@@ -27,6 +27,7 @@ export default class Header extends Component {
         this.BuildingStore.setFilters({wheelchairWidth: sliderValue});
     }
 
+    //range filter
     wheelchairWidthFilter =
         <div className="search__filters__range" action="#">
             <p className="wheelchair__description" id="wheelchair__description">Wheelchair width :100</p>
@@ -35,22 +36,36 @@ export default class Header extends Component {
             </p>
         </div>;
 
-    multiple__selection =
+    //radio botton filter
+    selection =
         <Row>
             <Input name='group1' type='radio' value='red' label='Red' />
             <Input name='group1' type='radio' value='yellow' label='Yellow' />
         </Row>;
 
-    selection =
+    //radio botton filter
+    typeOfFacility =
+        <Row>
+            <Input name='group1' type='radio' value='restaurant' label='restaurant' />
+            <Input name='group1' type='radio' value='bar' label='bar' />
+            <Input name='group1' type='radio' value='shop' label='shop' />
+            <Input name='group1' type='radio' value='mall' label='mall' />
+            <Input name='group1' type='radio' value='school' label='school' />
+            <Input name='group1' type='radio' value='hospital' label='hospital' />
+        </Row>;
+
+    //checkboxe filter
+    multiple__selection =
         <Row>
             <Input name='group2' type='checkbox' value='red' label='Red' />
             <Input name='group2' type='checkbox' value='yellow' label='Yellow' />
         </Row>;
 
     filters = [
+        {name: 'typeOfFacility', content: this.typeOfFacility},
         {name: 'Wheelchair width', content: this.wheelchairWidthFilter},
-        {name: 'Elevator', content: this.multiple__selection},
-        {name: 'options', content: this.selection},
+        {name: 'Elevator', content: this.selection},
+        {name: 'options', content: this.multiple__selection},
     ];
 
 
