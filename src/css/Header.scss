@@ -1,7 +1,8 @@
 .header {
     position: relative;
     height: 120px;
-    background-color: $primaryColor;
+    background-color: $colorPrimary;
+    color: $textColorOnPrimary;
 }
 
 .header .search__bar {

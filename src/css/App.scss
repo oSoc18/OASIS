@@ -1,6 +1,10 @@
 
-$primaryColor: #20b2bd;
-$primaryColorDark: #026863;
+$colorPrimary: #20b2bd;
+$colorPrimaryLight: lighten($colorPrimary,20%);
+$colorPrimaryDark: #026863;
+
+$textColor: #333;
+$textColorOnPrimary: $colorPrimaryDark;
 
 @import "Header";
 @import "Map";
