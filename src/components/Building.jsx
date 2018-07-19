@@ -6,9 +6,9 @@ export default class Building extends React.Component {
 }
 
 Building.propTypes = {
-    // id: PropTypes.number.isRequired,
-    // title: PropTypes.string.isRequired,
-    // description: PropTypes.string,
+    id: PropTypes.number.isRequired,
+    title: PropTypes.string.isRequired,
+    about: PropTypes.string,
     lat: PropTypes.number,
     long: PropTypes.number,
     // doorWidth: PropTypes.number

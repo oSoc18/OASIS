@@ -11,6 +11,7 @@ export default class SidebarBuildingDetail extends Component {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.BuildingStore = this.props.BuildingStore;
+        this.Building = this.props.buildings.props;
     }
 
     handleClick(e){
@@ -22,10 +23,10 @@ export default class SidebarBuildingDetail extends Component {
         return (
             <Row>
                 <Col>
-                    <h2>{this.props.buildings.title}</h2>
+                    <h2>{this.Building.title}</h2>
                 </Col>
                 <Col>
-                    <p>{this.props.buildings.about}</p>
+                    <p>{this.Building.about}</p>
                 </Col>
                 <Col className="m12 s12 left">
                     <h4>Details:</h4>
