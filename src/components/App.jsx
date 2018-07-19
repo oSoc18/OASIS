@@ -28,6 +28,9 @@ export default class App extends React.Component {
         }
     }
 
+    /**
+    * It takes the list of triples as an argument, and returns a summary of everything we know about a certain subject in one object
+    */
     triplesToObjects = function(triples) {
         var objects = {};
         for (var index in triples) {
@@ -39,7 +42,10 @@ export default class App extends React.Component {
         }
         return objects;
     };
-    
+
+    /**
+    * Get information of a building based on the url and push it to the building array
+    */
     callGebouw = async function (url) {
         try{
             let response = await fetch.get(url);
@@ -69,6 +75,9 @@ export default class App extends React.Component {
         }
     }
     
+    /**
+    * Get the Dataset urls from the master catalog and search for buildings
+    */
     callChild = async function (url) {
         try{
             let response = await fetch.get(url);
@@ -89,6 +98,9 @@ export default class App extends React.Component {
         }
     }
         
+    /**
+    * Get the linked open data from the master catalog using the url above
+    */
     getLinkedOpenData = async function () {
         let response = await fetch.get(StartURL);
         let triples = response.triples;
