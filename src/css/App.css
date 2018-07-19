@@ -1,9 +1,0 @@
-html, body, div#root, div.application {
-    height: 100%;
-    overflow: hidden;
-}
-
-div.application__content {
-    position: relative;
-    height: calc(100% - 64px);
-}

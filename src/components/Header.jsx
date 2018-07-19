@@ -3,9 +3,6 @@ import {Col, Input, Row} from "react-materialize";
 import {SearchFilterContainer} from "./SearchFilterContainer";
 import {inject, observer} from 'mobx-react';
 
-require('../css/Header.css');
-
-
 @inject('BuildingStore')
 @observer
 export default class Header extends Component {

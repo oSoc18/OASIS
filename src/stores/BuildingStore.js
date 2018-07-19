@@ -7,8 +7,8 @@ class BuildingStore {
     @observable searchKey = "";
     @observable filters = {wheelchairWidth: 0};
 
-    @action addBuildings = (buildingArray) => {
-        this.buildings = buildingArray;
+    @action addBuildings = (building) => {
+        this.buildings = building;
     };
 
     @action setBuilding = (building) => {
@@ -34,8 +34,8 @@ class BuildingStore {
     filterBuildings() {
         let arr = [];
         for (let i = 0; i < this.buildings.length; i++) {
-            let title = this.buildings[i].title.toLowerCase();
-            let buildingAccessibleWidth = this.buildings[i].wheelchair.width;
+            let title = this.buildings[i].props.title.toLowerCase();
+            let buildingAccessibleWidth = this.buildings[i].props.door.width;
 
             if (this.searchKey !== "" && title.search(this.searchKey) < 0) {
                 continue;
