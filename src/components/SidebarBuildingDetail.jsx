@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Col, Row} from "react-materialize";
 import {inject, observer} from 'mobx-react';
 
-require('../css/SidebarBuildingDetail.css');
 
 @inject('BuildingStore')
 @observer

@@ -5,7 +5,7 @@ class BuildingStore {
     @observable building = null;
     @observable isInDetailState = false;
     @observable searchKey = "";
-
+    @observable filters = {wheelchairWidth: 0};
 
     @action addBuildings = (building) => {
         this.buildings.push(building);
@@ -23,40 +23,50 @@ class BuildingStore {
         this.searchKey = key;
     };
 
-    @computed get getBuildings(){
+    @action setFilters = (filters) => {
+        this.filters = filters;
+    };
+
+    @computed get getBuildings() {
         return this.buildings;
     };
 
-    filterBuildings(){
+    filterBuildings() {
         let arr = [];
-        for(let i=0; i < this.buildings.length; i++){
+        for (let i = 0; i < this.buildings.length; i++) {
             let title = this.buildings[i].title.toLowerCase();
-            if(title.search(this.searchKey)>=0){
-                arr.push(this.buildings[i]);
+            let buildingAccessibleWidth = this.buildings[i].wheelchair.width;
+
+            if (this.searchKey !== "" && title.search(this.searchKey) < 0) {
+                continue;
             }
-            // do nothing
+
+            if (buildingAccessibleWidth < this.filters.wheelchairWidth) {
+                continue;
+            }
+
+            arr.push(this.buildings[i]);
         }
         return arr;
-    }    
-
-    @computed get getFilteredBuildings(){
-        if(this.searchKey === ""){
-            return this.getBuildings;
-        }else{
-            let arr = this.filterBuildings();
-            return arr;
-        }
     }
 
-    @computed get getBuilding(){
+    @computed get getFilteredBuildings() {
+        return this.filterBuildings();
+
+
+    }
+
+    @computed get getBuilding() {
         return this.building;
     };
 
-    @computed get getIsInDetailState(){
+    @computed get getIsInDetailState() {
         return this.isInDetailState;
     };
 
-    @computed get getSearchKey(){return this.searchKey;}
+    @computed get getSearchKey() {
+        return this.searchKey;
+    }
 }
 
 const store = new BuildingStore();

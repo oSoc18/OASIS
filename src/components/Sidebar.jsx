@@ -4,7 +4,6 @@ import {Card, Col} from "react-materialize";
 import BuildingDetail from './SidebarBuildingDetail.jsx';
 import {inject, observer} from 'mobx-react';
 
-require('../css/Sidebar.css');
     
 @inject('BuildingStore')
 @observer
