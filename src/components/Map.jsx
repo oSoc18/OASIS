@@ -1,8 +1,7 @@
 import React, {Component} from 'react'
-import {Map, Marker, Popup, TileLayer} from 'react-leaflet'
+import {Map, Marker, TileLayer} from 'react-leaflet'
 import * as L from "leaflet";
 import {inject, observer} from 'mobx-react';
-import {Col} from "react-materialize";
 
 @inject('BuildingStore')
 @observer

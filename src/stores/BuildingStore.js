@@ -34,11 +34,11 @@ class BuildingStore {
     filterBuildings() {
         let arr = [];
         for (let i = 0; i < this.buildings.length; i++) {
-            let title = this.buildings[i].props.title.toLowerCase();
-            let widthOfTheDoor = parseInt(this.buildings[i].props.door.width);
-            let widthOfTheChair = parseInt(this.filters.wheelchairWidth);
+            let desc = this.buildings[i].props.description.toLowerCase();
+            let widthOfTheDoor = parseInt(this.buildings[i].props.door.width,10);
+            let widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
             
-            if (this.searchKey !== "" && title.search(this.searchKey) < 0) {
+            if (this.searchKey !== "" && desc.search(this.searchKey) < 0) {
                 continue;
             }
             
