@@ -56,13 +56,9 @@ export default class OpenStreetMap extends Component {
     };
 
     onClick = (e) => {
-        let building;
-        this.BuildingStore.getBuildings.forEach(element => {
-            if (element.props.lat === e.latlng.lat && element.props.long === e.latlng.lng) {
-                building = element;
-            }
-        });
+        let building = this.BuildingStore.getBuildings.find(b => b.props.lat === e.latlng.lat && b.props.long === e.latlng.lng);
         this.BuildingStore.setBuilding(building);
+        this.BuildingStore.setIsInDetailState(false);
         this.BuildingStore.setIsInDetailState(true);
     }
 

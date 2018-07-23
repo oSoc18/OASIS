@@ -11,5 +11,6 @@ Building.propTypes = {
     description: PropTypes.string,
     lat: PropTypes.number,
     long: PropTypes.number,
-    door: PropTypes.object
+    door: PropTypes.object,
+    service: PropTypes.array
 }

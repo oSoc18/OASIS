@@ -43,6 +43,30 @@ export default class App extends React.Component {
         return objects;
     };
 
+    getBuilding = function(id){
+        let building = null;
+        for(let b  in buildings){
+            if(buildings[b].props.id === id){
+                building = buildings[b];
+            }
+        }
+        return building;
+    } 
+
+    getBuildingIndex = function(id){
+        let index = null;
+        for(let b  in buildings){
+            if(buildings[b].props.id === id){
+                index = b;
+            }
+        }
+        return index;
+    }
+
+    checkIfBuildingExists = function (id){
+        return (this.getBuilding(id) !== null);
+    }
+
     /**
      * Get information of a public services based on the url
      */
@@ -54,7 +78,35 @@ export default class App extends React.Component {
             for(let subject in objects){
                 let entity = objects[subject];
                 if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://purl.org/vocab/cpsv#PublicService"){
-                    // console.log(entity);
+                    let idBuildingAdres = entity["http://www.w3.org/ns/locn#location"];
+                    idBuildingAdres = "http://data.vlaanderen.be/id/adres/3743516";
+                    let name = entity["http://schema.org/name"];
+                    let desc = entity["http://schema.org/description"];
+
+                    let accessInfo =objects[objects[entity["toevla:accessibilityMeasurement"]]["toevla:accessibilityMeasurement_for"]]; // not relevant for user
+                    let accessObj = {description: "", width: 0};
+                    accessObj.description = accessInfo["dcterms:description"];
+                    accessObj.width = accessInfo["toevla:elevatorDoorWidth"];
+                    
+                    let serviceObj = {
+                        "name": name,
+                        "desc": desc,
+                        "accessinfo": accessObj
+                    }
+                    
+                    if(this.checkIfBuildingExists(idBuildingAdres)){                        
+                        let b = this.getBuilding(idBuildingAdres);
+                        let index = this.getBuildingIndex(idBuildingAdres);
+                        let serviceArr = b.props.service;
+                        serviceArr.push(serviceObj);
+                        let comp = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src} description={b.props.description}
+                         lat={b.props.lat} long={b.props.long} service={serviceArr}/>;
+                        
+                        buildings[index] = comp;
+                    }else{
+                        let comp = <Building id={idBuildingAdres} title={"Public Service"} src={""} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
+                        buildings.push(comp);
+                    }
                 }
             }
         }catch(e){
@@ -93,21 +145,31 @@ export default class App extends React.Component {
             for(let subject in objects){
                 let entity = objects[subject];
                 if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
+                    let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"];
                     let descr = this.getDescription(entity);
                     let location = this.getLocation(objects, entity);
                     let title = "Gebouw";
                     let src = "http://placekitten.com/200/300";
 
                     // Accessibility stuff
-                    let door={description: "", width:0}
+                    // let door={description: "", width:0}
                     // door.description = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://purl.org/dc/terms/description"];
                     // door.width = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://semweb.mmlab.be/ns/wa#entranceDoorWidth"];
-
-                    let comp = <Building id={subject} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} door={door}/>
-                    buildings.push(comp);
+                    
+                    if(this.checkIfBuildingExists(idBuildingAdres)){
+                        let b = this.getBuilding(idBuildingAdres);
+                        let index = this.getBuildingIndex(idBuildingAdres);
+                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
+                         service={b.props.service}/>; // DO NOT FORGET TO ADD DOOR INFORMATION AGAIN
+                        buildings[index] = comp;
+                    }else{
+                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}/>;
+                        buildings.push(comp);
+                    }
                 }
             }
         }catch(e){
+            console.log(e);
             return;
         }
     }
