@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Col, Row} from "react-materialize";
+import {Col, Row, Collapsible, CollapsibleItem} from "react-materialize";
 import {inject, observer} from 'mobx-react';
 
 
@@ -18,6 +18,43 @@ export default class SidebarBuildingDetail extends Component {
         this.BuildingStore.setIsInDetailState(false);
     }
 
+    showAccessibilityInformation = () => {
+        try{
+            let ar = [];
+            ar.push(<h4>Details</h4>);
+            ar.push(
+            <div>
+                <p><i className="material-icons">wheelchair</i> {this.Building.door.description}: {this.Building.door.width} cm</p>
+                <i className="material-icons">hearing</i>
+                <i className="material-icons">accessibility</i>
+            </div>)
+            return ar;
+        }catch(e){
+            return (<div><h4>Details</h4><p>No accessibility information available</p></div>);
+        }
+    }
+
+    showServices = () => {
+        try{
+            let ar = [];
+            ar.push(<h4>Services</h4>);
+            for(let index in this.Building.service){
+                ar.push(
+                    <Collapsible>
+                        <CollapsibleItem header={this.Building.service[index].name} icon='toc'>
+                            <p>{this.Building.service[index].desc}</p>
+                            <p>{this.Building.service[index].accessinfo.description+" is "+this.Building.service[index].accessinfo.width+" cm"}</p>
+                        </CollapsibleItem>
+                    </Collapsible>
+                )
+            }
+            return ar;
+            
+        }catch(e){ 
+            return (<div><h4>Services</h4><p>This building does not contain public services</p></div>);
+        }
+    }
+
     render() {
         return (
             <Row>
@@ -25,11 +62,13 @@ export default class SidebarBuildingDetail extends Component {
                     <h2>{this.Building.title}</h2>
                 </Col>
                 <Col>
-                    <p>{this.Building.about}</p>
+                    <p>{this.Building.description}</p>
                 </Col>
-                <Col className="m12 s12 left">
-                    <h4>Details:</h4>
-                    <p>{this.Building.door.description}: {this.Building.door.width} cm</p>
+                <Col s={12}>
+                    {this.showAccessibilityInformation()}
+                </Col>
+                <Col s={12}>
+                    {this.showServices()}
                 </Col>
                 <a href='#' className="col m12 s12 center" onClick={this.handleClick}>Return to search results</a>
             </Row>

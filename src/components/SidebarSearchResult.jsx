@@ -15,11 +15,23 @@ export default class SidebarSearchResult extends React.Component {
 
     handleClick(e){
         e.preventDefault();
-        let id = this.props.buildings.id;
-        let building = this.BuildingStore.getBuildings.find(b => b.id === id);
-        
+        let id = this.Building.id;
+        let building = this.BuildingStore.getBuildings.find(b => b.props.id === id);
+
         this.BuildingStore.setBuilding(building);
         this.BuildingStore.setIsInDetailState(true);
+    }
+
+    showAccessibilityInformation = () => {
+        try{
+            <div>
+                <p><i className="material-icons">wheelchair</i> {this.Building.door.description}: {this.Building.door.width} cm</p>
+                <i className="material-icons">hearing</i>
+                <i className="material-icons">accessibility</i>
+            </div>
+        }catch(e){
+            console.log(e);
+        }
     }
 
     render() {
@@ -33,12 +45,10 @@ export default class SidebarSearchResult extends React.Component {
                 <img className="col m3 s12 sidebar__searchresult__thumbnail" src={this.Building.src}/>
 
                 <Col m={9} s={12}>
-                    <span className="sidebar__searchresult__description"><p>{this.Building.about}</p></span>
+                    <span className="sidebar__searchresult__description"><p>{this.Building.description}</p></span>
                 </Col>
                 <Col m={9} s={12}>
-                    <p>{this.Building.door.description}: {this.Building.door.width} cm</p>
-                    <i className="material-icons">hearing</i>
-                    <i className="material-icons">accessibility</i>
+                    {/* {this.showAccessibilityInformation()} */}
                 </Col>
                 <a className="col m12 s12 center" href="#" onClick={this.handleClick} id={this.Building.id}>Meer details...</a>
             </Row>
