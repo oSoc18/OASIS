@@ -52,6 +52,7 @@ export default class App extends React.Component {
         }
         return building;
     } 
+
     getBuildingIndex = function(id){
         let index = null;
         for(let b  in buildings){
@@ -92,16 +93,18 @@ export default class App extends React.Component {
                         "desc": desc,
                         "accessinfo": accessObj
                     }
-
+                    
                     if(this.checkIfBuildingExists(idBuildingAdres)){                        
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
+                        let serviceArr = b.props.service;
+                        serviceArr.push(serviceObj);
                         let comp = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src} description={b.props.description}
-                         lat={b.props.lat} long={b.props.long} service={[serviceObj]}/>;
+                         lat={b.props.lat} long={b.props.long} service={serviceArr}/>;
                         
                         buildings[index] = comp;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={""} src={""} description={""} lat={0} long={0} service={[serviceObj]}/>;
+                        let comp = <Building id={idBuildingAdres} title={"Public Service"} src={""} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
                         buildings.push(comp);
                     }
                 }
@@ -149,19 +152,18 @@ export default class App extends React.Component {
                     let src = "http://placekitten.com/200/300";
 
                     // Accessibility stuff
-                    let door={description: "", width:0}
+                    // let door={description: "", width:0}
                     // door.description = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://purl.org/dc/terms/description"];
                     // door.width = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://semweb.mmlab.be/ns/wa#entranceDoorWidth"];
                     
-                    console.log(this.checkIfBuildingExists(idBuildingAdres));
                     if(this.checkIfBuildingExists(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
                         let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
-                        door={door} service={b.props.service}/>;
+                         service={b.props.service}/>; // DO NOT FORGET TO ADD DOOR INFORMATION AGAIN
                         buildings[index] = comp;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} door={door}/>;
+                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}/>;
                         buildings.push(comp);
                     }
                 }
