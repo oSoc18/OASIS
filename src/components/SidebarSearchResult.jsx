@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Row} from "react-materialize";
+import {Card, Col, Row} from "react-materialize";
 import {inject, observer} from 'mobx-react';
 
 
@@ -24,6 +24,7 @@ export default class SidebarSearchResult extends React.Component {
 
     render() {
         return (
+            <Card>
             <Row>
                 <Col m={12} s={12}>
                     <hr />
@@ -42,6 +43,7 @@ export default class SidebarSearchResult extends React.Component {
                 </Col>
                 <a className="col m12 s12 center" href="#" onClick={this.handleClick} id={this.Building.id}>Meer details...</a>
             </Row>
+            </Card>
         )
     }
 }

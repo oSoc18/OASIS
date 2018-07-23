@@ -24,7 +24,7 @@ export default class SidebarBuildingDetail extends Component {
                 <Col>
                     <h2>{this.Building.title}</h2>
                 </Col>
-                <Col>
+                <Col s={12}>
                     <p>{this.Building.description}</p>
                 </Col>
                 <Col className="m12 s12 left">

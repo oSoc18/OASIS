@@ -27,6 +27,13 @@ $filterBarBackground: white;
     float: left;
   }
 
+  .social__media__icon{
+    height: 32px;
+    float: right;
+    position: absolute;
+    right: 0px;
+  }
+
   .brand__name {
     height: 100%;
     display: inline-block;
@@ -34,6 +41,11 @@ $filterBarBackground: white;
     font-size: 30px;
     line-height: 48px;
     float: left;
+  }
+
+  ::placeholder {
+    color: $colorPrimaryDark;
+    opacity: 1; /* Firefox */
   }
 
   div.search {
@@ -48,6 +60,7 @@ $filterBarBackground: white;
     }
   }
 }
+
 
 .header .search__filters {
   height: $headerBarFilterHeight;
@@ -89,7 +102,7 @@ $filterBarBackground: white;
         margin-top: ($headerBarFilterHeight - 3 * $headerBarPadding - 18px)/2;
         padding: $headerBarPadding / 2;
         line-height: 18px;
-        font-size: 14px;
+        font-size: 20px;
         border-radius: 4px;
         color: $filterBarForeground;
         border: 1px solid $filterBarForeground;
