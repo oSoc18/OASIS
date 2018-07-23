@@ -36,7 +36,7 @@ export default class SidebarSearchResult extends React.Component {
                     <span className="sidebar__searchresult__description"><p>{this.Building.description}</p></span>
                 </Col>
                 <Col m={9} s={12}>
-                    <p>{this.Building.door.description}: {this.Building.door.width} cm</p>
+                    {/* <p>{this.Building.door.description}: {this.Building.door.width} cm</p> */}
                     <i className="material-icons">hearing</i>
                     <i className="material-icons">accessibility</i>
                 </Col>
