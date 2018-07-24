@@ -137,7 +137,7 @@ export default class Header extends Component {
                     </Col>
                 </Row>
                 <Row>
-                    <Col s={3} className="search">
+                    <Col s={4} className="search">
                         <div className="input-field">
                             <input id="search" type="search" placeholder="Zoek op naam" required
                                    onInput={this.handleSearchRequest}></input>
@@ -147,7 +147,7 @@ export default class Header extends Component {
                             <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
                     </Col>
-                    <Col s={9}>
+                    <Col s={8}>
                         <div className="search__filters">
                             {this.renderFilters()}
                         </div>
