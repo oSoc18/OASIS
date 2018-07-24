@@ -36,12 +36,13 @@ class BuildingStore {
         let widthOfTheDoor = 0;
         let widthOfTheChair = -1;
         for (let i = 0; i < this.buildings.length; i++) {
-            let desc = this.buildings[i].props.description.toLowerCase();
-            if(this.buildings[i].props.door === 'undefined'){
-                widthOfTheDoor = parseInt(this.buildings[i].props.door.width,10);
-                widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
+            let desc = this.buildings[i].props.title.toLowerCase();
+            let accessibilityInfoArray = this.buildings[i].props.accessInfo;
+            if(typeof(accessibilityInfoArray) === 'object'){
+                widthOfTheDoor = parseInt(accessibilityInfoArray[0].width,10);
             }
-            
+            widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
+
             if (this.searchKey !== "" && desc.search(this.searchKey) < 0) {
                 continue;
             }
