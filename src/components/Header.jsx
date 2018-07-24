@@ -119,30 +119,37 @@ export default class Header extends Component {
     render() {
         return (
             <nav className="header">
-                <Row className="search__bar">
-                    <Col l={3} m={6} href="#" className="brand">
-                        <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
-                        <h1 className="brand__name">Access Flanders</h1>
+                <Row>
+                    <Col l={3} m={6} href="#">
+                        <div className="brand">
+                            <img className="brand__icon" src={require('../images/logo-oasis.svg')}
+                                 alt="OASIS"></img>
+                            <h1 className="brand__name">Access Flanders</h1>
+                        </div>
                     </Col>
-                    <Col s={6} className="search">
+                    <Col s={1} className="right">
+                        <a href="https://github.com/oSoc18/OASIS" target="_blank">
+                            <img alt="github icon" title="github" className="social__media__icon"
+                                 src={require('../images/logo-github.svg')}>
+                            </img>
+                        </a>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col s={3} className="search">
                         <div className="input-field">
-                            <input id="search" type="search" placeholder="Zoek op naam" required onInput={this.handleSearchRequest}></input>
+                            <input id="search" type="search" placeholder="Zoek op naam" required
+                                   onInput={this.handleSearchRequest}></input>
                             <label className="label-icon" htmlFor="search">
                                 <i className="material-icons">search</i>
                             </label>
                             <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
                     </Col>
-                    <Col>
-                        <a href="https://github.com/oSoc18/OASIS" target="_blank">
-                        <img  alt="github icon" title="github" className="social__media__icon" src={require('../images/github_otocat.png')} alt="github">
-                        </img>
-                        </a>
-                    </Col>
-                </Row>
-                <Row className="search__filters">
-                    <Col s={9} offset="s0 m6 l3">
-                        {this.renderFilters()}
+                    <Col s={9}>
+                        <div className="search__filters">
+                            {this.renderFilters()}
+                        </div>
                     </Col>
                 </Row>
             </nav>

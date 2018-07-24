@@ -1,10 +1,9 @@
-
 $colorPrimary: #27b59f;
-$colorPrimaryLight: lighten($colorPrimary,20%);
+$colorPrimaryLight: #d6f2ec;
 $colorPrimaryDark: #026863;
 
 $textColor: #333;
-$textColorOnPrimary: $colorPrimaryDark;
+$textColorLight: #ccc;
 
 @import "Header";
 @import "Map";
@@ -19,5 +18,5 @@ html, body, div#root, div.application {
 
 div.application__content {
     position: relative;
-    height: calc(100% - 64px);
+    height: calc(100% - 112px);
 }
