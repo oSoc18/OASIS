@@ -1,37 +1,41 @@
 div.leaflet-container {
-    height: 100%;
+  height: 100%;
 }
 
-
-.leaflet-marker-pane>img{
-    margin:-1px;
+.leaflet-marker-pane > img {
+  margin: -1px;
 }
 
 .map__marker__image {
-    position: relative;
-    height:38px;
-    width:38px;
-    top: -32px;
-    left: -13px;
+  position: relative;
+  height: 42px;
+  width: 30px;
+  top: -34px;
+  left: -13px;
 }
 
-.map__marker__text{
-    position: relative;
-    width:80px;
-    overflow: hidden;
-    white-space: nowrap;
-    top: -100px;
-    left: -35px;
-    background-color: #ffffff;
-    opacity: 0.9;
-    display: none;
-    text-align: center;
+.map__marker__text {
+  position: relative;
+  width: 80px;
+  overflow: hidden;
+  white-space: nowrap;
+  top: -100px;
+  left: -35px;
+  background-color: $colorPrimary;
+  border: 1px solid $colorPrimaryDark;
+  opacity: 0.9;
+  display: none;
+  text-align: center;
 }
 
-.map__marker__image:hover + .map__marker__text{
-    display: block;
+.map__marker__image:hover + .map__marker__text {
+  display: block;
 }
 
 .map__marker:hover > .map__marker__text {
-    display: block;
+  display: block;
+}
+
+leaflet-top leaflet-left {
+  float: right !important;
 }

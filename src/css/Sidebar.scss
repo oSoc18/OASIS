@@ -3,9 +3,10 @@ div.sidebar {
     margin: 0;
     float: left;
     background-color: #fff;
+    overflow: scroll;
 }
 
 div.sidebar__card {
-    overflow: scroll;
+
     height: 100%;
 }
