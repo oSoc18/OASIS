@@ -1,0 +1,16 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+.building__name {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.center {
+  font-family: 'Open Sans', sans-serif;
+  color: $colorPrimary;
+  text-align: left !important;
+}
+
+hr {
+  border-color: rgba(164, 164, 164, 0.21);
+}

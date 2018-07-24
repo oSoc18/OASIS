@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
 div.sidebar {
     height: 100%;
     margin: 0;
@@ -9,4 +12,21 @@ div.sidebar {
 div.sidebar__card {
 
     height: 100%;
+}
+
+.result{
+    position: absolute;
+    bottom: 0;
+    height:5%;
+    width:100%;
+    background:$colorAlmostWhite;
+    clear:both;
+    padding: 0;
+
+}
+
+.result__text {
+    font-size: 10px;
+    font-family: 'Open Sans', sans-serif;
+
 }

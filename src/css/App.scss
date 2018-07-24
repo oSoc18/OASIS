@@ -2,6 +2,7 @@
 $colorPrimary: #27b59f;
 $colorPrimaryLight: lighten($colorPrimary,20%);
 $colorPrimaryDark: #026863;
+$colorAlmostWhite: #d6f2ec;
 
 $textColor: #333;
 $textColorOnPrimary: $colorPrimaryDark;
@@ -19,5 +20,5 @@ html, body, div#root, div.application {
 
 div.application__content {
     position: relative;
-    height: calc(100% - 64px);
+    height: calc(100% - 112px);
 }
