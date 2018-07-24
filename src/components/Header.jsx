@@ -122,7 +122,7 @@ export default class Header extends Component {
                 <Row className="search__bar">
                     <Col l={3} m={6} href="#" className="brand">
                         <img className="brand__icon" src={require('../images/logo-oasis.svg')} alt="OASIS"></img>
-                        <h1 className="brand__name">OASIS</h1>
+                        <h1 className="brand__name">Access Flanders</h1>
                     </Col>
                     <Col s={6} className="search">
                         <div className="input-field">
@@ -132,6 +132,12 @@ export default class Header extends Component {
                             </label>
                             <i className="material-icons" onClick={this.resetSearch}>close</i>
                         </div>
+                    </Col>
+                    <Col>
+                        <a href="https://github.com/oSoc18/OASIS" target="_blank">
+                        <img  alt="github icon" title="github" className="social__media__icon" src={require('../images/github_otocat.png')} alt="github">
+                        </img>
+                        </a>
                     </Col>
                 </Row>
                 <Row className="search__filters">

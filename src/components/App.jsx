@@ -135,6 +135,45 @@ export default class App extends React.Component {
     }
 
     /**
+     * Get information of a public services based on the url
+     */
+    getPublicServiceData = async function (url) {
+        try{
+            let response = await fetch.get(url);
+            let objects = this.triplesToObjects(response.triples);
+
+            for(let subject in objects){
+                let entity = objects[subject];
+                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://purl.org/vocab/cpsv#PublicService"){
+                    // console.log(entity);
+                }
+            }
+        }catch(e){
+            return;
+        }
+    }
+
+    getDescription(entity){
+        let desc= entity["http://purl.org/dc/terms/description"];
+        if(typeof(desc) === 'undefined'){
+            return "Description not available";
+        }
+        return desc;
+    }
+
+    getLocation(objects, entity){
+        try{     
+            let location = {lat:0, long: 0};       
+            let adres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"]; // not relevant for user
+            location.lat = objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#lat"];
+            location.long =  objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#long"];
+            return location;
+        }catch(e){
+            return {lat:0, long: 0};
+        }
+    }
+
+    /**
     * Get information of a building based on the url and push it to the building array
     */
     callGebouw = async function (url) {
