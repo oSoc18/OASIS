@@ -170,7 +170,7 @@ export default class App extends React.Component {
                     let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"][0];
                     let descr = this.getDescription(entity);
                     let location = this.getLocation(objects, entity);
-                    let title = "Gebouw";
+                    let title = entity["http://schema.org/name"][0];
                     let src = entity["http://schema.org/image"];
 
                     // Accessibility stuff
