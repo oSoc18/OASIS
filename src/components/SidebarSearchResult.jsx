@@ -43,7 +43,7 @@ export default class SidebarSearchResult extends React.Component {
                     <h4>{this.Building.title}</h4>
                 </Col>
 
-                <img className="col m3 s12 sidebar__searchresult__thumbnail" src={this.Building.src}/>
+                <img className="col m3 s12 sidebar__searchresult__thumbnail" src={this.Building.src} title={this.Building.title} alt={this.Building.title}/>
 
                 <Col m={9} s={12}>
                     <span className="sidebar__searchresult__description"><p>{this.Building.description}</p></span>

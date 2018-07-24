@@ -133,26 +133,6 @@ export default class App extends React.Component {
         }
     }
 
-    getDescription(entity){
-        let desc= entity["http://purl.org/dc/terms/description"];
-        if(typeof(desc) === 'undefined'){
-            return "Description not available";
-        }
-        return desc;
-    }
-
-    getLocation(objects, entity){
-        try{     
-            let location = {lat:0, long: 0};       
-            let adres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"]; // not relevant for user
-            location.lat = objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#lat"];
-            location.long =  objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#long"];
-            return location;
-        }catch(e){
-            return {lat:0, long: 0};
-        }
-    }
-
     /**
     * Get information of a building based on the url and push it to the building array
     */
