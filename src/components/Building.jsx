@@ -11,6 +11,6 @@ Building.propTypes = {
     description: PropTypes.string,
     lat: PropTypes.number,
     long: PropTypes.number,
-    accessInfo: PropTypes.array,
+    accessInfo: PropTypes.array, // accessibilityInfo
     service: PropTypes.array
 }

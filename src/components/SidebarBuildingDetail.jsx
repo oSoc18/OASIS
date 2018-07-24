@@ -10,7 +10,7 @@ export default class SidebarBuildingDetail extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.BuildingStore = this.props.BuildingStore;
         this.Building = this.props.buildings.props;
-        this.UID = 0;
+        this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
     }
 
     handleClick(e){

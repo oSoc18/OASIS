@@ -29,8 +29,11 @@ export default class App extends React.Component {
     }
 
     /**
-    * It takes the list of triples as an argument, and returns a summary of everything we know about a certain subject in one object with array values
-    */
+    * Retrieve an array everything we know about a certain subject
+    *
+    * @param triples list of triples
+    * @return array summary of everything we know about a certain subject in one object
+    **/
     triplesToArray = function(triples){
         var objects = {};
         for (var index in triples) {
@@ -81,7 +84,7 @@ export default class App extends React.Component {
         return index;
     }
 
-    checkIfBuildingExists = function (id){
+    doesBuildingExist = function (id){
         return (this.getBuilding(id) !== null);
     }
 
@@ -111,18 +114,18 @@ export default class App extends React.Component {
                         "accessinfo": accessObj
                     }
                     
-                    if(this.checkIfBuildingExists(idBuildingAdres)){
+                    if(this.doesBuildingExist(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
                         let serviceArr = b.props.service;
                         serviceArr.push(serviceObj);
-                        let comp = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src} description={b.props.description}
+                        let component = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src} description={b.props.description}
                          lat={b.props.lat} long={b.props.long} service={serviceArr}/>;
                         
-                        buildings[index] = comp;
+                        buildings[index] = component;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={"Public Service"} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
-                        buildings.push(comp);
+                        let component = <Building id={idBuildingAdres} title={"Public Service"} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
+                        buildings.push(component);
                     }
                 }
             }
@@ -158,7 +161,7 @@ export default class App extends React.Component {
     /**
     * Get information of a building based on the url and push it to the building array
     */
-    getGebouwInformation = async function (url) {
+    getBuildingInformation = async function (url) {
         try{
             let response = await fetch.get(url);
             let objects = this.triplesToArray(response.triples);
@@ -186,16 +189,16 @@ export default class App extends React.Component {
                         accessInfo.push(obj);
                     }
 
-                    if(this.checkIfBuildingExists(idBuildingAdres)){
+                    if(this.doesBuildingExist(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
-                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
+                        let component = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
                         accessInfo={accessInfo} service={b.props.service}/>;
-                        buildings[index] = comp;
+                        buildings[index] = component;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}
+                        let component = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}
                         accessInfo={accessInfo} />;
-                        buildings.push(comp);
+                        buildings.push(component);
                     }
                 }
             }
@@ -219,7 +222,7 @@ export default class App extends React.Component {
                     if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
                          let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
-                         await this.getGebouwInformation(url);
+                         await this.getBuildingInformation(url);
                      }
                      if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://purl.org/vocab/cpsv#PublicService"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];

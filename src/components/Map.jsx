@@ -9,7 +9,7 @@ export default class OpenStreetMap extends Component {
     constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
-        this.UID = 0;
+        this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
         this.state = {
             lat: 51.05389,
             lng: 3.705,

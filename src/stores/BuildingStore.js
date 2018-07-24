@@ -37,9 +37,9 @@ class BuildingStore {
         let widthOfTheChair = -1;
         for (let i = 0; i < this.buildings.length; i++) {
             let desc = this.buildings[i].props.title.toLowerCase();
-            let accessInfoArr = this.buildings[i].props.accessInfo;
-            if(typeof(accessInfoArr) === 'object'){
-                widthOfTheDoor = parseInt(accessInfoArr[0].width,10);
+            let accessibilityInfoArray = this.buildings[i].props.accessInfo;
+            if(typeof(accessibilityInfoArray) === 'object'){
+                widthOfTheDoor = parseInt(accessibilityInfoArray[0].width,10);
             }
             widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
 

@@ -11,7 +11,7 @@ export default class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
-        this.UID = 0;
+        this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
     }
 
     renderLists = () => {

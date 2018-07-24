@@ -10,7 +10,7 @@ export default class Header extends Component {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
         this.handleSearchRequest = this.handleSearchRequest.bind(this);
-        this.UID = 0;
+        this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
     }
 
     handleSearchRequest = (e) => {
