@@ -9,7 +9,7 @@ export default class OpenStreetMap extends Component {
     constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
-
+        this.UID = 0;
         this.state = {
             lat: 51.05389,
             lng: 3.705,
@@ -49,7 +49,7 @@ export default class OpenStreetMap extends Component {
                 });
 
                 buldingPosition.push(<Marker className="pointer" position={[building.props.lat, building.props.long]}
-                                             icon={markerIcon} onClick={this.onClick}/>);
+                                             icon={markerIcon} onClick={this.onClick} key={++this.UID}/>);
             })
         }
         return buldingPosition;

@@ -10,6 +10,7 @@ export default class Header extends Component {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
         this.handleSearchRequest = this.handleSearchRequest.bind(this);
+        this.UID = 0;
     }
 
     handleSearchRequest = (e) => {
@@ -106,7 +107,7 @@ export default class Header extends Component {
     renderFilters() {
         return this.filters.map((filter, index) => {
             return <SearchFilterContainer name={filter.name} content={filter.content} onOpen={this.onOpenFilterModal}
-                                          ref={this.refCollector(index)}/>;
+                                          ref={this.refCollector(index)} key={++this.UID}/>;
         });
     }
 

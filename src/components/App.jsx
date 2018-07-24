@@ -79,7 +79,6 @@ export default class App extends React.Component {
                 let entity = objects[subject];
                 if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://purl.org/vocab/cpsv#PublicService"){
                     let idBuildingAdres = entity["http://www.w3.org/ns/locn#location"];
-                    idBuildingAdres = "http://data.vlaanderen.be/id/adres/3743516";
                     let name = entity["http://schema.org/name"];
                     let desc = entity["http://schema.org/description"];
 
@@ -94,7 +93,7 @@ export default class App extends React.Component {
                         "accessinfo": accessObj
                     }
                     
-                    if(this.checkIfBuildingExists(idBuildingAdres)){                        
+                    if(this.checkIfBuildingExists(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
                         let serviceArr = b.props.service;
@@ -104,7 +103,7 @@ export default class App extends React.Component {
                         
                         buildings[index] = comp;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={"Public Service"} src={""} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
+                        let comp = <Building id={idBuildingAdres} title={"Public Service"} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
                         buildings.push(comp);
                     }
                 }
@@ -134,25 +133,6 @@ export default class App extends React.Component {
         }
     }
 
-    /**
-     * Get information of a public services based on the url
-     */
-    getPublicServiceData = async function (url) {
-        try{
-            let response = await fetch.get(url);
-            let objects = this.triplesToObjects(response.triples);
-
-            for(let subject in objects){
-                let entity = objects[subject];
-                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://purl.org/vocab/cpsv#PublicService"){
-                    // console.log(entity);
-                }
-            }
-        }catch(e){
-            return;
-        }
-    }
-
     getDescription(entity){
         let desc= entity["http://purl.org/dc/terms/description"];
         if(typeof(desc) === 'undefined'){
@@ -176,7 +156,7 @@ export default class App extends React.Component {
     /**
     * Get information of a building based on the url and push it to the building array
     */
-    callGebouw = async function (url) {
+    getGebouwInformation = async function (url) {
         try{
             let response = await fetch.get(url);
             let objects = this.triplesToObjects(response.triples);
@@ -216,7 +196,7 @@ export default class App extends React.Component {
     /**
     * Get the Dataset urls from the master catalog and search for buildings
     */
-    callChild = async function (url) {
+    getDataSets = async function (url) {
         try{
             let response = await fetch.get(url);
             let triples = response.triples;
@@ -227,7 +207,7 @@ export default class App extends React.Component {
                     if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
                          let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
-                         await this.callGebouw(url);
+                         await this.getGebouwInformation(url);
                      }
                      if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://purl.org/vocab/cpsv#PublicService"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
@@ -250,7 +230,7 @@ export default class App extends React.Component {
         for(let index in triples){
             if(triples[index].predicate.value === "http://xmlns.com/foaf/0.1/page"){
                 let url = triples[index].object.value;
-                await this.callChild(url);
+                await this.getDataSets(url);
             }
         }
         

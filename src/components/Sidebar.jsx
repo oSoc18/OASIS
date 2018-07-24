@@ -11,12 +11,13 @@ export default class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
+        this.UID = 0;
     }
 
     renderLists = () => {
         let result = [];
         for (let i = 0; i < this.BuildingStore.getFilteredBuildings.length; i++) {
-            result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]}/>);
+            result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]} key={++this.UID}/>);
         }
         return result;
     };
@@ -24,7 +25,7 @@ export default class Sidebar extends React.Component {
 
     renderDetails = () => {
         let details = [];
-        details.push(<BuildingDetail buildings={this.BuildingStore.getBuilding}/>);
+        details.push(<BuildingDetail buildings={this.BuildingStore.getBuilding}  key={++this.UID}/>);
         return details;
     };
 

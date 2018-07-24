@@ -2,7 +2,6 @@ import React, {Component} from 'react'
 import {Col, Row, Collapsible, CollapsibleItem} from "react-materialize";
 import {inject, observer} from 'mobx-react';
 
-
 @inject('BuildingStore')
 @observer
 export default class SidebarBuildingDetail extends Component {
@@ -11,6 +10,7 @@ export default class SidebarBuildingDetail extends Component {
         this.handleClick = this.handleClick.bind(this);
         this.BuildingStore = this.props.BuildingStore;
         this.Building = this.props.buildings.props;
+        this.UID = 0;
     }
 
     handleClick(e){
@@ -21,26 +21,26 @@ export default class SidebarBuildingDetail extends Component {
     showAccessibilityInformation = () => {
         try{
             let ar = [];
-            ar.push(<h4>Details</h4>);
+            ar.push(<h4 key={++this.UID}>Details</h4>);
             ar.push(
-            <div>
+            <div key={++this.UID}>
                 <p><i className="material-icons">wheelchair</i> {this.Building.door.description}: {this.Building.door.width} cm</p>
                 <i className="material-icons">hearing</i>
                 <i className="material-icons">accessibility</i>
             </div>)
             return ar;
         }catch(e){
-            return (<div><h4>Details</h4><p>No accessibility information available</p></div>);
+            return (<div><p>No accessibility information available</p></div>);
         }
     }
 
     showServices = () => {
         try{
             let ar = [];
-            ar.push(<h4>Services</h4>);
+            ar.push(<h4 key={++this.UID}>Services</h4>);
             for(let index in this.Building.service){
                 ar.push(
-                    <Collapsible>
+                    <Collapsible key={++this.UID}>
                         <CollapsibleItem header={this.Building.service[index].name} icon='toc'>
                             <p>{this.Building.service[index].desc}</p>
                             <p>{this.Building.service[index].accessinfo.description+" is "+this.Building.service[index].accessinfo.width+" cm"}</p>
