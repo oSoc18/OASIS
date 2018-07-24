@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 @import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
+
+.row.application__content > .col:first-of-type{
+    height: 100%;
+}
+
 div.sidebar {
     height: 100%;
     margin: 0;
     float: left;
     background-color: #fff;
-    overflow: scroll;
+    overflow: auto;
 }
 
 div.sidebar__card {
@@ -17,9 +22,9 @@ div.sidebar__card {
 .result{
     position: absolute;
     bottom: 0;
-    height:5%;
+    left:0;
     width:100%;
-    background:$colorAlmostWhite;
+    border-top: 1px solid rgba(164, 164, 164, 0.21);;
     clear:both;
     padding: 0;
 
@@ -28,5 +33,6 @@ div.sidebar__card {
 .result__text {
     font-size: 10px;
     font-family: 'Open Sans', sans-serif;
+    margin-left: 10px;
 
 }

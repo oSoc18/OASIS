@@ -64,7 +64,7 @@ export default class OpenStreetMap extends Component {
 
     render() {
         return (
-                <Map className={"col m6 l9 hide-on-small-only"} center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
+                <Map className={"col m6 l8 hide-on-small-only"} center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
                     <TileLayer
                         attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> contributors"
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
