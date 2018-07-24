@@ -29,6 +29,27 @@ export default class App extends React.Component {
     }
 
     /**
+    * Retrieve an array everything we know about a certain subject
+    *
+    * @param triples list of triples
+    * @return array summary of everything we know about a certain subject in one object
+    **/
+    triplesToArray = function(triples){
+        var objects = {};
+        for (var index in triples) {
+            var triple = triples[index];
+            if (!objects[triple.subject.value]) {
+                objects[triple.subject.value] = {};
+            }
+            if(!objects[triple.subject.value][triple.predicate.value]){
+                objects[triple.subject.value][triple.predicate.value] = [];
+            }
+            objects[triple.subject.value][triple.predicate.value].push(triple.object.value);
+        }
+        return objects;
+    }
+
+    /**
     * It takes the list of triples as an argument, and returns a summary of everything we know about a certain subject in one object
     */
     triplesToObjects = function(triples) {
@@ -63,7 +84,7 @@ export default class App extends React.Component {
         return index;
     }
 
-    checkIfBuildingExists = function (id){
+    doesBuildingExist = function (id){
         return (this.getBuilding(id) !== null);
     }
 
@@ -79,7 +100,6 @@ export default class App extends React.Component {
                 let entity = objects[subject];
                 if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://purl.org/vocab/cpsv#PublicService"){
                     let idBuildingAdres = entity["http://www.w3.org/ns/locn#location"];
-                    idBuildingAdres = "http://data.vlaanderen.be/id/adres/3743516";
                     let name = entity["http://schema.org/name"];
                     let desc = entity["http://schema.org/description"];
 
@@ -94,18 +114,18 @@ export default class App extends React.Component {
                         "accessinfo": accessObj
                     }
                     
-                    if(this.checkIfBuildingExists(idBuildingAdres)){                        
+                    if(this.doesBuildingExist(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
                         let serviceArr = b.props.service;
                         serviceArr.push(serviceObj);
-                        let comp = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src} description={b.props.description}
+                        let component = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src} description={b.props.description}
                          lat={b.props.lat} long={b.props.long} service={serviceArr}/>;
                         
-                        buildings[index] = comp;
+                        buildings[index] = component;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={"Public Service"} src={""} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
-                        buildings.push(comp);
+                        let component = <Building id={idBuildingAdres} title={"Public Service"} description={"Not linked to a known building"} lat={0} long={0} service={[serviceObj]}/>;
+                        buildings.push(component);
                     }
                 }
             }
@@ -134,76 +154,51 @@ export default class App extends React.Component {
         }
     }
 
-    /**
-     * Get information of a public services based on the url
-     */
-    getPublicServiceData = async function (url) {
-        try{
-            let response = await fetch.get(url);
-            let objects = this.triplesToObjects(response.triples);
+    getAccessibilityInformation(entity){
 
-            for(let subject in objects){
-                let entity = objects[subject];
-                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://purl.org/vocab/cpsv#PublicService"){
-                    // console.log(entity);
-                }
-            }
-        }catch(e){
-            return;
-        }
-    }
-
-    getDescription(entity){
-        let desc= entity["http://purl.org/dc/terms/description"];
-        if(typeof(desc) === 'undefined'){
-            return "Description not available";
-        }
-        return desc;
-    }
-
-    getLocation(objects, entity){
-        try{     
-            let location = {lat:0, long: 0};       
-            let adres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"]; // not relevant for user
-            location.lat = objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#lat"];
-            location.long =  objects[objects[adres]["http://www.w3.org/2003/01/geo/wgs84_pos#location"]]["http://www.w3.org/2003/01/geo/wgs84_pos#long"];
-            return location;
-        }catch(e){
-            return {lat:0, long: 0};
-        }
     }
 
     /**
     * Get information of a building based on the url and push it to the building array
     */
-    callGebouw = async function (url) {
+    getBuildingInformation = async function (url) {
         try{
             let response = await fetch.get(url);
-            let objects = this.triplesToObjects(response.triples);
-            
+            let objects = this.triplesToArray(response.triples);
+
             for(let subject in objects){
                 let entity = objects[subject];
-                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
-                    let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"];
+                // console.log(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0]);
+                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] && entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
+                    let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"][0];
                     let descr = this.getDescription(entity);
                     let location = this.getLocation(objects, entity);
-                    let title = "Gebouw";
-                    let src = "http://placekitten.com/200/300";
+                    let title = entity["http://schema.org/name"][0];
+                    let src = entity["http://schema.org/image"];
 
                     // Accessibility stuff
-                    // let door={description: "", width:0}
-                    // door.description = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://purl.org/dc/terms/description"];
-                    // door.width = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://semweb.mmlab.be/ns/wa#entranceDoorWidth"];
-                    
-                    if(this.checkIfBuildingExists(idBuildingAdres)){
+                    let accessInfo=[];
+                    let accessInfoLocations = objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"];
+                    for(let index in accessInfoLocations){
+                        let obj = {description: "", width: 0};
+                        // Get the string of the width (can be either ElevatorDoorWidth or entranceDoorWidth or ...)
+                        let key = Object.keys(objects[accessInfoLocations[index]])[1];
+
+                        obj.description = objects[accessInfoLocations[index]]["http://purl.org/dc/terms/description"][0];
+                        obj.width = objects[accessInfoLocations[index]][key][0];
+                        accessInfo.push(obj);
+                    }
+
+                    if(this.doesBuildingExist(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
-                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
-                         service={b.props.service}/>; // DO NOT FORGET TO ADD DOOR INFORMATION AGAIN
-                        buildings[index] = comp;
+                        let component = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
+                        accessInfo={accessInfo} service={b.props.service}/>;
+                        buildings[index] = component;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}/>;
-                        buildings.push(comp);
+                        let component = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}
+                        accessInfo={accessInfo} />;
+                        buildings.push(component);
                     }
                 }
             }
@@ -216,7 +211,7 @@ export default class App extends React.Component {
     /**
     * Get the Dataset urls from the master catalog and search for buildings
     */
-    callChild = async function (url) {
+    getDataSets = async function (url) {
         try{
             let response = await fetch.get(url);
             let triples = response.triples;
@@ -227,7 +222,7 @@ export default class App extends React.Component {
                     if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
                          let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
-                         await this.callGebouw(url);
+                         await this.getBuildingInformation(url);
                      }
                      if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://purl.org/vocab/cpsv#PublicService"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
@@ -250,7 +245,7 @@ export default class App extends React.Component {
         for(let index in triples){
             if(triples[index].predicate.value === "http://xmlns.com/foaf/0.1/page"){
                 let url = triples[index].object.value;
-                await this.callChild(url);
+                await this.getDataSets(url);
             }
         }
         
