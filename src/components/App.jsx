@@ -29,6 +29,24 @@ export default class App extends React.Component {
     }
 
     /**
+    * It takes the list of triples as an argument, and returns a summary of everything we know about a certain subject in one object with array values
+    */
+    triplesToArray = function(triples){
+        var objects = {};
+        for (var index in triples) {
+            var triple = triples[index];
+            if (!objects[triple.subject.value]) {
+                objects[triple.subject.value] = {};
+            }
+            if(!objects[triple.subject.value][triple.predicate.value]){
+                objects[triple.subject.value][triple.predicate.value] = [];
+            }
+            objects[triple.subject.value][triple.predicate.value].push(triple.object.value);
+        }
+        return objects;
+    }
+
+    /**
     * It takes the list of triples as an argument, and returns a summary of everything we know about a certain subject in one object
     */
     triplesToObjects = function(triples) {
@@ -133,36 +151,50 @@ export default class App extends React.Component {
         }
     }
 
+    getAccessibilityInformation(entity){
+
+    }
+
     /**
     * Get information of a building based on the url and push it to the building array
     */
     getGebouwInformation = async function (url) {
         try{
             let response = await fetch.get(url);
-            let objects = this.triplesToObjects(response.triples);
-            
+            let objects = this.triplesToArray(response.triples);
+
             for(let subject in objects){
                 let entity = objects[subject];
-                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
-                    let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"];
+                // console.log(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0]);
+                if(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] && entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
+                    let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"][0];
                     let descr = this.getDescription(entity);
                     let location = this.getLocation(objects, entity);
                     let title = "Gebouw";
-                    let src = "http://placekitten.com/200/300";
+                    let src = entity["http://schema.org/image"];
 
                     // Accessibility stuff
-                    // let door={description: "", width:0}
-                    // door.description = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://purl.org/dc/terms/description"];
-                    // door.width = objects[objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"]]["http://semweb.mmlab.be/ns/wa#entranceDoorWidth"];
-                    
+                    let accessInfo=[];
+                    let accessInfoLocations = objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"];
+                    for(let index in accessInfoLocations){
+                        let obj = {description: "", width: 0};
+                        // Get the string of the width (can be either ElevatorDoorWidth or entranceDoorWidth or ...)
+                        let key = Object.keys(objects[accessInfoLocations[index]])[1];
+
+                        obj.description = objects[accessInfoLocations[index]]["http://purl.org/dc/terms/description"][0];
+                        obj.width = objects[accessInfoLocations[index]][key][0];
+                        accessInfo.push(obj);
+                    }
+
                     if(this.checkIfBuildingExists(idBuildingAdres)){
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
                         let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)} 
-                         service={b.props.service}/>; // DO NOT FORGET TO ADD DOOR INFORMATION AGAIN
+                        accessInfo={accessInfo} service={b.props.service}/>;
                         buildings[index] = comp;
                     }else{
-                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}/>;
+                        let comp = <Building id={idBuildingAdres} title={title} src={src} description={descr} lat={parseFloat(location.lat)} long={parseFloat(location.long)}
+                        accessInfo={accessInfo} />;
                         buildings.push(comp);
                     }
                 }

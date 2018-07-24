@@ -37,11 +37,12 @@ class BuildingStore {
         let widthOfTheChair = -1;
         for (let i = 0; i < this.buildings.length; i++) {
             let desc = this.buildings[i].props.description.toLowerCase();
-            if(this.buildings[i].props.door === 'undefined'){
-                widthOfTheDoor = parseInt(this.buildings[i].props.door.width,10);
-                widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
+            let accessInfoArr = this.buildings[i].props.accessInfo;
+            if(typeof(accessInfoArr) === 'object'){
+                widthOfTheDoor = parseInt(accessInfoArr[0].width,10);
             }
-            
+            widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
+
             if (this.searchKey !== "" && desc.search(this.searchKey) < 0) {
                 continue;
             }

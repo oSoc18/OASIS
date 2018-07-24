@@ -21,13 +21,14 @@ export default class SidebarBuildingDetail extends Component {
     showAccessibilityInformation = () => {
         try{
             let ar = [];
+            let accessInfo = this.Building.accessInfo
             ar.push(<h4 key={++this.UID}>Details</h4>);
-            ar.push(
-            <div key={++this.UID}>
-                <p><i className="material-icons">wheelchair</i> {this.Building.door.description}: {this.Building.door.width} cm</p>
-                <i className="material-icons">hearing</i>
-                <i className="material-icons">accessibility</i>
-            </div>)
+            for(let index in accessInfo){
+                ar.push(
+                <div key={++this.UID}>
+                    <p><i className="material-icons">wheelchair</i> {accessInfo[index].description}: {accessInfo[index].width} cm</p>
+                </div>)
+            }
             return ar;
         }catch(e){
             return (<div><p>No accessibility information available</p></div>);
