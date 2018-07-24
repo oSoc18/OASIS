@@ -1,25 +1,39 @@
-$headerBarPrimaryHeight: 56px;
-$headerBarFilterHeight: 50px;
+$headerBarRowHeight: 56px;
 $headerBarPadding: 8px;
 
 $filterBarForeground: $colorPrimary;
+$filterBarActiveBackground: $colorPrimary;
 $filterBarBackground: white;
 
 .header {
   position: relative;
-  height: $headerBarPrimaryHeight + $headerBarFilterHeight;
-  background-color: $colorPrimary;
+  height: 2* $headerBarRowHeight;
+
+  & > .row {
+    height: $headerBarRowHeight;
+    margin: 0;
+
+    &:first-of-type {
+      background-color: $colorPrimary;
+    }
+
+    &:nth-of-type(2) {
+      background-color: $filterBarBackground;
+    }
+
+    .col {
+      height: $headerBarRowHeight;
+    }
+  }
 }
 
-.header .search__bar {
-  height: $headerBarPrimaryHeight;
-  padding: 8px;
-  margin-bottom: 0;
-  color: white;
-
+.header {
   .brand {
-    height: 100%;
+    height: $headerBarRowHeight;
     display: inline-block;
+    padding: 8px 0;
+    margin-bottom: 0;
+    color: white;
   }
 
   .brand__icon {
@@ -27,50 +41,48 @@ $filterBarBackground: white;
     float: left;
   }
 
-  .social__media__icon{
+  .social__media__icon {
     height: 32px;
+    margin: ($headerBarRowHeight - 32px) / 2;
     float: right;
-    position: absolute;
-    right: 0px;
   }
 
   .brand__name {
     height: 100%;
     display: inline-block;
     margin: 0;
-    font-size: 30px;
-    line-height: 48px;
+    font-size: 0.7* ($headerBarRowHeight - 2*$headerBarPadding);
+    line-height: $headerBarRowHeight - 2*$headerBarPadding;
     float: left;
   }
+}
+
+.header .search {
+  background-color: $colorPrimaryLight;
+  padding: 0 !important;
 
   ::placeholder {
     color: $colorPrimaryDark;
     opacity: 1; /* Firefox */
   }
 
-  div.search {
-    display: block;
-    height: $headerBarPrimaryHeight - 2* $headerBarPadding;
-    background-color: #ffffff33;
-    padding: 0;
-
+  .label-icon {
+    margin-left: .75rem;
     i.material-icons {
-      line-height: $headerBarPrimaryHeight - 2* $headerBarPadding;
-      height: $headerBarPrimaryHeight - 2* $headerBarPadding;
+      line-height: $headerBarRowHeight;
+      height: $headerBarRowHeight;
+      color: $colorPrimaryDark;
     }
   }
 }
 
-
 .header .search__filters {
-  height: $headerBarFilterHeight;
   margin-bottom: 0;
-  border-bottom: 1px solid rgb(219, 219, 219);
   color: $colorPrimary;
   background-color: white;
 
   & > div {
-    height: $headerBarFilterHeight;
+    height: $headerBarRowHeight;
     padding: 0;
     margin-bottom: 0;
   }
@@ -84,14 +96,14 @@ $filterBarBackground: white;
   /* Search filters with a modal dropdown*/
   .search__filters__filter.search__filters__filter--modal {
     position: relative;
-    height: $headerBarFilterHeight;
+    height: $headerBarRowHeight;
     width: auto;
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
 
     .search__filters__filter__caption {
-      height: $headerBarFilterHeight;
+      height: $headerBarRowHeight;
       padding: $headerBarPadding 2*$headerBarPadding $headerBarPadding 0;
       background-color: transparent;
       display: block;
@@ -99,7 +111,7 @@ $filterBarBackground: white;
 
       a {
         display: block;
-        margin-top: ($headerBarFilterHeight - 3 * $headerBarPadding - 18px)/2;
+        margin-top: ($headerBarRowHeight - 3 * $headerBarPadding - 18px)/2;
         padding: $headerBarPadding / 2;
         line-height: 18px;
         font-size: 20px;
@@ -109,7 +121,7 @@ $filterBarBackground: white;
       }
 
       &.search__filters__filter__caption--active a {
-        background-color: $filterBarForeground;
+        background-color: $filterBarActiveBackground;
         color: $filterBarBackground;
         border: 1px solid $filterBarForeground;
       }
@@ -128,7 +140,6 @@ $filterBarBackground: white;
       padding: $headerBarPadding * 2;
       display: none;
       line-height: 18px;
-
       box-shadow: rgba(0, 0, 0, 0.15) 0 14px 36px 2px !important;
       border: 1px solid rgba(0, 0, 0, 0.2);
     }
@@ -139,7 +150,6 @@ $filterBarBackground: white;
       background-color: $filterBarBackground;
       box-shadow: rgba(0, 0, 0, 0.15) 0 14px 36px 2px !important;
       border: 1px solid rgba($filterBarForeground, 0.2);
-      color: $textColor;
     }
 
     #wheelslider {
