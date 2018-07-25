@@ -5,7 +5,7 @@ class BuildingStore {
     @observable building = null;
     @observable isInDetailState = false;
     @observable searchKey = "";
-    @observable filters = {wheelchairWidth: 0};
+    @observable filters = {wheelchairWidth: 1};
 
     @action addBuildings = (building) => {
         this.buildings = building;
@@ -50,7 +50,7 @@ class BuildingStore {
             if (widthOfTheChair > widthOfTheDoor) {
                 continue;
             }
-
+            
             arr.push(this.buildings[i]);
         }
         return arr;
