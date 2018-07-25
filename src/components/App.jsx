@@ -203,7 +203,7 @@ export default class App extends React.Component {
                 }
             }
         }catch(e){
-            console.log(e);
+            // console.log(e);
             return;
         }
     }
@@ -222,11 +222,13 @@ export default class App extends React.Component {
                     if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://data.vlaanderen.be/ns/gebouw#Gebouw"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
                          let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
+                         url = url.replace('http', 'https');
                          await this.getBuildingInformation(url);
                      }
                      if(entity["https://www.w3.org/ns/dcat#keyword"] === "http://purl.org/vocab/cpsv#PublicService"){
                          let dist = entity["https://www.w3.org/ns/dcat#distribution"];
                          let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
+                         url = url.replace('http', 'https');
                          await this.getPublicServiceData(url);
                      }
                 }
@@ -245,6 +247,7 @@ export default class App extends React.Component {
         for(let index in triples){
             if(triples[index].predicate.value === "http://xmlns.com/foaf/0.1/page"){
                 let url = triples[index].object.value;
+                url = url.replace('http', 'https');
                 await this.getDataSets(url);
             }
         }
