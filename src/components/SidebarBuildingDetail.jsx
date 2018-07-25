@@ -26,7 +26,7 @@ export default class SidebarBuildingDetail extends Component {
             for(let index in accessInfo){
                 ar.push(
                 <div key={++this.UID}>
-                    <p><i className="material-icons">wheelchair</i> {accessInfo[index].description}: {accessInfo[index].width} cm</p>
+                    <p><i className="material-icons">accessible</i> {accessInfo[index].description}: {accessInfo[index].width} cm</p>
                 </div>)
             }
             return ar;
