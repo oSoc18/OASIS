@@ -24,15 +24,21 @@ export default class SidebarSearchResult extends React.Component {
 
     showAccessibilityInformation = () => {
         try {
-            <div>
-                <p><i
-                    className="material-icons">wheelchair</i> {this.Building.door.description}: {this.Building.door.width} cm
-                </p>
-                <i className="material-icons">hearing</i>
-                <i className="material-icons">accessibility</i>
-            </div>
+            let ar = [];
+            let accessInfo = this.Building.accessInfo
+            for (let index in accessInfo) {
+                if(accessInfo[index].description === "The entrance"){
+                    ar.push(
+                        <div key={++this.UID}>
+                            <p>
+                                <i className="material-icons">arrow_back</i><i className="material-icons">arrow_forward</i> <span className="entranceWidth">{accessInfo[index].width} cm </span>
+                            </p>
+                        </div>)
+                }
+            }
+            return ar;
         } catch (e) {
-            console.log(e);
+            return (<div><p>Er is geen toegankelijkheidsinformatie beschikbaar voor dit gebouw</p></div>);
         }
     }
 
@@ -51,7 +57,7 @@ export default class SidebarSearchResult extends React.Component {
                     </Col>
                     <img className="col m3 s12 sidebar__searchresult__thumbnail" src={this.Building.src}/>
                     <Col m={9} s={12}>
-                        {/* {this.showAccessibilityInformation()} */}
+                        {this.showAccessibilityInformation()}
                     </Col>
                     <a className="col m12 s12 center" href="#" onClick={this.handleClick} id={this.Building.id}>Meer
                         details...</a>
