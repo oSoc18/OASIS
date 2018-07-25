@@ -5,7 +5,7 @@ import {inject, observer} from 'mobx-react';
 @inject('BuildingStore')
 @observer
 export default class SidebarBuildingDetail extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.handleClick = this.handleClick.bind(this);
         this.BuildingStore = this.props.BuildingStore;
@@ -13,46 +13,48 @@ export default class SidebarBuildingDetail extends Component {
         this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
     }
 
-    handleClick(e){
+    handleClick(e) {
         e.preventDefault();
         this.BuildingStore.setIsInDetailState(false);
     }
 
     showAccessibilityInformation = () => {
-        try{
+        try {
             let ar = [];
             let accessInfo = this.Building.accessInfo
             ar.push(<h4 key={++this.UID}>Details</h4>);
-            for(let index in accessInfo){
+            for (let index in accessInfo) {
                 ar.push(
-                <div key={++this.UID}>
-                    <p><i className="material-icons">accessible</i> {accessInfo[index].description}: {accessInfo[index].width} cm</p>
-                </div>)
+                    <div key={++this.UID}>
+                        <p><i
+                            className="material-icons">accessible</i> {accessInfo[index].description}: {accessInfo[index].width} cm
+                        </p>
+                    </div>)
             }
             return ar;
-        }catch(e){
-            return (<div><p>No accessibility information available</p></div>);
+        } catch (e) {
+            return (<div><p>Er is geen toegankelijkheidsinformatie beschikbaar voor dit gebouw</p></div>);
         }
     }
 
     showServices = () => {
-        try{
+        try {
             let ar = [];
             ar.push(<h4 key={++this.UID}>Services</h4>);
-            for(let index in this.Building.service){
+            for (let index in this.Building.service) {
                 ar.push(
                     <Collapsible key={++this.UID}>
                         <CollapsibleItem header={this.Building.service[index].name} icon='toc'>
                             <p>{this.Building.service[index].desc}</p>
-                            <p>{this.Building.service[index].accessinfo.description+" is "+this.Building.service[index].accessinfo.width+" cm"}</p>
+                            <p>{this.Building.service[index].accessinfo.description + " is " + this.Building.service[index].accessinfo.width + " cm"}</p>
                         </CollapsibleItem>
                     </Collapsible>
                 )
             }
             return ar;
-            
-        }catch(e){ 
-            return (<div><h4>Services</h4><p>This building does not contain public services</p></div>);
+
+        } catch (e) {
+            return (<div><h4>Services</h4><p>Dit gebouw biedt geen publieke diensten aan</p></div>);
         }
     }
 
@@ -71,7 +73,7 @@ export default class SidebarBuildingDetail extends Component {
                 <Col s={12}>
                     {this.showServices()}
                 </Col>
-                <a href='#' className="col m12 s12 center" onClick={this.handleClick}>Return to search results</a>
+                <a href='#' className="col m12 s12 center" onClick={this.handleClick}>Terug naar zoekresultaten</a>
             </Row>
         )
     }

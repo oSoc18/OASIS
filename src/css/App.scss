@@ -21,3 +21,7 @@ div.application__content {
     position: relative;
     height: calc(100% - 112px);
 }
+
+.no-padding {
+    padding: 0 !important;
+}
