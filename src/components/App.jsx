@@ -11,7 +11,7 @@ require('../css/App.scss');
 
 const buildings = [];
 
-const StartURL = 'http://smartflanders.ilabt.imec.be/graph/master-catalog.json';
+const StartURL = 'https://smartflanders.ilabt.imec.be/graph/master-catalog.json';
 const fetch = new ldfetch();
 
 
