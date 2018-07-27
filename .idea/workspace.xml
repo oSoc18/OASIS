@@ -3,6 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="b24fd8d7-0626-422c-9439-ec3dc9e3372b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/img/blog.jpg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -20,8 +21,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="261">
-              <caret line="215" column="41" selection-start-line="215" selection-start-column="41" selection-end-line="215" selection-end-column="41" />
+            <state relative-caret-position="945">
+              <caret line="249" column="93" selection-start-line="249" selection-start-column="93" selection-end-line="249" selection-end-column="93" />
             </state>
           </provider>
         </entry>
@@ -34,6 +35,7 @@
       <find>searchTitle</find>
       <find>$filtersHeaderBarRowHeight</find>
       <find>view</find>
+      <find>blog</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -140,7 +142,7 @@
       <workItem from="1532330467824" duration="22208000" />
       <workItem from="1532423539328" duration="10802000" />
       <workItem from="1532511599265" duration="599000" />
-      <workItem from="1532607239330" duration="1134000" />
+      <workItem from="1532607239330" duration="2887000" />
     </task>
     <task id="LOCAL-00001" summary="35 show name when mouse over">
       <created>1531471777851</created>
@@ -240,18 +242,26 @@
       <option name="project" value="LOCAL" />
       <updated>1532442552949</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="add team names, and pictures">
+      <created>1532608445850</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1532608445850</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="113827000" />
+    <option name="totallyTimeSpent" value="115580000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-1" width="1926" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.228125" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.228125" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="8" weight="0.32924107" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32924107" />
       <window_info anchor="bottom" id="Version Control" order="10" />
@@ -265,7 +275,6 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="bottom" id="Messages" order="8" weight="0.32924107" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.20200893" />
@@ -290,7 +299,8 @@
     <MESSAGE value="Styling search bar, fix text color for placeholder, add github links #13" />
     <MESSAGE value="Styling side bar #77" />
     <MESSAGE value="Styling side bar and merging the header #77" />
-    <option name="LAST_COMMIT_MESSAGE" value="Styling side bar and merging the header #77" />
+    <MESSAGE value="add team names, and pictures" />
+    <option name="LAST_COMMIT_MESSAGE" value="add team names, and pictures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -604,8 +614,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="215" column="41" selection-start-line="215" selection-start-column="41" selection-end-line="215" selection-end-column="41" />
+        <state relative-caret-position="945">
+          <caret line="249" column="93" selection-start-line="249" selection-start-column="93" selection-end-line="249" selection-end-column="93" />
         </state>
       </provider>
     </entry>
