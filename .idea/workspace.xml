@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="b24fd8d7-0626-422c-9439-ec3dc9e3372b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/blog.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,8 +19,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="945">
-              <caret line="249" column="93" selection-start-line="249" selection-start-column="93" selection-end-line="249" selection-end-column="93" />
+            <state relative-caret-position="297">
+              <caret line="213" column="33" selection-start-line="213" selection-start-column="33" selection-end-line="213" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -102,6 +100,11 @@
               <item name="OASIS" type="b2602c69:ProjectViewProjectNode" />
               <item name="OASIS" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="OASIS" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OASIS" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -113,6 +116,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -142,7 +146,7 @@
       <workItem from="1532330467824" duration="22208000" />
       <workItem from="1532423539328" duration="10802000" />
       <workItem from="1532511599265" duration="599000" />
-      <workItem from="1532607239330" duration="2887000" />
+      <workItem from="1532607239330" duration="3166000" />
     </task>
     <task id="LOCAL-00001" summary="35 show name when mouse over">
       <created>1531471777851</created>
@@ -249,17 +253,24 @@
       <option name="project" value="LOCAL" />
       <updated>1532608445850</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="add team linkedin, and a quick text for smart flanders (Still waiting for them to give me the rigth one) also add the picture of the blog of smart flanders">
+      <created>1532688646695</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1532688646695</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="115580000" />
+    <option name="totallyTimeSpent" value="115859000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-3" y="-1" width="1926" height="1054" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.228125" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.228125" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Messages" order="8" weight="0.32924107" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
@@ -300,7 +311,8 @@
     <MESSAGE value="Styling side bar #77" />
     <MESSAGE value="Styling side bar and merging the header #77" />
     <MESSAGE value="add team names, and pictures" />
-    <option name="LAST_COMMIT_MESSAGE" value="add team names, and pictures" />
+    <MESSAGE value="add team linkedin, and a quick text for smart flanders (Still waiting for them to give me the rigth one) also add the picture of the blog of smart flanders" />
+    <option name="LAST_COMMIT_MESSAGE" value="add team linkedin, and a quick text for smart flanders (Still waiting for them to give me the rigth one) also add the picture of the blog of smart flanders" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -614,8 +626,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="945">
-          <caret line="249" column="93" selection-start-line="249" selection-start-column="93" selection-end-line="249" selection-end-column="93" />
+        <state relative-caret-position="297">
+          <caret line="213" column="33" selection-start-line="213" selection-start-column="33" selection-end-line="213" selection-end-column="33" />
         </state>
       </provider>
     </entry>
