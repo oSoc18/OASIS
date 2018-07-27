@@ -168,7 +168,7 @@ export default class App extends React.Component {
         try {
             let response = await fetch.get(url);
             let objects = this.triplesToArray(response.triples);
-
+            let title = "";
             for (let subject in objects) {
                 let entity = objects[subject];
                 // console.log(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0]);
@@ -176,11 +176,17 @@ export default class App extends React.Component {
                     let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"][0];
                     let descr = this.getDescription(entity);
                     let location = this.getLocation(objects, entity);
-                    let title = entity["http://schema.org/name"][0];
+                    // console.log(entity);
+                    try{
+                        title = entity["http://smartflanders.ilabt.imec.be/schema.jsonname"][0];
+                    }catch(e){
+                        title = "Gebouw"; // Change to 'Name not available maybe ?
+                    }
                     let src = entity["http://schema.org/image"];
 
                     // Accessibility stuff
                     let accessInfo = [];
+                    try{
                     let accessInfoLocations = objects[entity["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement"]]["http://semweb.mmlab.be/ns/wa#accessibilityMeasurement_for"];
                     for (let index in accessInfoLocations) {
                         let obj = {description: "", width: 0};
@@ -190,6 +196,9 @@ export default class App extends React.Component {
                         obj.description = objects[accessInfoLocations[index]]["http://purl.org/dc/terms/description"][0];
                         obj.width = objects[accessInfoLocations[index]][key][0];
                         accessInfo.push(obj);
+                    }}
+                    catch(e){
+                        // Currently do nothing 
                     }
 
                     if (this.doesBuildingExist(idBuildingAdres)) {
