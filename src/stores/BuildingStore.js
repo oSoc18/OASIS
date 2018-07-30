@@ -20,7 +20,8 @@ class BuildingStore {
     };
 
     @action setSearchKey = (key) => {
-        this.searchKey = key;
+        let santizedKey = key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        this.searchKey = santizedKey;
     };
 
     @action setFilters = (filters) => {
