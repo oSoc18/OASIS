@@ -5,7 +5,7 @@ class BuildingStore {
     @observable building = null;
     @observable isInDetailState = false;
     @observable searchKey = "";
-    @observable filters = {wheelchairWidth: 0};
+    @observable filters = {wheelchairWidth: 1};
 
     @action addBuildings = (building) => {
         this.buildings = building;
@@ -38,8 +38,12 @@ class BuildingStore {
         for (let i = 0; i < this.buildings.length; i++) {
             let desc = this.buildings[i].props.title.toLowerCase();
             let accessibilityInfoArray = this.buildings[i].props.accessInfo;
-            if(typeof(accessibilityInfoArray) === 'object'){
-                widthOfTheDoor = parseInt(accessibilityInfoArray[0].width,10);
+            try{
+                if(typeof(accessibilityInfoArray) === 'object'){
+                    widthOfTheDoor = parseInt(accessibilityInfoArray[0].width,10);
+                }
+            }catch(e){
+                widthOfTheDoor = 90;
             }
             widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
 
@@ -50,7 +54,7 @@ class BuildingStore {
             if (widthOfTheChair > widthOfTheDoor) {
                 continue;
             }
-
+            
             arr.push(this.buildings[i]);
         }
         return arr;
