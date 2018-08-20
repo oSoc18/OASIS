@@ -27,7 +27,7 @@ export default class OpenStreetMap extends Component {
                 this.setState({
                     lat: position.coords.latitude,
                     lng: position.coords.longitude,
-                    zoom: 16
+                    zoom: 10
                 });
             });
     }

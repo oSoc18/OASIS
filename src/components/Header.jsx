@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Col, Input, Row} from "react-materialize";
+import {Col, Input, Row, Modal, Button} from "react-materialize";
 import {SearchFilterContainer} from "./SearchFilterContainer";
 import {inject, observer} from 'mobx-react';
 
@@ -57,9 +57,7 @@ export default class Header extends Component {
      * @type {*[]}
      */
     filters = [
-        {name: 'Categorie', content: this.typeOfBuildingFilter},
-        {name: 'Breedte rolstoel', content: this.wheelchairWidthFilter},
-        {name: 'Faciliteiten', content: this.facilitiesFilter},
+        {name: 'Breedte rolstoel', content: this.wheelchairWidthFilter}
     ];
 
 
@@ -117,6 +115,11 @@ export default class Header extends Component {
         this.BuildingStore.setSearchKey(document.getElementById('search').value);
     }
 
+    resetFilters = (e) => {
+        this.renderFilters();
+    }
+
+
     render() {
         return (
             <nav className="header">
@@ -128,6 +131,12 @@ export default class Header extends Component {
                             <h1 className="brand__name">Access Flanders</h1>
                         </div>
                     </Col>
+                    <Modal
+                        header='Als jij rolstoelgebruiker bent'
+                        trigger={<Button className="button">DEMO</Button>}>
+                        <p>
+                            vul alstublieft de breedte van uw rolstoel in.</p><p> We toon enkel bereikbare locaties voor jou op de kaart.</p>
+                    </Modal>
                     <Col s={1} className="right">
                         <a href="https://github.com/oSoc18/OASIS" target="_blank">
                             <img alt="github icon" title="github" className="social__media__icon"
@@ -150,6 +159,10 @@ export default class Header extends Component {
                     <Col s={8}>
                         <div className="search__filters">
                             {this.renderFilters()}
+                            <label>
+                                <i className="material-icons">search</i>
+                            </label>
+                            <Button className="resetFiltersButton" onClick={this.resetFilters}>close</Button>
                         </div>
                     </Col>
                 </Row>

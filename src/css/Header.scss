@@ -60,6 +60,7 @@ $filterBarBackground: white;
 .header .search {
   background-color: $colorPrimaryLight;
   padding: 0 !important;
+  z-index:10000;
 
   ::placeholder {
     color: $colorPrimaryDark;
@@ -95,12 +96,15 @@ $filterBarBackground: white;
 
   /* Search filters with a modal dropdown*/
   .search__filters__filter.search__filters__filter--modal {
+    border-radius: 8px;
     position: relative;
     height: $headerBarRowHeight;
-    width: auto;
+    width: 300px;
     cursor: pointer;
     display: inline-block;
     vertical-align: top;
+    background-color: white;
+    z-index: 10000;
 
     .search__filters__filter__caption {
       height: $headerBarRowHeight;
@@ -117,43 +121,43 @@ $filterBarBackground: white;
         font-size: 20px;
         border-radius: 4px;
         color: $filterBarForeground;
-        border: 1px solid $filterBarForeground;
-      }
-
-      &.search__filters__filter__caption--active a {
-        background-color: $filterBarActiveBackground;
-        color: $filterBarBackground;
-        border: 1px solid $filterBarForeground;
+        border: 0px solid $filterBarForeground;
       }
 
     }
 
     .search__filters__filter__detail {
-      background-color: white;
-      border-radius: 4px;
-      width: 100%;
-      min-height: 25px;
+      border-radius: 8px;
+      width: auto;
+      height: $headerBarRowHeight;
       position: absolute;
-      left: 0;
+      left: 270px;
+      top:0px;
       z-index: 10000;
       color: black;
-      padding: $headerBarPadding * 2;
-      display: none;
+      display: block;
       line-height: 18px;
-      box-shadow: rgba(0, 0, 0, 0.15) 0 14px 36px 2px !important;
-      border: 1px solid rgba(0, 0, 0, 0.2);
-    }
-
-    .search__filters__filter__detail--visible {
-      display: block !important;
-      width: auto;
       background-color: $filterBarBackground;
-      box-shadow: rgba(0, 0, 0, 0.15) 0 14px 36px 2px !important;
-      border: 1px solid rgba($filterBarForeground, 0.2);
+      box-shadow: rgba(0, 0, 0, 0) 0 0px 0px 0px !important;
+      border: 0px solid rgba($filterBarForeground, 0.2);
     }
 
     #wheelslider {
       width: 240px;
     }
   }
+}
+.button{
+  position: absolute;
+  top: 4px;
+  box-shadow: 8px 8px 20px rgba(250, 250, 250,0.5) !important;
+  height: $headerBarRowHeight - 8px !important;
+}
+.modal{
+  top: 20% !important;
+
+}
+
+.resetFiltersButton{
+  position: absolute;
 }

@@ -17,7 +17,9 @@ export default class Sidebar extends React.Component {
     renderLists = () => {
         let result = [];
         for (let i = 0; i < this.BuildingStore.getFilteredBuildings.length; i++) {
-            result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]} key={++this.UID}/>);
+            if(this.BuildingStore.getFilteredBuildings[i].lat==this.BuildingStore.getFilteredBuildings[i].lat){
+                result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]} key={++this.UID}/>);
+            }
         }
         return result;
     };
