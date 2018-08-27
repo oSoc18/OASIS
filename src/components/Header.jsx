@@ -36,21 +36,6 @@ export default class Header extends Component {
             </p>
         </div>;
 
-    typeOfBuildingFilter =
-        <Row>
-            <Input name='group1' type='checkbox' value='restaurant' label='Restaurant'/>
-            <Input name='group1' type='checkbox' value='bar' label='Cafe'/>
-            <Input name='group1' type='checkbox' value='shop' label='Winkelen'/>
-            <Input name='group1' type='checkbox' value='school' label='School'/>
-            <Input name='group1' type='checkbox' value='hospital' label='Ziekenhuis'/>
-        </Row>;
-
-    facilitiesFilter =
-        <Row>
-            <Input name='group2' type='checkbox' value='red' label='Lift'/>
-            <Input name='group2' type='checkbox' value='yellow' label='Ringleiding'/>
-        </Row>;
-
     /**
      * This array determines which filters are rendered, and consists of the name (shown in the header) and the component which is shown in the modal
      *
@@ -137,6 +122,7 @@ export default class Header extends Component {
                         <p>
                             vul alstublieft de breedte van uw rolstoel in.</p><p> We toon enkel bereikbare locaties voor jou op de kaart.</p>
                     </Modal>
+
                     <Col s={1} className="right">
                         <a href="https://github.com/oSoc18/OASIS" target="_blank">
                             <img alt="github icon" title="github" className="social__media__icon"

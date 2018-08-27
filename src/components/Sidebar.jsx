@@ -1,6 +1,6 @@
 import React from 'react'
 import SearchResult from "./SidebarSearchResult.jsx";
-import {Card, Col, Pagination} from "react-materialize";
+import {Card, Col, Pagination, Preloader} from "react-materialize";
 import BuildingDetail from './SidebarBuildingDetail.jsx';
 import {inject, observer} from 'mobx-react';
 
@@ -44,7 +44,6 @@ export default class Sidebar extends React.Component {
             ? this.BuildingStore.getFilteredBuildings.length + " resultaten "
             : "Resultaat voor '" + this.BuildingStore.getSearchKey + "' (" + this.renderLists().length + ")";
         return (
-
             <Col l={4} m={6} s={12} className="no-padding">
                 <div className="sidebar__list">
                     {this.show()}

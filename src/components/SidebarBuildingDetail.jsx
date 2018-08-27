@@ -58,14 +58,22 @@ export default class SidebarBuildingDetail extends Component {
         }
     }
 
+    titleBuild = () => {
+        if (this.Building.title.includes("&#39;t")) {
+            return "Sporthall";
+        } else {
+            return this.Building.title;
+        }
+    }
+
     render() {
         return (
             <Row>
                 <Col>
-                    <h2>{this.Building.title}</h2>
+                    <h2>{this.titleBuild()}</h2>
                 </Col>
                 <Col s={12}>
-                    <p>{this.Building.description}</p>
+                    <a href={this.Building.description}>link to the page</a>
                 </Col>
                 <Col s={12}>
                     {this.showAccessibilityInformation()}
