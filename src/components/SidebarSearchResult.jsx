@@ -42,18 +42,25 @@ export default class SidebarSearchResult extends React.Component {
         }
     }
 
+    linkOrdescription = () => {
+        if (this.Building.description !== "Geen beschrijving beschikbaar") {
+            return <a href={this.Building.description}>link</a>;
+        }
+        return <p>{this.Building.description}</p>;
+    }
+
     render() {
         return (
             <div className="buildings__card">
                 <Row>
                     <Col m={12} s={12}>
 
-                        <h4 className="building__name">{this.Building.title}</h4>
+                        <h4 className="building__name">{this.Building.title.replace(/[&\/\\#,+()$~%.'":;*?<>{}1234567890]/g, '')}</h4>
                     </Col>
 
 
                     <Col m={9} s={12}>
-                        <span className="sidebar__searchresult__description"><a hred={this.Building.description}>link to the page</a></span>
+                        <span className="sidebar__searchresult__description">{this.linkOrdescription()}</span>
                     </Col>
                     <img className="col m3 s12 sidebar__searchresult__thumbnail" src={this.Building.src}/>
                     <Col m={9} s={12}>

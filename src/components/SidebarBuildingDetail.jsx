@@ -58,22 +58,21 @@ export default class SidebarBuildingDetail extends Component {
         }
     }
 
-    titleBuild = () => {
-        if (this.Building.title.includes("&#39;t")) {
-            return "Sporthall";
-        } else {
-            return this.Building.title;
+    linkOrdescription = () => {
+        if (this.Building.description !== "Geen beschrijving beschikbaar") {
+            return <a href={this.Building.description}>link</a>;
         }
+        return <p>{this.Building.description}</p>;
     }
 
     render() {
         return (
             <Row>
                 <Col>
-                    <h2>{this.titleBuild()}</h2>
+                    <h2>{this.Building.title.replace(/[&\/\\#,+()$~%.'":;*?<>{}1234567890]/g, '')}</h2>
                 </Col>
                 <Col s={12}>
-                    <a href={this.Building.description}>link to the page</a>
+                    {this.linkOrdescription()}
                 </Col>
                 <Col s={12}>
                     {this.showAccessibilityInformation()}
