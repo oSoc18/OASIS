@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Col, Row, Collapsible, CollapsibleItem} from "react-materialize";
+import {Col, Row, Collapsible, CollapsibleItem, Preloader} from "react-materialize";
 import {inject, observer} from 'mobx-react';
 
 @inject('BuildingStore')

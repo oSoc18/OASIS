@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Col, Row} from "react-materialize";
+import {Card, Col, Row, Preloader} from "react-materialize";
 import {inject, observer} from 'mobx-react';
 
 
