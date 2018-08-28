@@ -44,7 +44,7 @@ export default class SidebarSearchResult extends React.Component {
 
     linkOrdescription = () => {
         if (this.Building.description !== "Geen beschrijving beschikbaar") {
-            return <a href={this.Building.description}>link</a>;
+            return <a href={this.Building.description}>{this.Building.description}</a>;
         }
         return <p>{this.Building.description}</p>;
     }

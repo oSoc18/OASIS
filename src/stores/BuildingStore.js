@@ -7,8 +7,12 @@ class BuildingStore {
     @observable searchKey = "";
     @observable filters = {wheelchairWidth: 1};
 
-    @action addBuildings = (building) => {
-        this.buildings = building;
+    @action addBuildings = (buildings) => {
+        this.buildings = buildings;
+    };
+
+    @action addBuilding = (building) => {
+        this.buildings.push(building);
     };
 
     @action setBuilding = (building) => {

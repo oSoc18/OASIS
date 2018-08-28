@@ -114,22 +114,26 @@ export default class App extends React.Component {
                         "accessinfo": accessObj
                     }
 
+                    let component;
                     if (this.doesBuildingExist(idBuildingAdres)) {
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
                         let serviceArr = b.props.service;
                         serviceArr.push(serviceObj);
-                        let component = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src}
+                        component = <Building id={idBuildingAdres} title={b.props.title} src={b.props.src}
                                                   description={b.props.description}
                                                   lat={b.props.lat} long={b.props.long} service={serviceArr}/>;
 
                         buildings[index] = component;
                     } else {
-                        let component = <Building id={idBuildingAdres} title={"Publieke Service"}
+                        component = <Building id={idBuildingAdres} title={"Publieke Service"}
                                                   description={"Niet gelinkt aan een gekend gebouw"} lat={0} long={0}
                                                   service={[serviceObj]}/>;
                         buildings.push(component);
                     }
+
+                    const {BuildingStore} = this.props;
+                    BuildingStore.addBuilding(component);
                 }
             }
         } catch (e) {
@@ -137,12 +141,12 @@ export default class App extends React.Component {
         }
     }
 
-    getDescription(entity) {
-        let desc = entity["http://purl.org/dc/terms/description"];
-        if (typeof(desc) === 'undefined') {
-            return "Geen beschrijving beschikbaar";
+    getWebsite(entity) {
+        let web = entity["http://schema.org/WebSite"];
+        if (typeof(web) === 'undefined') {
+            return "Geen website beschikbaar";
         }
-        return desc;
+        return web;
     }
 
     getLocation(objects, entity) {
@@ -169,18 +173,21 @@ export default class App extends React.Component {
             let response = await fetch.get(url);
             let objects = this.triplesToArray(response.triples);
             let title = "";
+
             for (let subject in objects) {
                 let entity = objects[subject];
                 // console.log(entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0]);
                 if (entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"] && entity["http://www.w3.org/1999/02/22-rdf-syntax-ns#type"][0] === "http://data.vlaanderen.be/ns/gebouw#Gebouw") {
+                                //console.log(subject)
+
                     let idBuildingAdres = entity["http://data.vlaanderen.be/ns/gebouw#Gebouw.adres"][0];
-                    let descr = this.getDescription(entity);
+                    let web = this.getWebsite(entity);
                     let location = this.getLocation(objects, entity);
-                    // console.log(entity);
                     try{
-                        title = entity["http://smartflanders.ilabt.imec.be/schema.jsonname"][0];
+                        title = entity["http://schema.org/name"][0];
                     }catch(e){
                         title = "Gebouw"; // Change to 'Name not available maybe ?
+                        web = subject; // subject page as website
                     }
                     let src = entity["http://schema.org/image"];
 
@@ -201,19 +208,23 @@ export default class App extends React.Component {
                         // Currently do nothing 
                     }
 
+                    let component;
                     if (this.doesBuildingExist(idBuildingAdres)) {
                         let b = this.getBuilding(idBuildingAdres);
                         let index = this.getBuildingIndex(idBuildingAdres);
-                        let component = <Building id={idBuildingAdres} title={title} src={src} description={descr}
+                        component = <Building id={idBuildingAdres} title={title} src={src} description={web}
                                                   lat={parseFloat(location.lat)} long={parseFloat(location.long)}
                                                   accessInfo={accessInfo} service={b.props.service}/>;
                         buildings[index] = component;
                     } else {
-                        let component = <Building id={idBuildingAdres} title={title} src={src} description={descr}
+                        component = <Building id={idBuildingAdres} title={title} src={src} description={web}
                                                   lat={parseFloat(location.lat)} long={parseFloat(location.long)}
                                                   accessInfo={accessInfo}/>;
                         buildings.push(component);
                     }
+
+                    const {BuildingStore} = this.props;
+                    BuildingStore.addBuilding(component);
                 }
             }
         } catch (e) {
@@ -239,12 +250,12 @@ export default class App extends React.Component {
                         url = url.replace('http', 'https');
                         await this.getBuildingInformation(url);
                     }
-                    if (entity["https://www.w3.org/ns/dcat#keyword"] === "http://purl.org/vocab/cpsv#PublicService") {
+                   /** if (entity["https://www.w3.org/ns/dcat#keyword"] === "http://purl.org/vocab/cpsv#PublicService") {
                         let dist = entity["https://www.w3.org/ns/dcat#distribution"];
                         let url = objects[dist]["https://www.w3.org/ns/dcat#accessUrl"];
                         url = url.replace('http', 'https');
                         await this.getPublicServiceData(url);
-                    }
+                    } **/
                 }
             }
         } catch (e) {
@@ -267,7 +278,7 @@ export default class App extends React.Component {
         }
 
         const {BuildingStore} = this.props;
-        BuildingStore.addBuildings(buildings);
+        /** BuildingStore.addBuildings(buildings); **/
     }
 
     render() {
