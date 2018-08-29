@@ -51,7 +51,7 @@ export default class SidebarSearchResult extends React.Component {
     }
 
     inBuildingZone = () =>{
-            if(this.BuildingStore.isbuildingInZone()){
+            if(this.BuildingStore.getBuilding != null && this.BuildingStore.isbuildingInZone()){
                 return (<div>
                 <Row>
                     <Col m={12} s={12}>
