@@ -1,9 +1,11 @@
 import React from 'react'
 import {Card, Col, Row, Preloader} from "react-materialize";
 import {inject, observer} from 'mobx-react';
+import OpenStreetMap from "./Map";
 
 
 @inject('BuildingStore')
+@inject('OpenStreetMap')
 @observer
 export default class SidebarSearchResult extends React.Component {
     constructor(props) {
@@ -25,7 +27,7 @@ export default class SidebarSearchResult extends React.Component {
     showAccessibilityInformation = () => {
         try {
             let ar = [];
-            let accessInfo = this.Building.accessInfo
+            let accessInfo = this.Building.accessInfo;
             for (let index in accessInfo) {
                 if(accessInfo[index].description === "The entrance"){
                     ar.push(
@@ -49,9 +51,13 @@ export default class SidebarSearchResult extends React.Component {
         return <p>{this.Building.description}</p>;
     }
 
-    render() {
-        return (
-            <div className="buildings__card">
+    buildingInZone = () =>{
+        /*let bigLat =this.building.props.lat > (this.OpenStreetMap.state.lat - this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][0]);
+        let smallLat =this.building.props.lat < (this.OpenStreetMap.state.lat + this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][0]);
+        let bigLng =this.building.props.lat > (this.OpenStreetMap.state.lat - this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][1]);
+        let smallLng =this.building.props.lat > (this.OpenStreetMap.state.lat + this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][1]);
+            if(bigLat && smallLat && bigLng && smallLng){*/
+                return (<div>
                 <Row>
                     <Col m={12} s={12}>
 
@@ -71,6 +77,14 @@ export default class SidebarSearchResult extends React.Component {
                 </Row>
                 <hr/>
             </div>
-        )
+            );/*}*/
+    }
+
+
+    render() {
+        return (
+            <div className="buildings__card">
+            {this.buildingInZone()}
+                </div>)
     }
 }

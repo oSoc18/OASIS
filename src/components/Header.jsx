@@ -120,7 +120,7 @@ export default class Header extends Component {
                         header='Als jij rolstoelgebruiker bent'
                         trigger={<Button className="button">DEMO</Button>}>
                         <p>
-                            vul alstublieft de breedte van uw rolstoel in.</p><p> We toon enkel bereikbare locaties voor jou op de kaart.</p>
+                            Bovenaan kan de breedte van uw rolstoel ingeven worden.</p><p>Hiermee worden enkel locaties weergegeven waarvan de ingang breed genoeg is.</p>
                     </Modal>
 
                     <Col s={1} className="right">

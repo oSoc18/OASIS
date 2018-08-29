@@ -15,6 +15,7 @@ export default class OpenStreetMap extends Component {
             lng: 3.705,
             zoom: 11
         }
+        this.zoomlatlng = [[360,650],[180,360],[90,180],[45,90],[22.5,45],[11.25,22.5],[5.625,11.25],[2.813,5.625],[1.406,2.813],[0.703,1.406],[0.352,0.703],[0.176,0.352],[0.088,0.176],[0.044,0.088],[0.022,0.044],[0.011,0.022],[0.005,0.011],[0.003,0.005],[0.001,0.003],[0.0005,0.001]];
     }
 
     /**
@@ -47,7 +48,6 @@ export default class OpenStreetMap extends Component {
                     '<img src="' + require("../images/map-marker-icon.png") + '" class="map__marker__image"/>' +
                     '<span class="map__marker__text">' + building.props.title + '</span>'
                 });
-
                 buldingPosition.push(<Marker className="pointer" position={[building.props.lat, building.props.long]}
                                              icon={markerIcon} onClick={this.onClick} key={++this.UID}/>);
             })
