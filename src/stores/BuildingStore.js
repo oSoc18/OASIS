@@ -6,6 +6,13 @@ class BuildingStore {
     @observable isInDetailState = false;
     @observable searchKey = "";
     @observable filters = {wheelchairWidth: 1};
+    @observable state = {
+        lat: 51.05389,
+        lng: 3.705,
+        zoom: 11
+    };
+    @observable zoomlatlng = [[360,650],[180,360],[90,180],[45,90],[22.5,45],[11.25,22.5],[5.625,11.25],[2.813,5.625],[1.406,2.813],[0.703,1.406],[0.352,0.703],[0.176,0.352],[0.088,0.176],[0.044,0.088],[0.022,0.044],[0.011,0.022],[0.005,0.011],[0.003,0.005],[0.001,0.003],[0.0005,0.001]];
+
 
     @action addBuildings = (buildings) => {
         this.buildings = buildings;
@@ -35,6 +42,18 @@ class BuildingStore {
     @computed get getBuildings() {
         return this.buildings;
     };
+
+
+    buildingInZone() {
+        let res = false;
+        if( (this.building.props.lat >= (this.state.lat - this.zoomlatlng[this.state.zoom][0])) &&
+        (this.building.props.lat <= (this.state.lat + this.zoomlatlng[this.state.zoom][0])) &&
+        (this.building.props.lat >= (this.state.lat - this.zoomlatlng[this.state.zoom][1])) &&
+        (this.building.props.lat >= (this.state.lat + this.zoomlatlng[this.state.zoom][1]))){
+            res=true;
+        }
+        return res;
+    }
 
     filterBuildings() {
         let arr = [];
@@ -79,6 +98,10 @@ class BuildingStore {
 
     @computed get getSearchKey() {
         return this.searchKey;
+    }
+
+    @computed get  isbuildingInZone() {
+        return this.buildingInZone();
     }
 }
 

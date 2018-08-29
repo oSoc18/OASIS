@@ -5,7 +5,6 @@ import OpenStreetMap from "./Map";
 
 
 @inject('BuildingStore')
-@inject('OpenStreetMap')
 @observer
 export default class SidebarSearchResult extends React.Component {
     constructor(props) {
@@ -51,12 +50,8 @@ export default class SidebarSearchResult extends React.Component {
         return <p>{this.Building.description}</p>;
     }
 
-    buildingInZone = () =>{
-        /*let bigLat =this.building.props.lat > (this.OpenStreetMap.state.lat - this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][0]);
-        let smallLat =this.building.props.lat < (this.OpenStreetMap.state.lat + this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][0]);
-        let bigLng =this.building.props.lat > (this.OpenStreetMap.state.lat - this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][1]);
-        let smallLng =this.building.props.lat > (this.OpenStreetMap.state.lat + this.OpenStreetMap.zoomlatlng[this.OpenStreetMap.state.zoom][1]);
-            if(bigLat && smallLat && bigLng && smallLng){*/
+    inBuildingZone = () =>{
+            if(this.BuildingStore.isbuildingInZone()){
                 return (<div>
                 <Row>
                     <Col m={12} s={12}>
@@ -77,14 +72,14 @@ export default class SidebarSearchResult extends React.Component {
                 </Row>
                 <hr/>
             </div>
-            );/*}*/
+            );}
     }
 
 
     render() {
         return (
             <div className="buildings__card">
-            {this.buildingInZone()}
+            {this.inBuildingZone()}
                 </div>)
     }
 }

@@ -10,12 +10,8 @@ export default class OpenStreetMap extends Component {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
         this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
-        this.state = {
-            lat: 51.05389,
-            lng: 3.705,
-            zoom: 11
-        }
-        this.zoomlatlng = [[360,650],[180,360],[90,180],[45,90],[22.5,45],[11.25,22.5],[5.625,11.25],[2.813,5.625],[1.406,2.813],[0.703,1.406],[0.352,0.703],[0.176,0.352],[0.088,0.176],[0.044,0.088],[0.022,0.044],[0.011,0.022],[0.005,0.011],[0.003,0.005],[0.001,0.003],[0.0005,0.001]];
+        this.state = this.BuildingStore.state;
+        this.zoomlatlng = this.BuildingStore.zoomlatlng;
     }
 
     /**
