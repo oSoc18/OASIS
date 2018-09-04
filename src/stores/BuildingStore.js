@@ -1,7 +1,10 @@
 import {observable, action, computed} from 'mobx';
+import * as L from "leaflet";
 
 class BuildingStore {
     @observable buildings = [];
+    @observable buildingsListByMap = [];
+    @observable boundsMap = null;
     @observable building = null;
     @observable isInDetailState = false;
     @observable searchKey = "";
@@ -43,18 +46,6 @@ class BuildingStore {
         return this.buildings;
     };
 
-
-    buildingInZone() {
-        let res = false;
-        if( (this.building.props.lat >= (this.state.lat - this.zoomlatlng[this.state.zoom][0])) &&
-        (this.building.props.lat <= (this.state.lat + this.zoomlatlng[this.state.zoom][0])) &&
-        (this.building.props.lat >= (this.state.lat - this.zoomlatlng[this.state.zoom][1])) &&
-        (this.building.props.lat >= (this.state.lat + this.zoomlatlng[this.state.zoom][1]))){
-            res=true;
-        }
-        return res;
-    }
-
     filterBuildings() {
         let arr = [];
         let widthOfTheDoor = 0;
@@ -84,6 +75,39 @@ class BuildingStore {
         return arr;
     }
 
+    @computed get getSearchListByMap() {
+        let arr = [];
+        let widthOfTheDoor = 0;
+        let widthOfTheChair = -1;
+        for (let i = 0; i < this.buildings.length; i++) {
+            let desc = this.buildings[i].props.title.toLowerCase();
+            let accessibilityInfoArray = this.buildings[i].props.accessInfo;
+            try{
+                if(typeof(accessibilityInfoArray) === 'object'){
+                    widthOfTheDoor = parseInt(accessibilityInfoArray[0].width,10);
+                }
+            }catch(e){
+                widthOfTheDoor = 90;
+            }
+            widthOfTheChair = parseInt(this.filters.wheelchairWidth,10);
+
+            if (this.searchKey !== "" && desc.search(this.searchKey) < 0) {
+                continue;
+            }
+            
+            if (widthOfTheChair > widthOfTheDoor) {
+                continue;
+            }
+            
+            let loc = L.latLng(this.buildings[i].props.lat, this.buildings[i].props.long);
+            if (this.boundsMap != null && this.boundsMap.contains(loc)) {
+                arr.push(this.buildings[i]);
+            }
+        }
+        return arr; 
+    }
+
+    // Only filtered on accessibility
     @computed get getFilteredBuildings() {
         return this.filterBuildings();
     }

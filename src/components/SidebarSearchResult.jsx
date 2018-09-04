@@ -50,12 +50,11 @@ export default class SidebarSearchResult extends React.Component {
         return <p>{this.Building.description}</p>;
     }
 
-    inBuildingZone = () =>{
-            if(this.BuildingStore.getBuilding != null && this.BuildingStore.isbuildingInZone()){
-                return (<div>
+    render() {
+        return (
+            <div className="buildings__card">
                 <Row>
                     <Col m={12} s={12}>
-
                         <h4 className="building__name">{this.Building.title.replace(/[&\/\\#,+()$~%.'":;*?<>{}1234567890]/g, '')}</h4>
                     </Col>
 
@@ -71,15 +70,6 @@ export default class SidebarSearchResult extends React.Component {
                         details...</a>
                 </Row>
                 <hr/>
-            </div>
-            );}
-    }
-
-
-    render() {
-        return (
-            <div className="buildings__card">
-            {this.inBuildingZone()}
-                </div>)
+            </div>)
     }
 }

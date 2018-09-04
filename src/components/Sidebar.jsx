@@ -12,16 +12,22 @@ export default class Sidebar extends React.Component {
         super(props);
         this.BuildingStore = this.props.BuildingStore;
         this.UID = 0; // To surpress warnings in React render Array --> Each element in an array needs a unique key value
+        this.lastState = "";
+        this.lastResult = [];
     }
 
     renderLists = () => {
         let result = [];
-        for (let i = 0; i < this.BuildingStore.getFilteredBuildings.length; i++) {
-            if(this.BuildingStore.getFilteredBuildings[i].lat==this.BuildingStore.getFilteredBuildings[i].lat){
-                result.push(<SearchResult buildings={this.BuildingStore.getFilteredBuildings[i]} key={++this.UID}/>);
-            }
+        if (this.lastState != this.BuildingStore.state || this.BuildingStore.getSearchListByMap.length != this.lastResult.length) {
+            this.lastState = this.BuildingStore.state;
+            this.BuildingStore.getSearchListByMap.map((building) => {
+                result.push(<SearchResult buildings={building} key={++this.UID}/>);
+            });
+            this.lastResult = result;
+            return result;
+        } else {
+            return this.lastResult;
         }
-        return result;
     };
 
 
@@ -41,7 +47,7 @@ export default class Sidebar extends React.Component {
 
     render() {
         let searchTitle = (this.BuildingStore.getSearchKey === "")
-            ? this.BuildingStore.getFilteredBuildings.length + " resultaten "
+            ? this.BuildingStore.getSearchListByMap.length + " resultaten "
             : "Resultaat voor '" + this.BuildingStore.getSearchKey + "' (" + this.renderLists().length + ")";
         return (
             <Col l={4} m={6} s={12} className="no-padding">

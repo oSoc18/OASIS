@@ -48,6 +48,7 @@ export default class OpenStreetMap extends Component {
                                              icon={markerIcon} onClick={this.onClick} key={++this.UID}/>);
             })
         }
+
         return buldingPosition;
     };
 
@@ -58,9 +59,21 @@ export default class OpenStreetMap extends Component {
         this.BuildingStore.setIsInDetailState(true);
     }
 
+    handleMoveend = (event) => {
+        let map = event.map;
+        
+        this.setState({
+                    lat: event.target._animateToCenter.lat,
+                    lng: event.target._animateToCenter.lng,
+                    zoom: event.target._animateToZoom
+                });
+        this.BuildingStore.boundsMap = event.target.getBounds();
+        this.BuildingStore.state = this.state;
+    }
+
     render() {
         return (
-                <Map className={"col m6 l8 hide-on-small-only"} center={[this.state.lat, this.state.lng]} zoom={this.state.zoom}>
+                <Map className={"col m6 l8 hide-on-small-only"} center={[this.state.lat, this.state.lng]} zoom={this.state.zoom} onMoveend={this.handleMoveend}>
                     <TileLayer
                         attribution="&amp;copy <a href=&quot;http://osm.org/copyright&quot;>OpenStreetMap</a> bijdragers"
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
