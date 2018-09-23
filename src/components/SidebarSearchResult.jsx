@@ -66,8 +66,6 @@ export default class SidebarSearchResult extends React.Component {
                     <Col m={9} s={12}>
                         {this.showAccessibilityInformation()}
                     </Col>
-                    <a className="col m12 s12 center" href="#" onClick={this.handleClick} id={this.Building.id}>Meer
-                        details...</a>
                 </Row>
                 <hr/>
             </div>)
